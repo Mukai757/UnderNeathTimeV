@@ -1,0 +1,13 @@
+{
+	// Creative Tabs
+	"itemGroup.ut5": "时空深渊V",
+	
+	// Blocks
+	"block.ut5.example_block": "Example Block",
+	
+	// Items
+	"item.ut5.time_wings": "时之翼",
+		
+	// Others
+	"ut5.welcome": "欢迎来到时空深渊V！"
+}

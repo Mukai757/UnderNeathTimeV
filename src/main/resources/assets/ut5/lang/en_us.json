@@ -1,0 +1,13 @@
+{
+	// Creative Tabs
+	"itemGroup.ut5": "UnderNeathTime V",
+	
+	// Blocks
+	"block.ut5.example_block": "Example Block",
+	
+	// Items
+	"item.ut5.time_wings": "Time Wings",
+	
+	// Others
+	"ut5.welcome": "Welcome to UnderNeathTime V!"
+}
