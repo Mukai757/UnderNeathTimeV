@@ -34,6 +34,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import underneathtimev.bus.UTVEvents;
+import underneathtimev.component.UTVComponents;
 import underneathtimev.item.UTVItems;
 
 @Mod(UnderNeathTimeV.MOD_ID)
@@ -46,6 +47,7 @@ public class UnderNeathTimeV {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister
 			.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
+	public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(MOD_ID);
 
 	private static List<DeferredItem<? extends ItemLike>> items4MainTab = new LinkedList<>();
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(
@@ -65,12 +67,14 @@ public class UnderNeathTimeV {
 		BLOCKS.register(modEventBus);
 		CREATIVE_MODE_TABS.register(modEventBus);
 		ATTACHMENT_TYPES.register(modEventBus);
+		DATA_COMPONENTS.register(modEventBus);
 
 		NeoForge.EVENT_BUS.register(this);
 
 		new UTVItems();
 		new UTVEvents();
 		new TimeSystem();
+		new UTVComponents();
 		
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 	}

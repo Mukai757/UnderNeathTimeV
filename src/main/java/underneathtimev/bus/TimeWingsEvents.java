@@ -1,20 +1,22 @@
 package underneathtimev.bus;
 
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import underneathtimev.item.TimeWingsItem;
 
 /**
- * @author Mukai, AoXiang_Soar
+ * @author Mukai
+ * @author AoXiang_Soar
  */
 public class TimeWingsEvents {
 	public static void register() {
 		NeoForge.EVENT_BUS.addListener(TimeWingsEvents::onPlayerJump);
-		NeoForge.EVENT_BUS.addListener(TimeWingsEvents::onPlayerFall);
+		NeoForge.EVENT_BUS.addListener(TimeWingsEvents::onPlayerHurt);
 	}
     // 监听玩家跳跃事件（用于测试）
     //@SubscribeEvent
@@ -30,11 +32,11 @@ public class TimeWingsEvents {
 
     // 防止穿戴时之翼时受到摔落伤害
     //@SubscribeEvent
-    public static void onPlayerFall(LivingFallEvent event) {
+    public static void onPlayerHurt(LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player player) {
             ItemStack chestItem = player.getItemBySlot(EquipmentSlot.CHEST);
-            if (chestItem.getItem() instanceof TimeWingsItem && player.isFallFlying()) {
-                event.setCanceled(true);
+            if (chestItem.getItem() instanceof TimeWingsItem && event.getSource().is(DamageTypes.FALL)) {
+                event.setNewDamage(0);
             }
         }
     }

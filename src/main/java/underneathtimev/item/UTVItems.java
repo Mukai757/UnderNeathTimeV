@@ -22,7 +22,6 @@ public class UTVItems {
 	private static <I extends Item> DeferredItem<I> register(String name, Function<Item.Properties, ? extends I> func,
 			Item.Properties props, DeferredHolder<CreativeModeTab, CreativeModeTab> tab) {
 		DeferredItem<I> item = UnderNeathTimeV.ITEMS.registerItem(name, func, props);
-		//UnderNeathTimeV.addItem2Tab(tab, item.get());
 		UnderNeathTimeV.addItem2Tab(tab, item);
 		return item;
 	}

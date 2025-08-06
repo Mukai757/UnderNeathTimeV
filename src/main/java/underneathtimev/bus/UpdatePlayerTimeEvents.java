@@ -37,9 +37,10 @@ public class UpdatePlayerTimeEvents {
 
 	public static void onPlayerClone(Clone event) {
 		var player = event.getEntity();
+		var oldPlayer = event.getOriginal();
 		TimeSystem.initPlayerTimeAttachment(player, Config.INITIAL_TIME.get());
 		if (event.isWasDeath())
-			TimeSystem.decreacePlayerTime(player, TimeSystem.getPlayerTime(player) / 2);
+			TimeSystem.setPlayerTime(player, TimeSystem.getPlayerTime(oldPlayer) / 2);
 	}
 
 	public static void onCommandRegister(RegisterCommandsEvent event) {

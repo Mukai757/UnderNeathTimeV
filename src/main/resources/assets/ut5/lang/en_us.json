@@ -9,11 +9,12 @@
 	"item.ut5.time_wings": "Time Wings",
 	"item.ut5.fate_pocket_watch": "Fate Pocket Watch",
 	"item.ut5.fate_pocket_watch.recorded": "The you in this dimension has been frozen in time",
-	"item.ut5.fate_pocket_watch.cooldown": "The time has not yet come...",
 	"item.ut5.fate_pocket_watch.empty": "The pocket watch remains silent, only ticking away relentlessly",
+	"item.ut5.fate_pocket_watch.tooltip.stored": "The pocket watch has recorded health %1$f, food level %2$d",
+	"item.ut5.fate_pocket_watch.tooltip.empty": "No matter how you look at it, this appears to be just an ordinary pocket watch",
 	
 	// Commands
-	"command.ut5.time": "%1s has %2s left before reaching the end of life",
+	"command.ut5.time": "%1$s has %2$s left before reaching the end of life",
 	
 	// Others
 	"ut5.welcome": "Welcome to UnderNeathTime V!"
