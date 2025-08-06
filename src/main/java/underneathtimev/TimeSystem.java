@@ -17,7 +17,7 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 
 public class TimeSystem {
 	private static final Supplier<AttachmentType<Long>> TIME = UnderNeathTimeV.ATTACHMENT_TYPES.register(
-		    "utime", () -> AttachmentType.builder(() -> 0L).serialize(new PrimitiveCodec<Long>() {
+		    "utime", () -> AttachmentType.builder(() -> 0L).serialize(new PrimitiveCodec<Long>() { // Hey, why does not MapCodec implements Codec?
 		        @Override
 		        public <T> DataResult<Long> read(final DynamicOps<T> ops, final T input) {
 		            return ops
