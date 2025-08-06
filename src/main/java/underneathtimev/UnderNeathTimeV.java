@@ -16,6 +16,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -29,6 +30,7 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import underneathtimev.bus.UTVEvents;
@@ -45,14 +47,14 @@ public class UnderNeathTimeV {
 			.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 
-	private static List<ItemLike> items4MainTab = new LinkedList<>();
+	private static List<DeferredItem<? extends ItemLike>> items4MainTab = new LinkedList<>();
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(
 			"main_tab",
 			() -> CreativeModeTab.builder().title(Component.translatable("itemGroup.ut5"))
 					.withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> UTVItems.TIME_WINGS.get().getDefaultInstance())
 					.displayItems((parameters, output) -> {
-						items4MainTab.forEach(output::accept);
-						//output.accept(UTVItems.TIME_WINGS.get());
+						for(var item : items4MainTab)
+							output.accept(item.get());
 					}).build());
 
 	public UnderNeathTimeV(IEventBus modEventBus, ModContainer modContainer) {
@@ -89,7 +91,7 @@ public class UnderNeathTimeV {
         }
     }
     
-    public static void addItem2Tab(DeferredHolder<CreativeModeTab, CreativeModeTab> tab, ItemLike item) {
+    public static <I extends Item> void addItem2Tab(DeferredHolder<CreativeModeTab, CreativeModeTab> tab, DeferredItem<I> item) {
     	if (tab == MAIN_TAB) {
     		items4MainTab.add(item);
     	}
