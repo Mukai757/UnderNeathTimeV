@@ -2,10 +2,7 @@ package underneathtimev.bus;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -47,8 +44,8 @@ public class UpdatePlayerTimeEvents {
 
 	public static void onCommandRegister(RegisterCommandsEvent event) {
 		CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-		BiFunction<CommandContext<CommandSourceStack>, BiConsumer<Player, Long>, Integer> timeHandler = (command,
-				operation) -> {
+		BiFunction<CommandContext<CommandSourceStack>, BiConsumer<Player, Long>, Integer> timeHandler = 
+				(command, operation) -> {
 			var player = command.getSource().getPlayer();
 			long time = LongArgumentType.getLong(command, "utime");
 			operation.accept(player, time);
