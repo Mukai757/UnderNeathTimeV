@@ -8,6 +8,9 @@
 	// Items
 	"item.ut5.time_wings": "Time Wings",
 	
+	// Commands
+	"command.ut5.time": "%1s has %2s left before reaching the end of life",
+	
 	// Others
 	"ut5.welcome": "Welcome to UnderNeathTime V!"
 }

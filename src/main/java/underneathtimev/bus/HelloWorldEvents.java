@@ -8,9 +8,9 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class HelloWorld {
+public class HelloWorldEvents {
 	public static void register() {
-		NeoForge.EVENT_BUS.addListener(HelloWorld::onLoggedIn);
+		NeoForge.EVENT_BUS.addListener(HelloWorldEvents::onLoggedIn);
 	}
 
 	public static void onLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {

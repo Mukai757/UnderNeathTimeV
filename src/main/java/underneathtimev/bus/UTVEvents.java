@@ -12,7 +12,8 @@ package underneathtimev.bus;
 
 public class UTVEvents {
 	public UTVEvents() {
-		HelloWorld.register();
+		HelloWorldEvents.register();
 		TimeWingsEvents.register();
+		UpdatePlayerTimeEvents.register();
 	}
 }

@@ -7,7 +7,10 @@
 	
 	// Items
 	"item.ut5.time_wings": "时之翼",
-		
+
+	// Commands
+	"command.ut5.time": "%1$s距离生命的尽头现在还有%2$s",
+	
 	// Others
 	"ut5.welcome": "欢迎来到时空深渊V！"
 }
