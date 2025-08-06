@@ -24,3 +24,15 @@ runs
 run-data
 
 repo
+
+##
+.github
+gradle
+.gitattributes
+.gitignore
+build.bat
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
+TEMPLATE_LICENSE.txt
