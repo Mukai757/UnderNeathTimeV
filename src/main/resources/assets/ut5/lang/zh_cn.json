@@ -7,12 +7,19 @@
 	
 	// Items
 	"item.ut5.time_wings": "时之翼",
+	
 	"item.ut5.fate_pocket_watch": "宿命怀表",
 	"item.ut5.fate_pocket_watch.recorded": "此位面中的你已被定格",
 	"item.ut5.fate_pocket_watch.empty": "怀表无言，只是一味滴答",
 	"item.ut5.fate_pocket_watch.tooltip.stored": "怀表已记录生命值%1$f，饥饿值%2$d",
 	"item.ut5.fate_pocket_watch.tooltip.empty": "不管你怎么看，这似乎只是普通的怀表",
 
+	"item.ut5.backtrack_compass": "回溯罗盘",
+	"item.ut5.backtrace_compass.recorded": "你在冥冥之间预感到，这块罗盘未来会引发生命之奇迹——只要它在你的身边",
+	"item.ut5.backtrace_compass.tooltip.empty": "这块罗盘没法指示任何方向，但直觉告诉你它没有这么简单",
+	"item.ut5.backtrace_compass.tooltip.recorded": "这块罗盘仍然没法指示任何方向，但你却能感受到时间的引力",
+	"item.ut5.backtrace_compass.tooltip.wrong_owner": "你能感受到这块罗盘有着不同寻常的力量，但你却怎么也搞不明白",
+	
 	// Commands
 	"command.ut5.time": "%1$s距离生命的尽头现在还有%2$s",
 	

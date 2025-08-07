@@ -1,4 +1,4 @@
-package underneathtimev.bus;
+package underneathtimev.event;
 
 /**
  * @author Mukai

@@ -1,4 +1,4 @@
-package underneathtimev.bus;
+package underneathtimev.event;
 
 /**
  * Event Master Registry. </br>
@@ -15,5 +15,6 @@ public class UTVEvents {
 		HelloWorldEvents.register();
 		TimeWingsEvents.register();
 		UpdatePlayerTimeEvents.register();
+		BacktrackCompassEvents.register();
 	}
 }

@@ -1,4 +1,4 @@
-package underneathtimev.bus;
+package underneathtimev.event;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;

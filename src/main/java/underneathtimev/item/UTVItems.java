@@ -30,4 +30,6 @@ public class UTVItems {
 			register("time_wings", TimeWingsItem::new, new Item.Properties().durability(432), UnderNeathTimeV.MAIN_TAB);
 	public static final DeferredItem<FatePocketWatchItem> FATE_POCKET_WATCH = // 宿命怀表
 			register("fate_pocket_watch", FatePocketWatchItem::new, new Item.Properties().stacksTo(1), UnderNeathTimeV.MAIN_TAB);
+	public static final DeferredItem<BacktrackCompassItem> BACKTRACK_COMPASS = // 回溯罗盘
+			register("backtrack_compass", BacktrackCompassItem::new, new Item.Properties().stacksTo(1), UnderNeathTimeV.MAIN_TAB);
 }

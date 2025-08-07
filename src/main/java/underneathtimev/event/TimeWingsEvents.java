@@ -1,4 +1,4 @@
-package underneathtimev.bus;
+package underneathtimev.event;
 
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;

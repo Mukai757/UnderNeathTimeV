@@ -91,7 +91,6 @@ public class FatePocketWatchItem extends Item {
 		} else {
 			tooltipComponents.add(Component.translatable("item.ut5.fate_pocket_watch.tooltip.empty"));
 		}
-
 	}
 
 }
