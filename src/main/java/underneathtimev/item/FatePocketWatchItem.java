@@ -1,10 +1,5 @@
 package underneathtimev.item;
 
-/**
- * @author Mukai
- * @author AoXiang_Soar
- */
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -24,6 +19,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import io.netty.buffer.ByteBuf;
+
+/**
+ * @author Mukai
+ * @author AoXiang_Soar
+ */
 
 public class FatePocketWatchItem extends Item {
 	private static final int COOLDOWN_TICKS = 5 * TimeSystem.MINUTE;

@@ -1,9 +1,5 @@
 package underneathtimev.item;
 
-/**
- * @author AoXiang_Soar
- */
-
 import underneathtimev.UnderNeathTimeV;
 
 import java.util.function.Function;
@@ -12,6 +8,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
+
+/**
+ * @author AoXiang_Soar
+ */
 
 public class UTVItems {
 	/**
@@ -29,5 +29,5 @@ public class UTVItems {
 	public static final DeferredItem<TimeWingsItem> TIME_WINGS = // 时之翼
 			register("time_wings", TimeWingsItem::new, new Item.Properties().durability(432), UnderNeathTimeV.MAIN_TAB);
 	public static final DeferredItem<FatePocketWatchItem> FATE_POCKET_WATCH = // 宿命怀表
-			register("fate_pocket_watch", FatePocketWatchItem::new, new Item.Properties(), UnderNeathTimeV.MAIN_TAB);
+			register("fate_pocket_watch", FatePocketWatchItem::new, new Item.Properties().stacksTo(1), UnderNeathTimeV.MAIN_TAB);
 }

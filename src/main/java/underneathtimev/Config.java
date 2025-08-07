@@ -2,6 +2,10 @@ package underneathtimev;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+/**
+ * @author AoXiang_Soar
+ */
+
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 

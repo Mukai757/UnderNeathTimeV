@@ -1,14 +1,14 @@
 package underneathtimev.item;
 
-/**
- * @author Mukai
- */
-
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+/**
+ * @author Mukai
+ */
 
 public class TimeWingsItem extends ElytraItem {
     // 速度加成常量 (50% = 1.5倍)
