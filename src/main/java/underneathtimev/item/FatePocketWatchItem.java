@@ -1,5 +1,7 @@
 package underneathtimev.item;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,15 +31,18 @@ public class FatePocketWatchItem extends Item {
 	private static final int COOLDOWN_TICKS = 5 * TimeSystem.MINUTE;
 	private static final String TAG_HEALTH = "storedHealth";
 	private static final String TAG_FOOD_LEVEL = "storedFood";
+	private static final String TAG_NAME = "storedName";
 
-	public record Record(float health, int food) {
+	public record Record(float health, int food, String name) {
 	}
 
 	public static final Codec<Record> FATE_POCKET_WATCH_CODEC = RecordCodecBuilder
 			.create(instance -> instance.group(Codec.FLOAT.fieldOf(TAG_HEALTH).forGetter(Record::health),
-					Codec.INT.fieldOf(TAG_FOOD_LEVEL).forGetter(Record::food)).apply(instance, Record::new));
-	public static final StreamCodec<ByteBuf, Record> FATE_POCKET_WATCH_STREAM_CODEC = StreamCodec
-			.composite(ByteBufCodecs.FLOAT, Record::health, ByteBufCodecs.INT, Record::food, Record::new);
+					Codec.INT.fieldOf(TAG_FOOD_LEVEL).forGetter(Record::food),
+					Codec.STRING.fieldOf(TAG_NAME).forGetter(Record::name)).apply(instance, Record::new));
+	public static final StreamCodec<ByteBuf, Record> FATE_POCKET_WATCH_STREAM_CODEC = StreamCodec.composite(
+			ByteBufCodecs.FLOAT, Record::health, ByteBufCodecs.INT, Record::food, ByteBufCodecs.STRING_UTF8,
+			Record::name, Record::new);
 
 	public FatePocketWatchItem(Properties properties) {
 		super(properties);
@@ -54,14 +59,16 @@ public class FatePocketWatchItem extends Item {
 			}
 			return InteractionResultHolder.success(stack);
 		} else {
-			if (stack.has(UTVComponents.FATE_POCKET_WATCH_COMPONENT)) {
+			if (stack.has(UTVComponents.FATE_POCKET_WATCH_COMPONENT) &&
+					stack.get(UTVComponents.FATE_POCKET_WATCH_COMPONENT).name.equals(player.getName().getString())) {
 				if (!level.isClientSide) {
 					restoreState(player, stack);
 					player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
 				}
 				return InteractionResultHolder.success(stack);
 			} else {
-				if (!level.isClientSide) player.sendSystemMessage(Component.translatable("item.ut5.fate_pocket_watch.empty"));
+				if (!level.isClientSide)
+					player.sendSystemMessage(Component.translatable("item.ut5.fate_pocket_watch.empty"));
 				return InteractionResultHolder.fail(stack);
 			}
 		}
@@ -69,7 +76,7 @@ public class FatePocketWatchItem extends Item {
 
 	private void recordState(Player player, ItemStack stack) {
 		stack.set(UTVComponents.FATE_POCKET_WATCH_COMPONENT,
-				new Record(player.getHealth(), player.getFoodData().getFoodLevel()));
+				new Record(player.getHealth(), player.getFoodData().getFoodLevel(), player.getName().getString()));
 		// TODO Add more effects
 	}
 
@@ -84,12 +91,15 @@ public class FatePocketWatchItem extends Item {
 
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents,
 			TooltipFlag tooltipFlag) {
-		if (stack.has(UTVComponents.FATE_POCKET_WATCH_COMPONENT)) {
-			var component = stack.get(UTVComponents.FATE_POCKET_WATCH_COMPONENT);
-			tooltipComponents.add(Component.translatable("item.ut5.fate_pocket_watch.tooltip.stored",
-					component.health, component.food));
+		var player = Minecraft.getInstance().player;
+		if (stack.has(UTVComponents.FATE_POCKET_WATCH_COMPONENT) &&
+				stack.get(UTVComponents.FATE_POCKET_WATCH_COMPONENT).name.equals(player.getName().getString())) {
+			tooltipComponents.add(Component
+					.translatable("item.ut5.fate_pocket_watch.tooltip.stored")
+					.withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
 		} else {
-			tooltipComponents.add(Component.translatable("item.ut5.fate_pocket_watch.tooltip.empty"));
+			tooltipComponents.add(Component.translatable("item.ut5.fate_pocket_watch.tooltip.empty")
+					.withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
 		}
 	}
 

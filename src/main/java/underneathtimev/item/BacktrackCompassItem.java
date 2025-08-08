@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -83,12 +84,14 @@ public class BacktrackCompassItem extends Item {
 			TooltipFlag tooltipFlag) {
 		var player = Minecraft.getInstance().player;
 		if (stack.has(UTVComponents.BACKTRACK_COMPASS_POSITION_COMPONENT) && stack.has(UTVComponents.BACKTRACK_COMPASS_PLAYER_INFO_COMPONENT)) {
-			if (player.getName().getString().equals(stack.get(UTVComponents.BACKTRACK_COMPASS_PLAYER_INFO_COMPONENT).name()))
-				tooltipComponents.add(Component.translatable("item.ut5.backtrace_compass.tooltip.recorded"));
+			if (!player.getName().getString().equals(stack.get(UTVComponents.BACKTRACK_COMPASS_PLAYER_INFO_COMPONENT).name()))
+				tooltipComponents.add(Component.translatable("item.ut5.backtrace_compass.tooltip.wrong_owner").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
+			else if (player.getCooldowns().isOnCooldown(this))
+				tooltipComponents.add(Component.translatable("item.ut5.backtrace_compass.tooltip.cooldown").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
 			else
-				tooltipComponents.add(Component.translatable("item.ut5.backtrace_compass.tooltip.wrong_owner"));
+				tooltipComponents.add(Component.translatable("item.ut5.backtrace_compass.tooltip.recorded").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
 		} else {
-			tooltipComponents.add(Component.translatable("item.ut5.backtrace_compass.tooltip.empty"));
+			tooltipComponents.add(Component.translatable("item.ut5.backtrace_compass.tooltip.empty").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
 		}
 	}
 }

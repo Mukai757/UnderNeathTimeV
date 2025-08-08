@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import underneathtimev.TimeSystem;
 import underneathtimev.component.UTVComponents;
 import underneathtimev.item.UTVItems;
 
@@ -37,11 +38,13 @@ public class BacktrackCompassEvents {
 	        }
 	    }
 	    
-	    if (matchingCompass != null) {
+	    if (matchingCompass != null && TimeSystem.getPlayerTime(player) >= TimeSystem.HOUR) {
 	        event.setCanceled(true);
 	        var pos = matchingCompass.get(UTVComponents.BACKTRACK_COMPASS_POSITION_COMPONENT);
 	        player.teleportTo(player.server.getLevel(pos.dimension()), pos.x(), pos.y(), pos.z(), new HashSet<>(), pos.yRot(), pos.xRot());
 	        player.setHealth(matchingCompass.get(UTVComponents.BACKTRACK_COMPASS_PLAYER_INFO_COMPONENT).health());
+	        player.getCooldowns().addCooldown(UTVItems.BACKTRACK_COMPASS.asItem(), TimeSystem.MINUTE);
+	        TimeSystem.decreacePlayerTime(player, TimeSystem.HOUR);
 	    }
 	}
 }

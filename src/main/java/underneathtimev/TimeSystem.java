@@ -23,7 +23,7 @@ public class TimeSystem {
 	public static final int YEAR = 12 * MONTH;
 
 	private static final Supplier<AttachmentType<Long>> TIME = 
-			UnderNeathTimeV.ATTACHMENT_TYPES.register("utime", () -> AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build());
+			UnderNeathTimeV.ATTACHMENT_TYPES.register("utime", () -> AttachmentType.builder(() -> Config.INITIAL_TIME.get()).serialize(Codec.LONG).build());
 
 	public static void setPlayerTime(Player player, long time) {
 		player.setData(TIME, time);
@@ -56,6 +56,11 @@ public class TimeSystem {
 		}
 	}
 
+	/**
+	 * Format the ticks into YYYY:MM:DD:hh:mm:ss
+	 * @param time Ticks
+	 * @return Formated string, return "Αι:ɱο:ѕτ:Ιπ:φι:πι:τγ" if out of range(more than 9999 years)
+	 */
 	public static String format(long time) {
 		// int tick = (int) (time % 20);
 		int second = (int) (time / SECOND % 60);

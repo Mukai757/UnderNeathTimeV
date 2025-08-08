@@ -5,6 +5,7 @@ import underneathtimev.UnderNeathTimeV;
 import java.util.function.Function;
 
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -26,10 +27,12 @@ public class UTVItems {
 		return item;
 	}
 
-	public static final DeferredItem<TimeWingsItem> TIME_WINGS = // 时之翼
-			register("time_wings", TimeWingsItem::new, new Item.Properties().durability(432), UnderNeathTimeV.MAIN_TAB);
-	public static final DeferredItem<FatePocketWatchItem> FATE_POCKET_WATCH = // 宿命怀表
+	public static final DeferredItem<ElytraItem> TIME_WINGS =
+			register("time_wings", ElytraItem::new, new Item.Properties().durability(432), UnderNeathTimeV.MAIN_TAB);
+	public static final DeferredItem<FatePocketWatchItem> FATE_POCKET_WATCH =
 			register("fate_pocket_watch", FatePocketWatchItem::new, new Item.Properties().stacksTo(1), UnderNeathTimeV.MAIN_TAB);
-	public static final DeferredItem<BacktrackCompassItem> BACKTRACK_COMPASS = // 回溯罗盘
+	public static final DeferredItem<BacktrackCompassItem> BACKTRACK_COMPASS =
 			register("backtrack_compass", BacktrackCompassItem::new, new Item.Properties().stacksTo(1), UnderNeathTimeV.MAIN_TAB);
+	public static final DeferredItem<DebugRodItem> DEBUG_ROD =
+			register("debug_rod", DebugRodItem::new, new Item.Properties().stacksTo(1), UnderNeathTimeV.MAIN_TAB);
 }

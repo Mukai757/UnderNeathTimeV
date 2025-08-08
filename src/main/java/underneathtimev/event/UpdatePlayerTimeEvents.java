@@ -13,11 +13,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.Clone;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import underneathtimev.Config;
-import underneathtimev.TimeSystem;
-import underneathtimev.UnderNeathTimeV;
+import underneathtimev.*;
 
 /**
  * @author AoXiang_Soar
@@ -26,6 +25,7 @@ import underneathtimev.UnderNeathTimeV;
 public class UpdatePlayerTimeEvents {
 	public static void register() {
 		NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onPlayerTick);
+		NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onLoggedIn);
 		NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onPlayerClone);
 		NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onCommandRegister);
 	}
@@ -35,10 +35,14 @@ public class UpdatePlayerTimeEvents {
 		TimeSystem.decreacePlayerTime(player, 1);
 	}
 
+	public static void onLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+		var player = event.getEntity();
+		TimeSystem.initPlayerTimeAttachment(player, Config.INITIAL_TIME.get());
+	}
+
 	public static void onPlayerClone(Clone event) {
 		var player = event.getEntity();
 		var oldPlayer = event.getOriginal();
-		TimeSystem.initPlayerTimeAttachment(player, Config.INITIAL_TIME.get());
 		if (event.isWasDeath())
 			TimeSystem.setPlayerTime(player, TimeSystem.getPlayerTime(oldPlayer) / 2);
 	}

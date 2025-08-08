@@ -57,7 +57,7 @@ public class UnderNeathTimeV {
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(
 			"main_tab",
 			() -> CreativeModeTab.builder().title(Component.translatable("itemGroup.ut5"))
-					.withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> UTVItems.TIME_WINGS.get().getDefaultInstance())
+					.withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> UTVItems.FATE_POCKET_WATCH.get().getDefaultInstance())
 					.displayItems((parameters, output) -> {
 						for(var item : items4MainTab)
 							output.accept(item.get());
