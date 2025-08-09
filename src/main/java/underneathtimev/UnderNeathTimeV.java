@@ -1,7 +1,4 @@
 package underneathtimev;
-/**
- * @author AoXiang_Soar
- */
 
 import java.util.LinkedList;
 import java.util.List;
@@ -40,6 +37,10 @@ import underneathtimev.event.UTVEvents;
 import underneathtimev.item.UTVItems;
 import underneathtimev.provider.UTVProviders;
 import underneathtimev.provider.loot_table.UTVLootModifier;
+
+/**
+ * @author AoXiang_Soar
+ */
 
 @Mod(UnderNeathTimeV.MOD_ID)
 public class UnderNeathTimeV {
