@@ -1,0 +1,33 @@
+{
+	// Creative Tabs
+	"itemGroup.ut5": "UnderNeathTime V",
+	
+	// Blocks
+	"block.ut5.example_block": "Example Block",
+	
+	// Items
+	"item.ut5.time_wings": "Time Wings",
+	
+	"item.ut5.fate_pocket_watch": "Fate Pocket Watch",
+	"item.ut5.fate_pocket_watch.recorded": "The you in this dimension has been frozen in time",
+	"item.ut5.fate_pocket_watch.empty": "The pocket watch remains silent, only ticking away relentlessly",
+	"item.ut5.fate_pocket_watch.tooltip.stored": "The hands of the pocket watch stopped at a certain moment",
+	"item.ut5.fate_pocket_watch.tooltip.empty": "No matter how you look at it, this appears to be just an ordinary pocket watch",
+	
+	"item.ut5.backtrack_compass": "Backtrack Compass",
+	"item.ut5.backtrace_compass.recorded": "You have a vague premonition that this compass will spark the miracle of life in the future—as long as it remains by your side",
+	"item.ut5.backtrace_compass.tooltip.empty": "This compass can't point to any direction, yet your intuition tells you it's far from ordinary",
+	"item.ut5.backtrace_compass.tooltip.recorded": "The compass still fails to point in any direction, yet you can feel the pull of time within it",
+	"item.ut5.backtrace_compass.tooltip.wrong_owner": "You can sense an unusual power emanating from this compass, yet you simply can't figure out how it works",
+	"item.ut5.backtrace_compass.tooltip.cooldown": "This compass is brimming with chaos—perhaps time will scatter it all away",
+
+	"item.ut5.debug_rod": "The Scepter of World Creation",
+	"item.ut5.debug_rod.tooltip.1": "God said, \"Let there be time,\" and there was time.",
+	"item.ut5.debug_rod.tooltip.2": "Debug tools",
+	
+	// Commands
+	"command.ut5.time": "%1$s has %2$s left before reaching the end of life",
+	
+	// Others
+	"ut5.welcome": "Welcome to UnderNeathTime V!"
+}
