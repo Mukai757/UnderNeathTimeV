@@ -14,7 +14,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -29,9 +28,9 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import underneathtimev.block.UTVBlocks;
 import underneathtimev.component.UTVComponents;
 import underneathtimev.event.UTVEvents;
 import underneathtimev.item.UTVItems;
@@ -45,7 +44,6 @@ import underneathtimev.provider.loot_table.UTVLootModifier;
 @Mod(UnderNeathTimeV.MOD_ID)
 public class UnderNeathTimeV {
 	public static final String MOD_ID = "ut5";
-	public static final String MODID = "ut5";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
@@ -55,15 +53,16 @@ public class UnderNeathTimeV {
 	public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(MOD_ID);
 	public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
 
-
-	private static List<DeferredItem<? extends ItemLike>> items4MainTab = new LinkedList<>();
+	private static List<DeferredHolder<? extends ItemLike, ?>> items4MainTab = new LinkedList<>();
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(
 			"main_tab",
 			() -> CreativeModeTab.builder().title(Component.translatable("itemGroup.ut5"))
 					.withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> UTVItems.FATE_POCKET_WATCH.get().getDefaultInstance())
 					.displayItems((parameters, output) -> {
-						for(var item : items4MainTab)
+						for(var item : items4MainTab) {
+							LOGGER.debug(item.get().toString());
 							output.accept(item.get());
+						}
 					}).build());
 
 	public UnderNeathTimeV(IEventBus modEventBus, ModContainer modContainer) {
@@ -79,10 +78,10 @@ public class UnderNeathTimeV {
 		GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
 
 		NeoForge.EVENT_BUS.register(this);
-		//NeoForge.EVENT_BUS.register(UTVProviders.class);
 
-		new UTVItems();
 		new UTVEvents();
+		new UTVItems();
+		new UTVBlocks();
 		new TimeSystem();
 		new UTVComponents();
 		new UTVLootModifier();
@@ -107,7 +106,7 @@ public class UnderNeathTimeV {
         }
     }
     
-    public static <I extends Item> void addItem2Tab(DeferredHolder<CreativeModeTab, CreativeModeTab> tab, DeferredItem<I> item) {
+    public static <I extends ItemLike> void addItem2Tab(DeferredHolder<CreativeModeTab, CreativeModeTab> tab, DeferredHolder<? extends ItemLike, ?> item) {
     	if (tab == MAIN_TAB) {
     		items4MainTab.add(item);
     	}

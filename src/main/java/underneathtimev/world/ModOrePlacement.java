@@ -1,9 +1,12 @@
 package underneathtimev.world;
 
-
 import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
+
+/**
+ * @author Mukai
+ */
 
 public class ModOrePlacement {
     public static List<PlacementModifier> orePlacement(PlacementModifier pCountPlacement, PlacementModifier pHeightRange) {

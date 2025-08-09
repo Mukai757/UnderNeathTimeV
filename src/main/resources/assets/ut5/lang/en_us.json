@@ -3,7 +3,10 @@
 	"itemGroup.ut5": "UnderNeathTime V",
 	
 	// Blocks
-	"block.ut5.example_block": "Example Block",
+	"block.ut5.time_sand_ore": "Time Sand Ore",
+	"block.ut5.chronostice_crystal_ore": "Chronostice Crystal Ore",
+	"block.ut5.void_crystal_ore": "Void Crystal Ore",
+	"block.ut5.space_dust_ore": "Space Dust Ore",
 	
 	// Items
 	"item.ut5.time_wings": "Time Wings",

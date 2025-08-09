@@ -1,7 +1,5 @@
 package underneathtimev.world;
 
-
-
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -15,6 +13,10 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import underneathtimev.UnderNeathTimeV;
 
 import java.util.List;
+
+/**
+ * Mukai
+ */
 
 public class ModPlacedFeatures {
     //注册
@@ -35,7 +37,7 @@ public class ModPlacedFeatures {
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(UnderNeathTimeV.MODID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(UnderNeathTimeV.MOD_ID, name));
     }
 
     private static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration,
