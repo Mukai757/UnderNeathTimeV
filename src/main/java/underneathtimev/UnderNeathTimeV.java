@@ -45,6 +45,7 @@ import underneathtimev.provider.loot_table.UTVLootModifier;
 @Mod(UnderNeathTimeV.MOD_ID)
 public class UnderNeathTimeV {
 	public static final String MOD_ID = "ut5";
+	public static final String MODID = "ut5";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
@@ -53,6 +54,7 @@ public class UnderNeathTimeV {
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 	public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(MOD_ID);
 	public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
+
 
 	private static List<DeferredItem<? extends ItemLike>> items4MainTab = new LinkedList<>();
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(

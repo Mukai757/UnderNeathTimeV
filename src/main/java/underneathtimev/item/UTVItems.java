@@ -1,5 +1,6 @@
 package underneathtimev.item;
 
+import net.neoforged.neoforge.registries.DeferredRegister;
 import underneathtimev.UnderNeathTimeV;
 
 import java.util.function.Function;
@@ -20,6 +21,7 @@ public class UTVItems {
 	 * Creative Mode inventory. See also
 	 * <code>underneathtimev.UnderNeathTimeV.addItem2Tab()</code>.
 	 */
+	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(UnderNeathTimeV.MOD_ID);
 	private static <I extends Item> DeferredItem<I> register(String name, Function<Item.Properties, ? extends I> func,
 			Item.Properties props, DeferredHolder<CreativeModeTab, CreativeModeTab> tab) {
 		DeferredItem<I> item = UnderNeathTimeV.ITEMS.registerItem(name, func, props);

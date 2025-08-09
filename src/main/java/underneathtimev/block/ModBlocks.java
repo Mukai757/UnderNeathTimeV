@@ -12,14 +12,14 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import underneathtimev.item.UT5Mod;
+import underneathtimev.UnderNeathTimeV;
 import underneathtimev.item.UTVItems;
 
 import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
-            DeferredRegister.createBlocks(UT5Mod.MODID);
+            DeferredRegister.createBlocks(UnderNeathTimeV.MODID);
 
     public static final DeferredBlock<Block> SandTimeOreBlock = registerBlock("sandtimeoreblock",
             () -> new Block(BlockBehaviour.Properties.of()
