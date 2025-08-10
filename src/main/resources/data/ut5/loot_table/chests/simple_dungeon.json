@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:empty",
+  "type": "minecraft:chest",
   "functions": [
     {
       "add": false,

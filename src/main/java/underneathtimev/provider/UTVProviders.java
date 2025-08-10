@@ -13,5 +13,7 @@ public class UTVProviders {
 				(DataProvider.Factory<UTVGlobalLootModifierProvider>) output -> new UTVGlobalLootModifierProvider(output, event.getLookupProvider()));
 		event.getGenerator().addProvider(event.includeServer(),
 				(DataProvider.Factory<UTVLootTableProvider>) output -> new UTVLootTableProvider(output, event.getLookupProvider()));
+		event.getGenerator().addProvider(event.includeServer(),
+				(DataProvider.Factory<UTVBlockTagProvider>) output -> new UTVBlockTagProvider(output, event.getLookupProvider()));
 	}
 }
