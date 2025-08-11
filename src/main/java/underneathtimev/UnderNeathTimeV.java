@@ -34,10 +34,10 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import underneathtimev.block.UTVBlocks;
 import underneathtimev.block.blockentity.UTVBlockEntities;
 import underneathtimev.component.UTVComponents;
+import underneathtimev.data.UTVDataGatherer;
+import underneathtimev.data.loot_table.UTVLootModifiers;
 import underneathtimev.event.UTVEvents;
 import underneathtimev.item.UTVItems;
-import underneathtimev.provider.UTVProviders;
-import underneathtimev.provider.loot_table.UTVLootModifier;
 
 /**
  * @author AoXiang_Soar
@@ -71,7 +71,7 @@ public class UnderNeathTimeV {
 	public UnderNeathTimeV(IEventBus modEventBus, ModContainer modContainer) {
 		LOGGER.info("Loading UnderNeathTime V... This log was written on the first day of developing the mod."
 				+ " Will there come a day when loading this mod requires traversing an abyss-like expanse of time?www");
-		modEventBus.addListener(UTVProviders::onGatherData);
+		modEventBus.addListener(UTVDataGatherer::onGatherData);
 
 		ITEMS.register(modEventBus);
 		BLOCKS.register(modEventBus);
@@ -89,7 +89,7 @@ public class UnderNeathTimeV {
 		new UTVBlockEntities();
 		new TimeSystem();
 		new UTVComponents();
-		new UTVLootModifier();
+		new UTVLootModifiers();
 		//new UTVProviders();
 		
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import underneathtimev.UnderNeathTimeV;
-import underneathtimev.provider.loot_table.BlockLootProvider.Drops;
+import underneathtimev.data.loot_table.BlockLootProvider.Drops;
 
 import java.util.LinkedList;
 import java.util.List;
