@@ -7,7 +7,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable.Builder;
-import underneathtimev.UnderNeathTimeV;
+import underneathtimev.UnderneathTimeV;
 import underneathtimev.block.UTVBlocks;
 
 /**
@@ -32,7 +32,7 @@ public class BlockLootProvider extends BlockLootSubProvider {
 	
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return UnderNeathTimeV.BLOCKS.getEntries()
+        return UnderneathTimeV.BLOCKS.getEntries()
                 .stream()
                 .map(e -> (Block) e.value())
                 .toList();

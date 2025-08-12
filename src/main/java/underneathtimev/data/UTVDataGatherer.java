@@ -8,7 +8,7 @@ import net.minecraft.data.DataProvider;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import underneathtimev.UnderNeathTimeV;
+import underneathtimev.UnderneathTimeV;
 import underneathtimev.data.loot_table.UTVGlobalLootModifierProvider;
 import underneathtimev.data.loot_table.UTVLootTableProvider;
 import underneathtimev.data.tag.UTVBlockTagProvider;
@@ -34,7 +34,7 @@ public class UTVDataGatherer {
 		
 		event.getGenerator().addProvider(event.includeServer(),
 		        (DataProvider.Factory<DatapackBuiltinEntriesProvider>) output -> new DatapackBuiltinEntriesProvider(output, event.getLookupProvider(),
-		        		createBuilder(), Set.of(UnderNeathTimeV.MOD_ID)));
+		        		createBuilder(), Set.of(UnderneathTimeV.MOD_ID)));
 	}
 	
 	/**

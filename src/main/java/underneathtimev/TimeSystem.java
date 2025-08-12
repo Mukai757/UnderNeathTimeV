@@ -23,7 +23,7 @@ public class TimeSystem {
 	public static final int YEAR = 12 * MONTH;
 
 	private static final Supplier<AttachmentType<Long>> TIME = 
-			UnderNeathTimeV.ATTACHMENT_TYPES.register("utime", () -> AttachmentType.builder(() -> Config.INITIAL_TIME.get()).serialize(Codec.LONG).build());
+			UnderneathTimeV.ATTACHMENT_TYPES.register("utime", () -> AttachmentType.builder(() -> Config.INITIAL_TIME.get()).serialize(Codec.LONG).build());
 
 	public static void setPlayerTime(Player player, long time) {
 		player.setData(TIME, time);

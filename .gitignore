@@ -1,0 +1,38 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+runs
+run-data
+
+repo
+
+##
+.github
+gradle
+.gitattributes
+build.bat
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
+TEMPLATE_LICENSE.txt
+src/generated/resources/.cache

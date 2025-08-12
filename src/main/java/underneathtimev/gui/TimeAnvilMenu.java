@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import underneathtimev.block.UTVBlocks;
-import underneathtimev.blockEntity.TimeAnvilBlockEntity;
+import underneathtimev.block.blockentity.TimeAnvilBlockEntity;
 
 public class TimeAnvilMenu extends AbstractContainerMenu {
     public final TimeAnvilBlockEntity blockEntity;
@@ -23,7 +23,7 @@ public class TimeAnvilMenu extends AbstractContainerMenu {
     }
 
     public TimeAnvilMenu(int containerId, Inventory inv, BlockEntity blockEntity) {
-        super(ModMenuTypes.PEDESTAL_MENU.get(), containerId);
+        super(UTVGUITypes.TIME_ANVIL_MENU.get(), containerId);
         this.blockEntity = ((TimeAnvilBlockEntity) blockEntity);
         this.level = inv.player.level();
 
@@ -82,7 +82,7 @@ public class TimeAnvilMenu extends AbstractContainerMenu {
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
-    //先随便用一个方块
+    // TODO 先随便用一个方块
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),

@@ -7,7 +7,7 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import underneathtimev.UnderNeathTimeV;
+import underneathtimev.UnderneathTimeV;
 import underneathtimev.block.UTVBlocks;
 
 /**
@@ -17,7 +17,7 @@ import underneathtimev.block.UTVBlocks;
 public class UTVBlockTagProvider extends BlockTagsProvider {
 
 	public UTVBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, UnderNeathTimeV.MOD_ID, null);
+        super(output, lookupProvider, UnderneathTimeV.MOD_ID, null);
     }
 
 	@Override

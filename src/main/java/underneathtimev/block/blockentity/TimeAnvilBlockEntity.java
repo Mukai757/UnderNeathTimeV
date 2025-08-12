@@ -1,4 +1,4 @@
-package underneathtimev.blockEntity;
+package underneathtimev.block.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+
 import underneathtimev.gui.TimeAnvilMenu;
 
 public class TimeAnvilBlockEntity extends BlockEntity implements MenuProvider {
@@ -38,7 +39,7 @@ public class TimeAnvilBlockEntity extends BlockEntity implements MenuProvider {
     private float rotation;
 
     public TimeAnvilBlockEntity(BlockPos pos, BlockState blockState) {
-        super(UTVBlockEntities.PEDESTAL_BE.get(), pos, blockState);
+        super(UTVBlockEntities.TIME_ANVIL_BLOCK_ENTITY.get(), pos, blockState);
     }
 
     public float getRenderingRotation() {

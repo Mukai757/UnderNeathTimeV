@@ -59,7 +59,7 @@ public class UpdatePlayerTimeEvents {
 			return 1;
 		};
 
-		dispatcher.register(Commands.literal(UnderNeathTimeV.MOD_ID)
+		dispatcher.register(Commands.literal(UnderneathTimeV.MOD_ID)
 				.then(Commands.literal("time")
 						.then(Commands.literal("set").requires(player -> player.hasPermission(2))
 								.then(Commands.argument("utime", LongArgumentType.longArg(0))

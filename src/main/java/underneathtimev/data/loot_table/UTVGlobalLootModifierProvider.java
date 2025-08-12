@@ -12,7 +12,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.AddTableLootModifier;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
-import underneathtimev.UnderNeathTimeV;
+import underneathtimev.UnderneathTimeV;
 
 /**
  * @author AoXiang_Soar
@@ -20,7 +20,7 @@ import underneathtimev.UnderNeathTimeV;
 
 public class UTVGlobalLootModifierProvider extends GlobalLootModifierProvider {
 	public UTVGlobalLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-		super(output, registries, UnderNeathTimeV.MOD_ID);
+		super(output, registries, UnderneathTimeV.MOD_ID);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class UTVGlobalLootModifierProvider extends GlobalLootModifierProvider {
 						LootTableIdCondition.builder(ResourceLocation.fromNamespaceAndPath("minecraft", "chests/simple_dungeon")).build(),
 						//LootItemRandomChanceCondition.randomChance(0.1f).build()
 						},
-						ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(UnderNeathTimeV.MOD_ID, "chests/additional_dungeon_loot"))
+						ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(UnderneathTimeV.MOD_ID, "chests/additional_dungeon_loot"))
 					)
 			);
 	}

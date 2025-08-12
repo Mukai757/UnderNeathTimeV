@@ -43,8 +43,8 @@ import underneathtimev.item.UTVItems;
  * @author AoXiang_Soar
  */
 
-@Mod(UnderNeathTimeV.MOD_ID)
-public class UnderNeathTimeV {
+@Mod(UnderneathTimeV.MOD_ID)
+public class UnderneathTimeV {
 	public static final String MOD_ID = "ut5";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -68,7 +68,7 @@ public class UnderNeathTimeV {
 						}
 					}).build());
 
-	public UnderNeathTimeV(IEventBus modEventBus, ModContainer modContainer) {
+	public UnderneathTimeV(IEventBus modEventBus, ModContainer modContainer) {
 		LOGGER.info("Loading UnderNeathTime V... This log was written on the first day of developing the mod."
 				+ " Will there come a day when loading this mod requires traversing an abyss-like expanse of time?www");
 		modEventBus.addListener(UTVDataGatherer::onGatherData);
@@ -101,7 +101,7 @@ public class UnderNeathTimeV {
         LOGGER.info("HELLO from server starting");
     }
     
-    @EventBusSubscriber(modid = UnderNeathTimeV.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = UnderneathTimeV.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     static class ClientModEvents {
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {

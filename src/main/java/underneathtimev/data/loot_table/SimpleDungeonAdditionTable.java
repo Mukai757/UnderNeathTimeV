@@ -14,7 +14,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import underneathtimev.UnderNeathTimeV;
+import underneathtimev.UnderneathTimeV;
 import underneathtimev.item.UTVItems;
 
 /**
@@ -30,7 +30,7 @@ public class SimpleDungeonAdditionTable implements LootTableSubProvider {
 	@Override
 	public void generate(BiConsumer<ResourceKey<LootTable>, Builder> consumer) {
 		consumer.accept(ResourceKey.create(Registries.LOOT_TABLE, 
-	            ResourceLocation.fromNamespaceAndPath(UnderNeathTimeV.MOD_ID, "chests/simple_dungeon")), LootTable.lootTable()
+	            ResourceLocation.fromNamespaceAndPath(UnderneathTimeV.MOD_ID, "chests/simple_dungeon")), LootTable.lootTable()
                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                 .withPool(LootPool.lootPool()
                 		.setRolls(ConstantValue.exactly(1))
