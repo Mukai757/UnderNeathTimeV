@@ -1,4 +1,4 @@
-package underneathtimev.provider;
+package underneathtimev.data.loot_table;
 
 import java.util.concurrent.CompletableFuture;
 

@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "ut5:chronostice_crystal_ore_feature",
+    "ut5:time_sand_ore_feature"
+  ],
+  "step": "underground_ores"
+}

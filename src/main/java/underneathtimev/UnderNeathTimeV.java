@@ -1,13 +1,21 @@
 package underneathtimev;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
+
 import net.minecraft.client.Minecraft;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -23,16 +31,13 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import org.slf4j.Logger;
 import underneathtimev.block.UTVBlocks;
+import underneathtimev.block.blockentity.UTVBlockEntities;
 import underneathtimev.component.UTVComponents;
+import underneathtimev.data.UTVDataGatherer;
+import underneathtimev.data.loot_table.UTVLootModifiers;
 import underneathtimev.event.UTVEvents;
 import underneathtimev.item.UTVItems;
-import underneathtimev.provider.UTVProviders;
-import underneathtimev.provider.loot_table.UTVLootModifier;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author AoXiang_Soar
@@ -45,6 +50,7 @@ public class UnderNeathTimeV {
 
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
 	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 	public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(MOD_ID);
@@ -65,10 +71,11 @@ public class UnderNeathTimeV {
 	public UnderNeathTimeV(IEventBus modEventBus, ModContainer modContainer) {
 		LOGGER.info("Loading UnderNeathTime V... This log was written on the first day of developing the mod."
 				+ " Will there come a day when loading this mod requires traversing an abyss-like expanse of time?www");
-		modEventBus.addListener(UTVProviders::onGatherData);
+		modEventBus.addListener(UTVDataGatherer::onGatherData);
 
 		ITEMS.register(modEventBus);
 		BLOCKS.register(modEventBus);
+		BLOCK_ENTITY_TYPES.register(modEventBus);
 		CREATIVE_MODE_TABS.register(modEventBus);
 		ATTACHMENT_TYPES.register(modEventBus);
 		DATA_COMPONENTS.register(modEventBus);
@@ -79,9 +86,10 @@ public class UnderNeathTimeV {
 		new UTVEvents();
 		new UTVItems();
 		new UTVBlocks();
+		new UTVBlockEntities();
 		new TimeSystem();
 		new UTVComponents();
-		new UTVLootModifier();
+		new UTVLootModifiers();
 		//new UTVProviders();
 		
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -108,6 +116,5 @@ public class UnderNeathTimeV {
     		items4MainTab.add(item);
     	}
     }
-
-
+    
 }

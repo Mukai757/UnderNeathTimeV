@@ -1,4 +1,4 @@
-package underneathtimev.provider;
+package underneathtimev.data.loot_table;
 
 import java.util.List;
 import java.util.Set;
@@ -7,7 +7,6 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import underneathtimev.provider.loot_table.*;
 
 /**
  * @author AoXiang_Soar
@@ -17,7 +16,8 @@ public class UTVLootTableProvider extends LootTableProvider {
 
 	public UTVLootTableProvider(PackOutput output, CompletableFuture<Provider> registries) {
 		super(output, Set.of(), List.of(
-				new SubProviderEntry(SimpleDungeonAdditionTable::new, LootContextParamSets.EMPTY)
+				new SubProviderEntry(SimpleDungeonAdditionTable::new, LootContextParamSets.CHEST),
+				new SubProviderEntry(BlockLootProvider::new, LootContextParamSets.BLOCK)
 				), registries);
 	}
 }

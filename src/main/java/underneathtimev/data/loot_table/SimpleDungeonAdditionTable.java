@@ -1,4 +1,4 @@
-package underneathtimev.provider.loot_table;
+package underneathtimev.data.loot_table;
 
 import java.util.function.BiConsumer;
 

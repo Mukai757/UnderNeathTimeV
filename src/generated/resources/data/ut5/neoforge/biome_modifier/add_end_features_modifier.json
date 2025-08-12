@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_end",
+  "features": [
+    "ut5:void_crystal_ore_feature",
+    "ut5:space_dust_ore_feature"
+  ],
+  "step": "underground_ores"
+}

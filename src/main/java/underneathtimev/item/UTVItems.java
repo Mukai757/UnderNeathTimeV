@@ -16,9 +16,15 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public class UTVItems {
 	/**
-	 * UTV utilizes this method to automatically register blocks and add them to the
+	 * UTV utilizes this method to automatically register items and add them to the
 	 * Creative Mode inventory. See also
 	 * <code>underneathtimev.UnderNeathTimeV.addItem2Tab()</code>.
+	 * 
+	 * @param name The register name of the item
+	 * @param func Initialization function called during registration; if no
+	 *             additional functionality is needed, <code>Item::new</code> can be used
+	 * @param props Properties of the item
+	 * @param tab Which creative tab the item to be added, use <code>null</code> if no one is suitable
 	 */
 	private static <I extends Item> DeferredItem<I> register(String name, Function<Item.Properties, ? extends I> func,
 			Item.Properties props, DeferredHolder<CreativeModeTab, CreativeModeTab> tab) {
