@@ -2,10 +2,13 @@ package underneathtimev.block;
 
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import underneathtimev.UnderNeathTimeV;
 
 import java.util.function.Function;
@@ -15,6 +18,9 @@ import java.util.function.Function;
  */
 
 public class UTVBlocks {
+	public static final DeferredRegister.Blocks BLOCKSModId =
+			DeferredRegister.createBlocks(UnderNeathTimeV.MOD_ID);
+
 	/**
 	 * UTV utilizes this method to automatically register blocks and add them to the
 	 * Creative Mode inventory. See also
@@ -27,8 +33,13 @@ public class UTVBlocks {
 		UnderNeathTimeV.addItem2Tab(tab, block);
 		return block;
 	}
+	/*
+	public static final DeferredBlock<Block> PEDESTAL = registerBlock("pedestal",(properties) -> new PedestalBlock(properties.noOcclusion()));
+	 */
+	public static final DeferredBlock<Block> PEDESTAL = register("pedestal", Block::new,
+			BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST), UnderNeathTimeV.MAIN_TAB);
 
-    public static final DeferredBlock<Block> TIME_SAND_ORE = register("time_sand_ore", Block::new, 
+	public static final DeferredBlock<Block> TIME_SAND_ORE = register("time_sand_ore", Block::new,
             BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST), UnderNeathTimeV.MAIN_TAB);
     
     public static final DeferredBlock<DropExperienceBlock> CHRONOSTICE_CRYSTAL_ORE = register("chronostice_crystal_ore", 
@@ -45,5 +56,7 @@ public class UTVBlocks {
     		props -> new DropExperienceBlock(UniformInt.of(3, 6), props),
             BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE), 
             UnderNeathTimeV.MAIN_TAB);
+
+
 
 }
