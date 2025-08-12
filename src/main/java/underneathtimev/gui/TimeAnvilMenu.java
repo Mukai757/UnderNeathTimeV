@@ -1,6 +1,5 @@
 package underneathtimev.gui;
 
-
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -10,19 +9,24 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import underneathtimev.block.UTVBlocks;
 import underneathtimev.block.blockentity.TimeAnvilBlockEntity;
 
+/**
+ * @author Mukai
+ */
 public class TimeAnvilMenu extends AbstractContainerMenu {
     public final TimeAnvilBlockEntity blockEntity;
     private final Level level;
 
     public TimeAnvilMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new ItemStackHandler(3));
     }
 
-    public TimeAnvilMenu(int containerId, Inventory inv, BlockEntity blockEntity) {
+    public TimeAnvilMenu(int containerId, Inventory inv, BlockEntity blockEntity, IItemHandler hander) {
         super(UTVGUITypes.TIME_ANVIL_MENU.get(), containerId);
         this.blockEntity = ((TimeAnvilBlockEntity) blockEntity);
         this.level = inv.player.level();
@@ -49,7 +53,7 @@ public class TimeAnvilMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

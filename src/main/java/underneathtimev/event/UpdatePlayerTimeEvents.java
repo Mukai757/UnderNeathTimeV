@@ -32,9 +32,10 @@ public class UpdatePlayerTimeEvents {
 
 	public static void onPlayerTick(PlayerTickEvent.Pre event) {
 		var player = event.getEntity();
-		TimeSystem.decreacePlayerTime(player, 1);
+		TimeSystem.decreasePlayerTime(player, 1);
 	}
 
+	// TODO The timer starts only when the player officially begins the mod progression
 	public static void onLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		var player = event.getEntity();
 		TimeSystem.initPlayerTimeAttachment(player, Config.INITIAL_TIME.get());
@@ -66,10 +67,10 @@ public class UpdatePlayerTimeEvents {
 										.executes(command -> timeHandler.apply(command, TimeSystem::setPlayerTime))))
 						.then(Commands.literal("increase").requires(player -> player.hasPermission(2))
 								.then(Commands.argument("utime", LongArgumentType.longArg(0)).executes(
-										command -> timeHandler.apply(command, TimeSystem::increacePlayerTime))))
+										command -> timeHandler.apply(command, TimeSystem::increasePlayerTime))))
 						.then(Commands.literal("decrease").requires(player -> player.hasPermission(2))
 								.then(Commands.argument("utime", LongArgumentType.longArg(0)).executes(
-										command -> timeHandler.apply(command, TimeSystem::decreacePlayerTime))))
+										command -> timeHandler.apply(command, TimeSystem::decreasePlayerTime))))
 						.then(Commands.literal("query").executes(command -> {
 							var player = command.getSource().getPlayer();
 							player.sendSystemMessage(Component.translatable("command.ut5.time", player.getName(), TimeSystem.getFormatPlayerTime(player)));

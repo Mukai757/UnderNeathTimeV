@@ -11,7 +11,9 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.client.Minecraft;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.ItemLike;
@@ -54,6 +56,7 @@ public class UnderneathTimeV {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 	public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(MOD_ID);
+    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, UnderneathTimeV.MOD_ID);
 	public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
 
 	private static List<DeferredHolder<? extends ItemLike, ?>> items4MainTab = new LinkedList<>();
@@ -79,6 +82,7 @@ public class UnderneathTimeV {
 		CREATIVE_MODE_TABS.register(modEventBus);
 		ATTACHMENT_TYPES.register(modEventBus);
 		DATA_COMPONENTS.register(modEventBus);
+		MENUS.register(modEventBus);
 		GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
 
 		NeoForge.EVENT_BUS.register(this);

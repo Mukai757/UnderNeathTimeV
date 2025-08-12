@@ -44,7 +44,7 @@ public class BacktrackCompassEvents {
 	        player.teleportTo(player.server.getLevel(pos.dimension()), pos.x(), pos.y(), pos.z(), new HashSet<>(), pos.yRot(), pos.xRot());
 	        player.setHealth(matchingCompass.get(UTVComponents.BACKTRACK_COMPASS_PLAYER_INFO_COMPONENT).health());
 	        player.getCooldowns().addCooldown(UTVItems.BACKTRACK_COMPASS.asItem(), TimeSystem.MINUTE);
-	        TimeSystem.decreacePlayerTime(player, TimeSystem.HOUR);
+	        TimeSystem.decreasePlayerTime(player, TimeSystem.HOUR);
 	    }
 	}
 }

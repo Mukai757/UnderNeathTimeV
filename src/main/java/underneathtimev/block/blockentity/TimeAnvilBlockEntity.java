@@ -21,6 +21,9 @@ import org.jetbrains.annotations.Nullable;
 
 import underneathtimev.gui.TimeAnvilMenu;
 
+/**
+ * @author Mukai
+ */
 public class TimeAnvilBlockEntity extends BlockEntity implements MenuProvider {
     public final ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
