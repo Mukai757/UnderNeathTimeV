@@ -22,7 +22,7 @@ public class UTVPlayerData {
                             .copyOnDeath()
                             .build());
 
-    public static void init(){
+    public static void init() {
 
     }
 
@@ -37,7 +37,7 @@ public class UTVPlayerData {
 
     public UTVPlayerData() {
         this.timeRunning = false;
-        this.time = 0;
+        this.time = Config.INITIAL_TIME.get();
     }
 
     public boolean isTimeRunning() {
@@ -53,7 +53,7 @@ public class UTVPlayerData {
     }
 
     public void setTime(long time) {
-        this.time = time;
+        this.time = Math.max(time, 0);
     }
 
     /**
@@ -61,8 +61,15 @@ public class UTVPlayerData {
      * @return time after modification
      */
     public long addTime(long time) {
-        this.time += time;
+        this.time = Math.max(time + this.time, 0);
         return time;
     }
 
+    public boolean extractTimeIfEnough(long time) {
+        if(this.time >= time){
+            this.time -= time;
+            return true;
+        }
+        return false;
+    }
 }

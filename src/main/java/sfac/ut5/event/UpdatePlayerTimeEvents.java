@@ -1,12 +1,8 @@
 package sfac.ut5.event;
 
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -16,7 +12,6 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.Clone;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import sfac.ut5.Config;
 import sfac.ut5.TimeSystem;
 import sfac.ut5.UTVPlayerData;
 import sfac.ut5.UnderneathTimeV;
@@ -58,6 +53,7 @@ public class UpdatePlayerTimeEvents {
 
 	public static void onCommandRegister(RegisterCommandsEvent event) {
 		CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+
 		BiFunction<CommandContext<CommandSourceStack>, BiConsumer<Player, Long>, Integer> timeHandler = 
 				(command, operation) -> {
 			var player = command.getSource().getPlayer();
