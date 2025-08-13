@@ -32,6 +32,20 @@ public class UTVItems {
         UnderneathTimeV.addItem2Tab(tab, item);
         return item;
     }
+    
+    /**
+     * UTV utilizes this method to automatically register items and add them to the
+     * Creative Mode inventory. See also
+     * <code>underneathtimev.UnderNeathTimeV.addItem2Tab()</code>.
+     *
+     * @param name  The register name of the item
+     * @param tab   Which creative tab the item to be added, use <code>null</code> if no one is suitable
+     */
+    private static DeferredItem<Item> registerSimpleItem(String name, DeferredHolder<CreativeModeTab, CreativeModeTab> tab) {
+        DeferredItem<Item> item = UnderneathTimeV.ITEMS.registerSimpleItem(name);
+        UnderneathTimeV.addItem2Tab(tab, item);
+        return item;
+    }
 
     public static final DeferredItem<ElytraItem> TIME_WINGS =
             register("time_wings", ElytraItem::new, new Item.Properties().durability(432), UnderneathTimeV.MAIN_TAB);
