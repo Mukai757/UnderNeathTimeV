@@ -1,7 +1,5 @@
 package sfac.ut5.event;
 
-import java.util.HashSet;
-
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
@@ -9,6 +7,8 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import sfac.ut5.TimeSystem;
 import sfac.ut5.component.UTVComponents;
 import sfac.ut5.item.UTVItems;
+
+import java.util.HashSet;
 
 /**
  * @author AoXiang_Soar
@@ -43,7 +43,7 @@ public class BacktrackCompassEvents {
 	        var pos = matchingCompass.get(UTVComponents.BACKTRACK_COMPASS_POSITION_COMPONENT);
 	        player.teleportTo(player.server.getLevel(pos.dimension()), pos.x(), pos.y(), pos.z(), new HashSet<>(), pos.yRot(), pos.xRot());
 	        player.setHealth(matchingCompass.get(UTVComponents.BACKTRACK_COMPASS_PLAYER_INFO_COMPONENT).health());
-	        player.getCooldowns().addCooldown(UTVItems.BACKTRACK_COMPASS.asItem(), TimeSystem.MINUTE);
+	        player.getCooldowns().addCooldown(UTVItems.BACKTRACK_COMPASS.asItem(), (int) TimeSystem.MINUTE);
 	        TimeSystem.decreasePlayerTime(player, TimeSystem.HOUR);
 	    }
 	}

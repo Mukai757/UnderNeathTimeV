@@ -1,5 +1,8 @@
 package sfac.ut5.item;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -17,18 +20,13 @@ import sfac.ut5.component.UTVComponents;
 
 import java.util.List;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import io.netty.buffer.ByteBuf;
-
 /**
  * @author Mukai
  * @author AoXiang_Soar
  */
 
 public class FatePocketWatchItem extends Item {
-	private static final int COOLDOWN_TICKS = 5 * TimeSystem.MINUTE;
+	private static final long COOLDOWN_TICKS = 5 * TimeSystem.MINUTE;
 	private static final String TAG_HEALTH = "storedHealth";
 	private static final String TAG_FOOD_LEVEL = "storedFood";
 	private static final String TAG_NAME = "storedName";
@@ -63,7 +61,7 @@ public class FatePocketWatchItem extends Item {
 					stack.get(UTVComponents.FATE_POCKET_WATCH_COMPONENT).name.equals(player.getName().getString())) {
 				if (!level.isClientSide) {
 					restoreState(player, stack);
-					player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
+					player.getCooldowns().addCooldown(this, (int) COOLDOWN_TICKS);
 				}
 				return InteractionResultHolder.success(stack);
 			} else {
