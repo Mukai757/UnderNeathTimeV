@@ -93,7 +93,7 @@ public class TimeAnvilBlockEntity extends BlockEntity implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new TimeAnvilMenu(i, inventory, this);
+        return new TimeAnvilMenu(i, inventory, null); // TODO
     }
 
 

@@ -6,7 +6,7 @@ import net.minecraft.core.component.DataComponentType;
 import sfac.ut5.UnderneathTimeV;
 import sfac.ut5.item.BacktrackCompassItem;
 import sfac.ut5.item.FatePocketWatchItem;
-import underneathtimev.item.*;
+import sfac.ut5.item.*;
 
 /**
  * @author AoXiang_Soar
