@@ -12,6 +12,9 @@ public class Config {
     public static final ModConfigSpec.LongValue INITIAL_TIME = BUILDER
             .comment("The initial time(ticks) when player first enters the game")
             .defineInRange("initialTime", 3 * TimeSystem.HOUR, 0L, Long.MAX_VALUE);
-    
-    static final ModConfigSpec SPEC = BUILDER.build();
+
+    // Modified by zer0M1nd: ensure all fields initialized before build
+    static ModConfigSpec build(){
+        return BUILDER.build();
+    }
 }
