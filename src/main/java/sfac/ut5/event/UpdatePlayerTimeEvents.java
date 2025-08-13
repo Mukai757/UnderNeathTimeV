@@ -6,7 +6,9 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -15,6 +17,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import sfac.ut5.TimeSystem;
 import sfac.ut5.UTVPlayerData;
 import sfac.ut5.UnderneathTimeV;
+import sfac.ut5.item.ITimeStorageItem;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
@@ -59,8 +62,8 @@ public class UpdatePlayerTimeEvents {
 			var player = command.getSource().getPlayer();
 			long time = TimeSystem.parseTime(StringArgumentType.getString(command, "utime"));
 			operation.accept(player, time);
-			var msg = Component.translatable("command.ut5.time", player.getName(), TimeSystem.getFormatPlayerTime(player));
-			player.sendSystemMessage(msg);
+			//var msg = Component.translatable("command.ut5.time", player.getName(), TimeSystem.getFormatPlayerTime(player));
+			//player.sendSystemMessage(msg);
 			return 1;
 		};
 
@@ -69,6 +72,16 @@ public class UpdatePlayerTimeEvents {
 						.then(Commands.literal("set").requires(player -> player.hasPermission(2))
 								.then(Commands.argument("utime", StringArgumentType.string())
 										.executes(command -> timeHandler.apply(command, TimeSystem::setPlayerTime))))
+						.then(Commands.literal("setitem").requires(player -> player.hasPermission(2))
+								.then(Commands.argument("utime", StringArgumentType.string())
+										.executes(command -> timeHandler.apply(command, (p, t) -> {
+											ItemStack is = p.getItemInHand(InteractionHand.MAIN_HAND);
+											if(is.getItem() instanceof ITimeStorageItem ti){
+												ti.setTime(is, t);
+											}else{
+												p.sendSystemMessage(Component.literal("Not a time storage!"));
+											}
+										}))))
 						.then(Commands.literal("increase").requires(player -> player.hasPermission(2))
 								.then(Commands.argument("utime", StringArgumentType.string()).executes(
 										command -> timeHandler.apply(command, TimeSystem::increasePlayerTime))))
