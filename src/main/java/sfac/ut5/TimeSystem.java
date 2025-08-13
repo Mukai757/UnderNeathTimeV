@@ -49,15 +49,23 @@ public class TimeSystem {
         return player.getData(TIME);
     }
 
-    public static void increasePlayerTime(Player player, long time) throws ArithmeticException {
+    public static void increasePlayerTime(Player player, long time) {
         long playerTime = player.getData(TIME);
-        player.setData(TIME, Math.addExact(time, playerTime));
+        try {
+        	player.setData(TIME, Math.addExact(time, playerTime));
+        } catch (ArithmeticException e) {
+        	player.setData(TIME, Long.MAX_VALUE);
+		}
     }
 
-    public static void decreasePlayerTime(Player player, long time) throws ArithmeticException {
-        long playerTime = getPlayerTime(player);
-        player.setData(TIME, Math.subtractExact(playerTime, time));
-    }
+	public static void decreasePlayerTime(Player player, long time) {
+		long playerTime = getPlayerTime(player);
+		try {
+			player.setData(TIME, Math.subtractExact(playerTime, time));
+		} catch (ArithmeticException e) {
+			player.setData(TIME, Long.MIN_VALUE);
+		}
+	}
 
     /**
      * Determine whether the player has a time attachment
@@ -109,6 +117,10 @@ public class TimeSystem {
      * @throws IllegalArgumentException if the timeString is not well-formatted
      */
     public static long parseTime(String timeString) throws IllegalArgumentException {
+    	if (timeString.toLowerCase().equals("max"))
+    		return Long.MAX_VALUE;
+    	else if (timeString.toLowerCase().equals("min"))
+    		return 0;
         if (timeString.chars().allMatch(Character::isDigit)) {
         	try {
         		long ticks = Math.multiplyExact(Long.parseLong(timeString), SECOND);
