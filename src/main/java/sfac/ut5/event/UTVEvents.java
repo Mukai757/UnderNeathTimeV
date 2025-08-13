@@ -20,5 +20,6 @@ public class UTVEvents {
 		TimeWingsEvents.register();
 		UpdatePlayerTimeEvents.register();
 		BacktrackCompassEvents.register();
+		DisplayEvents.register();
 	}
 }
