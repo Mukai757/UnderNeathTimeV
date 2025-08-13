@@ -11,7 +11,11 @@ package sfac.ut5.event;
  */
 
 public class UTVEvents {
-	public UTVEvents() {
+
+	private UTVEvents(){ // No one instantiate this!
+	}
+
+	public static void init() {
 		HelloWorldEvents.register();
 		TimeWingsEvents.register();
 		UpdatePlayerTimeEvents.register();

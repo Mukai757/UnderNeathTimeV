@@ -61,4 +61,8 @@ public class UTVBlocks {
 			BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
 			UnderneathTimeV.MAIN_TAB);
 
+	private UTVBlocks() {} // No one initializes this!
+
+	public static void init() {
+	}
 }

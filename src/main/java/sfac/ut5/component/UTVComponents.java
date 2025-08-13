@@ -1,12 +1,11 @@
 package sfac.ut5.component;
 
-import java.util.function.Supplier;
-
 import net.minecraft.core.component.DataComponentType;
 import sfac.ut5.UnderneathTimeV;
 import sfac.ut5.item.BacktrackCompassItem;
 import sfac.ut5.item.FatePocketWatchItem;
-import sfac.ut5.item.*;
+
+import java.util.function.Supplier;
 
 /**
  * @author AoXiang_Soar
@@ -31,4 +30,9 @@ public class UTVComponents {
 		        .persistent(BacktrackCompassItem.BACKTRACK_COMPASS_PLAYER_INFO_CODEC)
 		        .networkSynchronized(BacktrackCompassItem.BACKTRACK_COMPASS_PLAYER_INFO_STREAM_CODEC)
 		);
+
+	private UTVComponents() {}
+
+	public static void init() {
+	}
 }

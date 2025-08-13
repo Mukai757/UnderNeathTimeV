@@ -1,14 +1,13 @@
 package sfac.ut5.item;
 
-import sfac.ut5.UnderneathTimeV;
-
-import java.util.function.Function;
-
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
+import sfac.ut5.UnderneathTimeV;
+
+import java.util.function.Function;
 
 /**
  * @author AoXiang_Soar
@@ -41,4 +40,9 @@ public class UTVItems {
 			register("backtrack_compass", BacktrackCompassItem::new, new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
 	public static final DeferredItem<DebugRodItem> DEBUG_ROD =
 			register("debug_rod", DebugRodItem::new, new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
+
+	public static void init(){
+	}
+
+	private UTVItems() {} // No one initializes this!
 }

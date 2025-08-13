@@ -1,15 +1,8 @@
 package sfac.ut5;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
-
 import net.minecraft.client.Minecraft;
-
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.MenuType;
@@ -32,6 +25,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import org.slf4j.Logger;
 import sfac.ut5.block.UTVBlocks;
 import sfac.ut5.block.blockentity.UTVBlockEntities;
 import sfac.ut5.component.UTVComponents;
@@ -39,6 +33,9 @@ import sfac.ut5.data.UTVDataGatherer;
 import sfac.ut5.data.loot_table.UTVLootModifiers;
 import sfac.ut5.event.UTVEvents;
 import sfac.ut5.item.UTVItems;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author AoXiang_Soar
@@ -86,13 +83,19 @@ public class UnderneathTimeV {
 
 		NeoForge.EVENT_BUS.register(this);
 
-		new UTVEvents();
-		new UTVItems();
-		new UTVBlocks();
-		new UTVBlockEntities();
-		new TimeSystem();
-		new UTVComponents();
-		new UTVLootModifiers();
+		UTVEvents.init();
+		UTVItems.init();
+		UTVBlocks.init();
+		UTVBlockEntities.init();
+		TimeSystem.init();
+		UTVComponents.init();
+		UTVLootModifiers.init();
+
+		//new UTVBlocks();
+		//new UTVBlockEntities();
+		//new TimeSystem();
+		//new UTVComponents();
+		//new UTVLootModifiers();
 		//new UTVProviders();
 		
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

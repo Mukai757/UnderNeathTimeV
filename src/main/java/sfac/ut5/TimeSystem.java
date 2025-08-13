@@ -1,11 +1,10 @@
 package sfac.ut5;
 
-import java.util.function.Supplier;
-
 import com.mojang.serialization.Codec;
-
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
+
+import java.util.function.Supplier;
 
 /**
  * Also see <code>underneathtimev.bus.UpdatePlayerTimeEvents</code>
@@ -76,4 +75,10 @@ public class TimeSystem {
 	public static String getFormatPlayerTime(Player player) {
 		return format(getPlayerTime(player));
 	}
+
+
+	private TimeSystem() {} // No one initializes this!
+
+    public static void init() {
+    }
 }

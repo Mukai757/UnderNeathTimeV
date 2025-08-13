@@ -1,10 +1,10 @@
 package sfac.ut5.block.blockentity;
 
-import java.util.function.Supplier;
-
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import sfac.ut5.UnderneathTimeV;
 import sfac.ut5.block.UTVBlocks;
+
+import java.util.function.Supplier;
 
 /**
  * @author AoXiang_Soar
@@ -18,4 +18,9 @@ public class UTVBlockEntities {
 	       )
 	       .build(null)
 	  );
+
+	private UTVBlockEntities() {} // No one initializes this!
+
+	public static void init() {
+	}
 }
