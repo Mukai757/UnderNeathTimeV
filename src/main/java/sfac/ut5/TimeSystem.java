@@ -74,58 +74,82 @@ public class TimeSystem {
     }
 
     /**
+     * Format the ticks into "1Y2M3D4h5m6s"
+     *
+     * @param time Ticks
+     * @param includeTick If true, also include the number of ticks like "7t"
+     * @return Formated string
+     */
+    public static String formatUnits(long time, boolean includeTick) {
+        StringBuilder s = new StringBuilder();
+        for (Map.Entry<String, Long> entry : TIME_UNITS.entrySet()) {
+            if (entry.getValue() == TICK && !includeTick) {
+                continue;
+            }
+            if (time >= entry.getValue()) {
+                s.append((time / entry.getValue())).append(entry.getKey());
+                time %= entry.getValue();
+            }
+        }
+        if (s.isEmpty()) {
+            return "0s";
+        }
+        return s.toString();
+    }
+
+    /**
      * Parse a given String to the amount of time (in ticks) it represents.
      * The String may be in these formats:</br>
      * - A pure number: considered as the number of seconds</br>
      * - 1~6 numbers splitted by ":", for example, "1:23:4:56.7". Only last number can be float number.
-     * 		The decimal part will be rounded down to ticks using the conversion rate of 1s = 20t</br>
+     * The decimal part will be rounded down to ticks using the conversion rate of 1s = 20t</br>
      * - Numbers in the form "1Y2M3D4h5m6s7t"</br>
      * - No part can be negative, but the numbers in each part can be large values, such as ​​1Y99M​​ or ​​114514:1919810​​.
-     * 		This method will convert these numbers according to their units, but ​​will throw an exception if the conversion result overflows
+     * This method will convert these numbers according to their units, but ​​will throw an exception if the conversion result overflows
      *
      * @param timeString the String to parse
      * @return the time in ticks
      * @throws IllegalArgumentException if the timeString is not well-formatted
      */
     public static long parseTime(String timeString) throws IllegalArgumentException {
-    	if (timeString.toLowerCase().equals("max"))
-    		return Long.MAX_VALUE;
-    	else if (timeString.toLowerCase().equals("min"))
-    		return 0;
+        if (timeString.toLowerCase().equals("max"))
+            return Long.MAX_VALUE;
+        else if (timeString.toLowerCase().equals("min"))
+            return 0;
         if (timeString.chars().allMatch(Character::isDigit)) {
-        	try {
-        		long ticks = Math.multiplyExact(Long.parseLong(timeString), SECOND);
-        		if (ticks < 0)
-        			throw new IllegalArgumentException("Invalid time string: " + timeString + " . Time cannot be minus.");
-        		return ticks;
-        	} catch (NumberFormatException e) {
-        		throw new IllegalArgumentException("Invalid time string: " + timeString + " . Not contain a parsable long.");
-			} catch (ArithmeticException e) {
-            	throw new IllegalArgumentException("Invalid time string: " + timeString + " . Calculation result overflow.");
-			}
+            try {
+                long ticks = Math.multiplyExact(Long.parseLong(timeString), SECOND);
+                if (ticks < 0)
+                    throw new IllegalArgumentException("Invalid time string: " + timeString + " . Time cannot be minus.");
+                return ticks;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid time string: " + timeString + " . Not contain a parsable long.");
+            } catch (ArithmeticException e) {
+                throw new IllegalArgumentException("Invalid time string: " + timeString + " . Calculation result overflow.");
+            }
         }
         if (timeString.contains(":") || timeString.contains(".")) {
             String[] s0 = timeString.split("\\.");
 
             long ticks;
             try {
-            	ticks = (long) (s0.length >= 2 ? Double.parseDouble("0."+s0[1]) * SECOND : 0);
+                ticks = (long) (s0.length >= 2 ? Double.parseDouble("0." + s0[1]) * SECOND : 0);
             } catch (NumberFormatException e) {
-        		throw new IllegalArgumentException("Invalid time string: " + timeString + " in part: " + s0[1] + " .");
-			}
+                throw new IllegalArgumentException("Invalid time string: " + timeString + " in part: " + s0[1] + " .");
+            }
 
             String s1 = s0[0];
             String[] s = s1.split(":");
-            if(s.length >= 7){
+            if (s.length >= 7) {
                 throw new IllegalArgumentException("Invalid time string: " + timeString + " . Contain more than six colon(:).");
             }
             long[] t = new long[6];
             for (int i = 0; i < s.length; i++) {
-            	String part = s[s.length - i - 1];
+                String part = s[s.length - i - 1];
                 try {
-                	long pl = Long.parseLong(part);
-            		if (pl < 0)
-            			throw new IllegalArgumentException("Invalid time string: " + timeString + " in part: " + part + " . Time cannot be minus.");
+                    long pl = Long.parseLong(part);
+                    if (pl < 0)
+                        throw new IllegalArgumentException("Invalid time string: " + timeString + " in part: " + part + " . Time cannot be minus.");
                     t[6 - i - 1] = pl;
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("Invalid time string: " + timeString + " in part: " + part + " . Not contain a parsable long.");
@@ -135,14 +159,14 @@ public class TimeSystem {
             long[] units = {YEAR, MONTH, DAY, HOUR, MINUTE, SECOND};
             long result = 0;
             try {
-	            for (int i = 0; i < t.length; i++) {
-	            	long temp = Math.multiplyExact(t[i], units[i]);
-	            	result = Math.addExact(result, temp);
-	            }
-	            result = Math.addExact(result, ticks);
+                for (int i = 0; i < t.length; i++) {
+                    long temp = Math.multiplyExact(t[i], units[i]);
+                    result = Math.addExact(result, temp);
+                }
+                result = Math.addExact(result, ticks);
             } catch (ArithmeticException e) {
-            	throw new IllegalArgumentException("Invalid time string: " + timeString + " . Calculation result overflow.");
-			}
+                throw new IllegalArgumentException("Invalid time string: " + timeString + " . Calculation result overflow.");
+            }
             return result;
         }
 
@@ -152,10 +176,10 @@ public class TimeSystem {
             char c = timeString.charAt(i);
             if (!Character.isDigit(c)) {
                 try {
-                	long part = Long.parseLong(timeString.substring(begin, i));
-                	long unit = TIME_UNITS.get(timeString.substring(i, i + 1));
-                	part = Math.multiplyExact(part, unit);
-                	t = Math.addExact(t, part);
+                    long part = Long.parseLong(timeString.substring(begin, i));
+                    long unit = TIME_UNITS.get(timeString.substring(i, i + 1));
+                    part = Math.multiplyExact(part, unit);
+                    t = Math.addExact(t, part);
                 } catch (NullPointerException | NumberFormatException e) {
                     throw new IllegalArgumentException("Invalid time string: " + timeString);
                 } catch (ArithmeticException e) {
