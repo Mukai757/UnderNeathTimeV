@@ -1,6 +1,6 @@
 {
 	// Creative Tabs
-	"itemGroup.ut5": "UnderNeathTime V",
+	"itemGroup.ut5": "UnderneathTime V",
 	
 	// Blocks
 	"block.ut5.time_sand_ore": "Time Sand Ore",
@@ -32,5 +32,5 @@
 	"command.ut5.time": "%1$s has %2$s left before reaching the end of life",
 	
 	// Others
-	"ut5.welcome": "Welcome to UnderNeathTime V!"
+	"ut5.welcome": "Welcome to UnderneathTime V!"
 }

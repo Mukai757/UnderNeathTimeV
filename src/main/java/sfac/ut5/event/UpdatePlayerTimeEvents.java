@@ -4,7 +4,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.LongArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 
 import net.minecraft.commands.CommandSourceStack;
@@ -19,7 +19,6 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import sfac.ut5.Config;
 import sfac.ut5.TimeSystem;
 import sfac.ut5.UnderneathTimeV;
-import sfac.ut5.*;
 
 /**
  * @author AoXiang_Soar
@@ -56,7 +55,7 @@ public class UpdatePlayerTimeEvents {
 		BiFunction<CommandContext<CommandSourceStack>, BiConsumer<Player, Long>, Integer> timeHandler = 
 				(command, operation) -> {
 			var player = command.getSource().getPlayer();
-			long time = LongArgumentType.getLong(command, "utime");
+			long time = TimeSystem.parseTime(StringArgumentType.getString(command, "utime"));
 			operation.accept(player, time);
 			var msg = Component.translatable("command.ut5.time", player.getName(), TimeSystem.getFormatPlayerTime(player));
 			player.sendSystemMessage(msg);
@@ -66,13 +65,13 @@ public class UpdatePlayerTimeEvents {
 		dispatcher.register(Commands.literal(UnderneathTimeV.MOD_ID)
 				.then(Commands.literal("time")
 						.then(Commands.literal("set").requires(player -> player.hasPermission(2))
-								.then(Commands.argument("utime", LongArgumentType.longArg(0))
+								.then(Commands.argument("utime", StringArgumentType.string())
 										.executes(command -> timeHandler.apply(command, TimeSystem::setPlayerTime))))
 						.then(Commands.literal("increase").requires(player -> player.hasPermission(2))
-								.then(Commands.argument("utime", LongArgumentType.longArg(0)).executes(
+								.then(Commands.argument("utime", StringArgumentType.string()).executes(
 										command -> timeHandler.apply(command, TimeSystem::increasePlayerTime))))
 						.then(Commands.literal("decrease").requires(player -> player.hasPermission(2))
-								.then(Commands.argument("utime", LongArgumentType.longArg(0)).executes(
+								.then(Commands.argument("utime", StringArgumentType.string()).executes(
 										command -> timeHandler.apply(command, TimeSystem::decreasePlayerTime))))
 						.then(Commands.literal("query").executes(command -> {
 							var player = command.getSource().getPlayer();
