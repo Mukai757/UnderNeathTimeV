@@ -106,10 +106,6 @@ public class TimeSystem {
         }
         if (timeString.contains(":") || timeString.contains(".")) {
             String[] s0 = timeString.split("\\.");
-            long ticks = s0.length >= 2 ? Long.parseLong(s0[1]) : 0;
-            if(s0.length >= 3){
-                throw new IllegalArgumentException("Invalid time string: " + timeString + " . Contain more than one dot(.).");
-            }
 
             long ticks;
             try {
