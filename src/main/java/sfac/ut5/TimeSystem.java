@@ -92,6 +92,17 @@ public class TimeSystem {
             "t", TICK
     );
 
+    /**
+     * Parse a given String to the amount of time (in ticks) it represents.
+     * The String may be in these formats:
+     * - A pure number: considered as the number of ticks
+     * - 1~6 numbers splitted by ":", for example, "1:23:4:56".
+     * - Numbers in the form "1Y2M3D4h5m6s7t".
+     *
+     * @param timeString the String to parse
+     * @return the time in ticks
+     * @throws IllegalArgumentException if the timeString is not well-formatted
+     */
     public static long parseTime(String timeString) {
         if (timeString.chars().allMatch(Character::isDigit)) {
             return Long.parseLong(timeString) * SECOND;
@@ -99,11 +110,21 @@ public class TimeSystem {
         if (timeString.contains(":") || timeString.contains(".")) {
             String[] s0 = timeString.split("\\.");
             long ticks = s0.length >= 2 ? Long.parseLong(s0[1]) : 0;
+            if(s0.length >= 3){
+                throw new IllegalArgumentException("Invalid time string: " + timeString);
+            }
             String s1 = s0[0];
             String[] s = s1.split(":");
+            if(s.length >= 7){
+                throw new IllegalArgumentException("Invalid time string: " + timeString);
+            }
             long[] t = new long[6];
             for (int i = 0; i < s.length; i++) {
-                t[6 - i - 1] = Long.parseLong(s[s.length - i - 1]);
+                try {
+                    t[6 - i - 1] = Long.parseLong(s[s.length - i - 1]);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Invalid time string: " + timeString);
+                }
             }
             return t[0] * YEAR + t[1] * MONTH + t[2] * DAY + t[3] * HOUR + t[4] * MINUTE + t[5] * SECOND + ticks;
         }
