@@ -14,7 +14,10 @@ import sfac.ut5.block.blockentity.TimeAnvilBlockEntity;
 
 import org.jetbrains.annotations.Nullable;
 
-public class TimeAnvilBlock  extends BaseEntityBlock {
+/**
+ * @author Mukai
+ */
+public class TimeAnvilBlock extends BaseEntityBlock {
     public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
     public static final MapCodec<TimeAnvilBlock> CODEC = simpleCodec(TimeAnvilBlock::new);
 
