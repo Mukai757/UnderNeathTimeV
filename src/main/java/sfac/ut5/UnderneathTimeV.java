@@ -103,7 +103,7 @@ public class UnderneathTimeV {
 		UTVComponents.init();
 		UTVLootModifiers.init();
 		UTVPlayerData.init();
-		
+
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.build());
 	}
 

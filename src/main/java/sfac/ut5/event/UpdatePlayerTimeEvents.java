@@ -6,6 +6,7 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -14,10 +15,12 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.Clone;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import sfac.ut5.TimeSystem;
 import sfac.ut5.UTVPlayerData;
 import sfac.ut5.UnderneathTimeV;
 import sfac.ut5.item.ITimeStorageItem;
+import sfac.ut5.network.packets.PacketSyncPlayerData;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
@@ -27,71 +30,78 @@ import java.util.function.BiFunction;
  */
 
 public class UpdatePlayerTimeEvents {
-	public static void register() {
-		NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onPlayerTick);
-		NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onLoggedIn);
-		NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onPlayerClone);
-		NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onCommandRegister);
-	}
+    public static void register() {
+        NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onLoggedIn);
+        NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onPlayerClone);
+        NeoForge.EVENT_BUS.addListener(UpdatePlayerTimeEvents::onCommandRegister);
+    }
 
-	public static void onPlayerTick(PlayerTickEvent.Pre event) {
-		var player = event.getEntity();
-		TimeSystem.decreasePlayerTime(player, 1);
-	}
+    public static void onPlayerTick(PlayerTickEvent.Pre event) {
+        var player = event.getEntity();
+        TimeSystem.decreasePlayerTime(player, 1);
+    }
 
-	// TODO The timer starts only when the player officially begins the mod progression
-	public static void onLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		var player = event.getEntity();
-		if(!player.hasData(UTVPlayerData.UTVDATA)){
-			player.setData(UTVPlayerData.UTVDATA, new UTVPlayerData());
-		}
-	}
+    // TODO The timer starts only when the player officially begins the mod progression
+    public static void onLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        var player = event.getEntity();
+        if (!player.hasData(UTVPlayerData.UTVDATA)) {
+            player.setData(UTVPlayerData.UTVDATA, new UTVPlayerData());
+        }
+        if (player.getCommandSenderWorld().isClientSide()) {
+            return;
+        }
+        // Sync data from server to client
+        var data = player.getData(UTVPlayerData.UTVDATA);
+        PacketDistributor.sendToPlayer((ServerPlayer) player, new PacketSyncPlayerData(data));
+        data.markClean();
+    }
 
-	public static void onPlayerClone(Clone event) {
-		var player = event.getEntity();
-		var oldPlayer = event.getOriginal();
-		if (event.isWasDeath())
-			TimeSystem.setPlayerTime(player, TimeSystem.getPlayerTime(oldPlayer) / 2);
-	}
+    public static void onPlayerClone(Clone event) {
+        var player = event.getEntity();
+        var oldPlayer = event.getOriginal();
+        if (event.isWasDeath())
+            TimeSystem.setPlayerTime(player, TimeSystem.getPlayerTime(oldPlayer) / 2);
+    }
 
-	public static void onCommandRegister(RegisterCommandsEvent event) {
-		CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+    public static void onCommandRegister(RegisterCommandsEvent event) {
+        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-		BiFunction<CommandContext<CommandSourceStack>, BiConsumer<Player, Long>, Integer> timeHandler = 
-				(command, operation) -> {
-			var player = command.getSource().getPlayer();
-			long time = TimeSystem.parseTime(StringArgumentType.getString(command, "utime"));
-			operation.accept(player, time);
-			//var msg = Component.translatable("command.ut5.time", player.getName(), TimeSystem.getFormatPlayerTime(player));
-			//player.sendSystemMessage(msg);
-			return 1;
-		};
+        BiFunction<CommandContext<CommandSourceStack>, BiConsumer<Player, Long>, Integer> timeHandler =
+                (command, operation) -> {
+                    var player = command.getSource().getPlayer();
+                    long time = TimeSystem.parseTime(StringArgumentType.getString(command, "utime"));
+                    operation.accept(player, time);
+                    //var msg = Component.translatable("command.ut5.time", player.getName(), TimeSystem.getFormatPlayerTime(player));
+                    //player.sendSystemMessage(msg);
+                    return 1;
+                };
 
-		dispatcher.register(Commands.literal(UnderneathTimeV.MOD_ID)
-				.then(Commands.literal("time")
-						.then(Commands.literal("set").requires(player -> player.hasPermission(2))
-								.then(Commands.argument("utime", StringArgumentType.string())
-										.executes(command -> timeHandler.apply(command, TimeSystem::setPlayerTime))))
-						.then(Commands.literal("setitem").requires(player -> player.hasPermission(2))
-								.then(Commands.argument("utime", StringArgumentType.string())
-										.executes(command -> timeHandler.apply(command, (p, t) -> {
-											ItemStack is = p.getItemInHand(InteractionHand.MAIN_HAND);
-											if(is.getItem() instanceof ITimeStorageItem ti){
-												ti.setTime(is, t);
-											}else{
-												p.sendSystemMessage(Component.literal("Not a time storage!"));
-											}
-										}))))
-						.then(Commands.literal("increase").requires(player -> player.hasPermission(2))
-								.then(Commands.argument("utime", StringArgumentType.string()).executes(
-										command -> timeHandler.apply(command, TimeSystem::increasePlayerTime))))
-						.then(Commands.literal("decrease").requires(player -> player.hasPermission(2))
-								.then(Commands.argument("utime", StringArgumentType.string()).executes(
-										command -> timeHandler.apply(command, TimeSystem::decreasePlayerTime))))
-						.then(Commands.literal("query").executes(command -> {
-							var player = command.getSource().getPlayer();
-							player.sendSystemMessage(Component.translatable("command.ut5.time", player.getName(), TimeSystem.getFormatPlayerTime(player)));
-							return 1;
-						}))));
-	}
+        dispatcher.register(Commands.literal(UnderneathTimeV.MOD_ID)
+                .then(Commands.literal("time")
+                        .then(Commands.literal("set").requires(player -> player.hasPermission(2))
+                                .then(Commands.argument("utime", StringArgumentType.string())
+                                        .executes(command -> timeHandler.apply(command, TimeSystem::setPlayerTime))))
+                        .then(Commands.literal("setitem").requires(player -> player.hasPermission(2))
+                                .then(Commands.argument("utime", StringArgumentType.string())
+                                        .executes(command -> timeHandler.apply(command, (p, t) -> {
+                                            ItemStack is = p.getItemInHand(InteractionHand.MAIN_HAND);
+                                            if (is.getItem() instanceof ITimeStorageItem ti) {
+                                                ti.setTime(is, t);
+                                            } else {
+                                                p.sendSystemMessage(Component.literal("Not a time storage!"));
+                                            }
+                                        }))))
+                        .then(Commands.literal("increase").requires(player -> player.hasPermission(2))
+                                .then(Commands.argument("utime", StringArgumentType.string()).executes(
+                                        command -> timeHandler.apply(command, TimeSystem::increasePlayerTime))))
+                        .then(Commands.literal("decrease").requires(player -> player.hasPermission(2))
+                                .then(Commands.argument("utime", StringArgumentType.string()).executes(
+                                        command -> timeHandler.apply(command, TimeSystem::decreasePlayerTime))))
+                        .then(Commands.literal("query").executes(command -> {
+                            var player = command.getSource().getPlayer();
+                            player.sendSystemMessage(Component.translatable("command.ut5.time", player.getName(), TimeSystem.getFormatPlayerTime(player)));
+                            return 1;
+                        }))));
+    }
 }

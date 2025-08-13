@@ -23,5 +23,6 @@ public class UTVEvents {
 		UpdatePlayerTimeEvents.register();
 		BacktrackCompassEvents.register();
 		DisplayEvents.register(modEventBus);
+		NetworkEvents.register(modEventBus);
 	}
 }
