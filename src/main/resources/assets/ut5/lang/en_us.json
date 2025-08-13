@@ -32,5 +32,13 @@
 	"command.ut5.time": "%1$s has %2$s left before reaching the end of life",
 	
 	// Others
-	"ut5.welcome": "Welcome to UnderneathTime V!"
+	"ut5.welcome": "Welcome to UnderneathTime V!",
+
+	"ut5.timeunits.year": "Year",
+	"ut5.timeunits.month": "Month",
+	"ut5.timeunits.day": "Day",
+	"ut5.timeunits.hour": "Hour",
+	"ut5.timeunits.minute": "Minute",
+	"ut5.timeunits.second": "Second",
+	"ut5.timeunits.tick": "Tick"
 }
