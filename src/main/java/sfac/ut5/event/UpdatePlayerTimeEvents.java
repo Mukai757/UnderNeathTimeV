@@ -39,7 +39,8 @@ public class UpdatePlayerTimeEvents {
 
     public static void onPlayerTick(PlayerTickEvent.Pre event) {
         var player = event.getEntity();
-        TimeSystem.decreasePlayerTime(player, 1);
+        var data = player.getData(UTVPlayerData.UTVDATA);
+        data.tick();
     }
 
     // TODO The timer starts only when the player officially begins the mod progression
