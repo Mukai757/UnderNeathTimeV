@@ -7,6 +7,8 @@
 	"block.ut5.chronostice_crystal_ore": "时隙晶矿石",
 	"block.ut5.void_crystal_ore": "虚空晶矿石",
 	"block.ut5.space_dust_ore": "空尘矿石",
+	"block.ut5.time_bind_altar": "时缚祭坛",
+	"block.ut5.time_spindle_coupler": "时轴耦合器",
 	
 	// Items
 	"item.ut5.time_wings": "时之翼",
@@ -27,6 +29,10 @@
 	"item.ut5.debug_rod": "创世权杖",
 	"item.ut5.debug_rod.tooltip.1": "神说要有时间，然后便有了时间",
 	"item.ut5.debug_rod.tooltip.2": "调试工具",
+
+	"item.ut5.hourglass_1": "疾沙之漏",
+	"item.ut5.hourglass_2": "常沙之漏",
+	"item.ut5.hourglass_3": "缓沙之漏",
 	
 	// Commands
 	"command.ut5.time": "%1$s距离生命的尽头现在还有%2$s",

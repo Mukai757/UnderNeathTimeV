@@ -6,6 +6,9 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 
 import java.util.function.Supplier;
 
+/**
+ * @author zer0M1nd
+ */
 public class UTVPlayerData {
 
     private static final Codec<UTVPlayerData> CODEC = RecordCodecBuilder.create(instance -> // Given an instance
@@ -16,7 +19,7 @@ public class UTVPlayerData {
     );
 
     public static final Supplier<AttachmentType<UTVPlayerData>> UTVDATA =
-            UnderneathTimeV.ATTACHMENT_TYPES.register("utv",
+            UnderneathTimeV.ATTACHMENT_TYPES.register(UnderneathTimeV.MOD_ID,
                     () -> AttachmentType.builder(UTVPlayerData::new)
                             .serialize(CODEC)
                             .copyOnDeath()

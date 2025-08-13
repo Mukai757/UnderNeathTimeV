@@ -11,13 +11,18 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import sfac.ut5.UnderneathTimeV;
 import sfac.ut5.data.loot_table.UTVGlobalLootModifierProvider;
 import sfac.ut5.data.loot_table.UTVLootTableProvider;
+import sfac.ut5.data.model.UTVBlockStateProvider;
+import sfac.ut5.data.model.UTVItemModelProvider;
 import sfac.ut5.data.tag.UTVBlockTagProvider;
 import sfac.ut5.data.world.UTVBiomeModifiers;
 import sfac.ut5.data.world.UTVConfiguredFeatures;
 import sfac.ut5.data.world.UTVPlacedFeatures;
 
 /**
- * A class to gather all the datapacks
+ * A class to gather all the datapacks.</br>
+ * All items and blocks have undergone default datagen processing. If special
+ * data files are required, please modify the use of <code>if</code> in the
+ * <code>for</code> loops within each Provider to annotate them
  * 
  * @author AoXiang_Soar
  */
@@ -25,6 +30,7 @@ import sfac.ut5.data.world.UTVPlacedFeatures;
 public class UTVDataGatherer {
 	
 	public static void onGatherData(GatherDataEvent event) {
+		// Server
 		event.getGenerator().addProvider(event.includeServer(),
 				(DataProvider.Factory<UTVGlobalLootModifierProvider>) output -> new UTVGlobalLootModifierProvider(output, event.getLookupProvider()));
 		event.getGenerator().addProvider(event.includeServer(),
@@ -35,6 +41,12 @@ public class UTVDataGatherer {
 		event.getGenerator().addProvider(event.includeServer(),
 		        (DataProvider.Factory<DatapackBuiltinEntriesProvider>) output -> new DatapackBuiltinEntriesProvider(output, event.getLookupProvider(),
 		        		createBuilder(), Set.of(UnderneathTimeV.MOD_ID)));
+		
+		// Client
+		event.getGenerator().addProvider(event.includeClient(),
+				(DataProvider.Factory<UTVBlockStateProvider>) output -> new UTVBlockStateProvider(output, event.getExistingFileHelper()));
+		event.getGenerator().addProvider(event.includeClient(),
+				(DataProvider.Factory<UTVItemModelProvider>) output -> new UTVItemModelProvider(output, event.getExistingFileHelper()));
 	}
 	
 	/**

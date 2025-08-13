@@ -7,10 +7,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import sfac.ut5.UnderneathTimeV;
-import sfac.ut5.data.loot_table.BlockLootProvider.Drops;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -18,7 +15,6 @@ import java.util.function.Function;
  */
 
 public class UTVBlocks {
-	public static List<Drops> list = new LinkedList<>();
 
 	/**
 	 * UTV utilizes this method to automatically register blocks and add them to the
@@ -40,7 +36,7 @@ public class UTVBlocks {
 	}
 
 	public static final DeferredBlock<Block> TIME_SAND_ORE = register("time_sand_ore", Block::new,
-			BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
 
 	public static final DeferredBlock<DropExperienceBlock> CHRONOSTICE_CRYSTAL_ORE = register("chronostice_crystal_ore",
@@ -50,12 +46,20 @@ public class UTVBlocks {
 
 	public static final DeferredBlock<DropExperienceBlock> SPACE_DUST_ORE = register("space_dust_ore",
 			props -> new DropExperienceBlock(UniformInt.of(3, 6), props),
-			BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.SOUL_SAND),
+			BlockBehaviour.Properties.of().strength(2.5f).requiresCorrectToolForDrops().sound(SoundType.SOUL_SAND),
 			UnderneathTimeV.MAIN_TAB);
 
 	public static final DeferredBlock<DropExperienceBlock> VOID_CRYSTAL_ORE = register("void_crystal_ore",
 			props -> new DropExperienceBlock(UniformInt.of(3, 6), props),
-			BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
+			BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
+			UnderneathTimeV.MAIN_TAB);
+
+	public static final DeferredBlock<TimeBinderBlock> TIME_BIND_ALTAR = register("time_bind_altar", TimeBinderBlock::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
+			UnderneathTimeV.MAIN_TAB);
+
+	public static final DeferredBlock<TimeBinderBlock> TIME_SPINDLE_COUPLER = register("time_spindle_coupler", TimeBinderBlock::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
 			UnderneathTimeV.MAIN_TAB);
 
 	private UTVBlocks() {} // No one initializes this!

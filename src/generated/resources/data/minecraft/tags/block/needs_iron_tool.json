@@ -2,6 +2,8 @@
   "values": [
     "ut5:void_crystal_ore",
     "ut5:space_dust_ore",
-    "ut5:time_sand_ore"
+    "ut5:time_sand_ore",
+    "ut5:time_bind_altar",
+    "ut5:time_spindle_coupler"
   ]
 }

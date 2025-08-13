@@ -1,6 +1,8 @@
 {
   "values": [
     "ut5:chronostice_crystal_ore",
-    "ut5:void_crystal_ore"
+    "ut5:void_crystal_ore",
+    "ut5:time_bind_altar",
+    "ut5:time_spindle_coupler"
   ]
 }

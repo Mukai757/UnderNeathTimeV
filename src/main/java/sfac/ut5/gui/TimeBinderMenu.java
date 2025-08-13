@@ -13,22 +13,22 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import sfac.ut5.block.UTVBlocks;
-import sfac.ut5.block.blockentity.TimeAnvilBlockEntity;
+import sfac.ut5.block.blockentity.TimeBinderBlockEntity;
 
 /**
  * @author Mukai
  */
-public class TimeAnvilMenu extends AbstractContainerMenu {
-    public final TimeAnvilBlockEntity blockEntity;
+public class TimeBinderMenu extends AbstractContainerMenu {
+    public final TimeBinderBlockEntity blockEntity;
     private final Level level;
 
-    public TimeAnvilMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
+    public TimeBinderMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
         this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new ItemStackHandler(3));
     }
 
-    public TimeAnvilMenu(int containerId, Inventory inv, BlockEntity blockEntity, IItemHandler hander) {
+    public TimeBinderMenu(int containerId, Inventory inv, BlockEntity blockEntity, IItemHandler hander) {
         super(UTVGUITypes.TIME_ANVIL_MENU.get(), containerId);
-        this.blockEntity = ((TimeAnvilBlockEntity) blockEntity);
+        this.blockEntity = ((TimeBinderBlockEntity) blockEntity);
         this.level = inv.player.level();
 
         addPlayerInventory(inv);

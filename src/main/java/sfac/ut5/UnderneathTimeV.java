@@ -8,7 +8,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -23,6 +25,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.slf4j.Logger;
@@ -91,13 +94,6 @@ public class UnderneathTimeV {
 		UTVComponents.init();
 		UTVLootModifiers.init();
 		UTVPlayerData.init();
-
-		//new UTVBlocks();
-		//new UTVBlockEntities();
-		//new TimeSystem();
-		//new UTVComponents();
-		//new UTVLootModifiers();
-		//new UTVProviders();
 		
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.build());
 	}
@@ -123,5 +119,24 @@ public class UnderneathTimeV {
     		items4MainTab.add(item);
     	}
     }
-    
+
+    /**
+     * Use for datagen
+     */
+    public static List<DeferredHolder<Block, ? extends Block>> getKnownBlocks() {
+        return UnderneathTimeV.BLOCKS.getEntries()
+                .stream()
+//                .map(e -> (Block) e.value())
+                .toList();
+    }
+
+    /**
+     * Use for datagen
+     */
+    public static List<DeferredHolder<Item, ? extends Item>> getKnownItems() {
+        return UnderneathTimeV.ITEMS.getEntries()
+                .stream()
+//                .map(e -> (Item) e.value())
+                .toList();
+    }
 }

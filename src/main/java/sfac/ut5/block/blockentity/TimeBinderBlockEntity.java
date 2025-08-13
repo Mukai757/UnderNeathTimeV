@@ -19,16 +19,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
-import sfac.ut5.gui.TimeAnvilMenu;
+import sfac.ut5.gui.TimeBinderMenu;
 
 /**
  * @author Mukai
  */
-public class TimeAnvilBlockEntity extends BlockEntity implements MenuProvider {
-    public final ItemStackHandler inventory = new ItemStackHandler(1) {
+public class TimeBinderBlockEntity extends BlockEntity implements MenuProvider {
+    public final ItemStackHandler inventory = new ItemStackHandler(3) {
         @Override
         protected int getStackLimit(int slot, ItemStack stack) {
-            return 1;
+            return 3;
         }
 
         @Override
@@ -41,7 +41,7 @@ public class TimeAnvilBlockEntity extends BlockEntity implements MenuProvider {
     };
     private float rotation;
 
-    public TimeAnvilBlockEntity(BlockPos pos, BlockState blockState) {
+    public TimeBinderBlockEntity(BlockPos pos, BlockState blockState) {
         super(UTVBlockEntities.TIME_ANVIL_BLOCK_ENTITY.get(), pos, blockState);
     }
 
@@ -69,7 +69,7 @@ public class TimeAnvilBlockEntity extends BlockEntity implements MenuProvider {
 
     public void preRemoveSideEffects(BlockPos pos, BlockState state) {
         drops();
-        //抄了有报错，Todo
+        //抄了有报错，TODO
         //super.preRemoveSideEffects(pos, state);
     }
     /*  同上
@@ -93,7 +93,7 @@ public class TimeAnvilBlockEntity extends BlockEntity implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new TimeAnvilMenu(i, inventory, null); // TODO
+        return new TimeBinderMenu(i, inventory, null); // TODO
     }
 
 

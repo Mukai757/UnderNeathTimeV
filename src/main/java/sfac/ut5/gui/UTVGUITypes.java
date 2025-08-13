@@ -13,7 +13,7 @@ import sfac.ut5.UnderneathTimeV;
  * @author Mukai
  */
 public class UTVGUITypes {
-	public static final Supplier<MenuType<TimeAnvilMenu>> TIME_ANVIL_MENU = registerMenuType("time_anvil_menu", TimeAnvilMenu::new);
+	public static final Supplier<MenuType<TimeBinderMenu>> TIME_ANVIL_MENU = registerMenuType("time_anvil_menu", TimeBinderMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(
     		String name, IContainerFactory<T> factory) {
