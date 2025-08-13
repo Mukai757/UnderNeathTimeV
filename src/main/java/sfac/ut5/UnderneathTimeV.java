@@ -36,8 +36,8 @@ import sfac.ut5.component.UTVComponents;
 import sfac.ut5.data.UTVDataGatherer;
 import sfac.ut5.data.loot_table.UTVLootModifiers;
 import sfac.ut5.event.UTVEvents;
-import sfac.ut5.fluid.UTVFluid;
-import sfac.ut5.fluid.UTVFluidType;
+import sfac.ut5.fluid.UTVFluids;
+import sfac.ut5.fluid.UTVFluidTypes;
 import sfac.ut5.item.UTVItems;
 
 import java.util.LinkedList;
@@ -79,6 +79,7 @@ public class UnderneathTimeV {
 		LOGGER.info("Loading UnderNeathTime V... This log was written on the first day of developing the mod."
 				+ " Will there come a day when loading this mod requires traversing an abyss-like expanse of time?www");
 		modEventBus.addListener(UTVDataGatherer::onGatherData);
+		modEventBus.addListener(UTVFluids::onRegisterClientExtensions);
 
 		ITEMS.register(modEventBus);
 		BLOCKS.register(modEventBus);
@@ -97,8 +98,8 @@ public class UnderneathTimeV {
 		UTVItems.init();
 		UTVBlocks.init();
 		UTVBlockEntities.init();
-		UTVFluid.init();
-		UTVFluidType.init();
+		UTVFluids.init();
+		UTVFluidTypes.init();
 		TimeSystem.init();
 		UTVComponents.init();
 		UTVLootModifiers.init();

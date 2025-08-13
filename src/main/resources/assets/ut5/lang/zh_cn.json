@@ -9,6 +9,7 @@
 	"block.ut5.space_dust_ore": "空尘矿石",
 	"block.ut5.time_bind_altar": "时缚祭坛",
 	"block.ut5.time_spindle_coupler": "时轴耦合器",
+	"block.ut5.chronoplasm": "时流质",
 	
 	// Items
 	"item.ut5.time_wings": "时之翼",
@@ -33,6 +34,8 @@
 	"item.ut5.hourglass_1": "疾沙之漏",
 	"item.ut5.hourglass_2": "常沙之漏",
 	"item.ut5.hourglass_3": "缓沙之漏",
+	
+	"item.ut5.chronoplasm_bucket": "时流质桶",
 	
 	// Commands
 	"command.ut5.time": "%1$s距离生命的尽头现在还有%2$s",

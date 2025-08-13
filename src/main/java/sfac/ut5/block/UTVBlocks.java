@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import sfac.ut5.UnderneathTimeV;
-import sfac.ut5.fluid.UTVFluid;
+import sfac.ut5.fluid.UTVFluids;
 
 import java.util.function.Function;
 
@@ -37,8 +37,8 @@ public class UTVBlocks {
 	}
 
 
-	public static final DeferredBlock<LiquidBlock> CHRONOPLASM_BLOCK = register("chronoplasm_block",
-			props -> new LiquidBlock(UTVFluid.CHRONOPLASM_FLOW.get(), props),
+	public static final DeferredBlock<LiquidBlock> CHRONOPLASM_BLOCK = register("chronoplasm",
+			props -> new LiquidBlock(UTVFluids.CHRONOPLASM_SOURCE.get(), props),
 			BlockBehaviour.Properties.ofFullCopy(Blocks.WATER), null);
 
 	public static final DeferredBlock<Block> TIME_SAND_ORE = register("time_sand_ore", Block::new,

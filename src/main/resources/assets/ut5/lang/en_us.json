@@ -9,6 +9,7 @@
 	"block.ut5.space_dust_ore": "Space Dust Ore",
 	"block.ut5.time_bind_altar": "Time Bind Altar",
 	"block.ut5.time_spindle_coupler": "Time Spindle Coupler",
+	"block.ut5.chronoplasm": "Chronoplasm",
 	
 	// Items
 	"item.ut5.time_wings": "Time Wings",
@@ -33,6 +34,8 @@
 	"item.ut5.hourglass_1": "Swiftgrain Hourglass",
 	"item.ut5.hourglass_2": "Steadflow Hourglass",
 	"item.ut5.hourglass_3": "Slowfall Hourglass",
+
+	"item.ut5.chronoplasm_bucket": "Chronoplasm Bucket",
 	
 	// Commands
 	"command.ut5.time": "%1$s has %2$s left before reaching the end of life",

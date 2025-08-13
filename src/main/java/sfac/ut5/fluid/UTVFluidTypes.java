@@ -10,12 +10,12 @@ import java.util.function.Supplier;
 /**
  * @author Mukai
  */
-public class UTVFluidType {
+public class UTVFluidTypes {
 	public static final Supplier<FluidType> CHRONOPLASM = UnderneathTimeV.FLUID_TYPES.register("chronoplasm",
-			() -> new Chronoplasm(FluidType.Properties.create().lightLevel(2).density(15).viscosity(5)
+			() -> new FluidType(FluidType.Properties.create().lightLevel(2).density(10).viscosity(5)
 					.sound(SoundAction.get("drink"), SoundEvents.HONEY_DRINK)));
 	
-	private UTVFluidType() {}
+	private UTVFluidTypes() {}
 	
 	public static void init() {}
 }

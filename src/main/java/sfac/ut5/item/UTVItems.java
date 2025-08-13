@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import sfac.ut5.TimeSystem;
 import sfac.ut5.UnderneathTimeV;
-import sfac.ut5.fluid.UTVFluid;
+import sfac.ut5.fluid.UTVFluids;
 
 import java.util.function.Function;
 
@@ -51,7 +51,7 @@ public class UTVItems {
     }
 
 	public static final DeferredItem<BucketItem> CHRONOPLASM_BUCKET = register("chronoplasm_bucket",
-			prop -> new BucketItem(UTVFluid.CHRONOPLASM_SOURCE.get(), prop),
+			prop -> new BucketItem(UTVFluids.CHRONOPLASM_SOURCE.get(), prop),
 			new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1), UnderneathTimeV.MAIN_TAB);
     
     public static final DeferredItem<ElytraItem> TIME_WINGS =

@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import sfac.ut5.UnderneathTimeV;
 
 /**
@@ -22,6 +23,8 @@ public class BlockLootProvider extends BlockLootSubProvider {
 	protected void generate() {
 		for(Block block : getKnownBlocks()) {
 			// TODO createOreDrop
+			if(block instanceof LiquidBlock)
+				continue;
 			dropSelf(block);
 		}
 	}

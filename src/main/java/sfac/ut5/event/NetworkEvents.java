@@ -1,9 +1,5 @@
 package sfac.ut5.event;
 
-/**
- * @author Mukai
- */
-
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -17,6 +13,9 @@ import sfac.ut5.UTVPlayerData;
 import sfac.ut5.network.NetworkManager;
 import sfac.ut5.network.packets.PacketSyncPlayerData;
 
+/**
+ * @author zer0M1nd
+ */
 @OnlyIn(Dist.CLIENT)
 public class NetworkEvents {
 
