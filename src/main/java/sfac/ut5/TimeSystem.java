@@ -1,11 +1,8 @@
 package sfac.ut5;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.attachment.AttachmentType;
 
 import java.util.Map;
-import java.util.function.Supplier;
 
 /**
  * Also see <code>underneathtimev.bus.UpdatePlayerTimeEvents</code>
@@ -26,38 +23,20 @@ public class TimeSystem {
 
     public static final String ALMOST_INFINITY = "Αιɱο:ѕτ:Ιπ:φι:πι:τγ";
 
-    private static final Supplier<AttachmentType<Long>> TIME =
-            UnderneathTimeV.ATTACHMENT_TYPES.register("utime", () -> AttachmentType.builder(() -> Config.INITIAL_TIME.get()).serialize(Codec.LONG).build());
-
     public static void setPlayerTime(Player player, long time) {
-        player.setData(TIME, Math.max(0, time));
+        player.getData(UTVPlayerData.UTVDATA).setTime(Math.max(time, 0));
     }
 
     public static long getPlayerTime(Player player) {
-        return player.getData(TIME);
+        return player.getData(UTVPlayerData.UTVDATA).getTime();
     }
 
     public static void increasePlayerTime(Player player, long time) {
-        long playerTime = player.getData(TIME);
-        player.setData(TIME, time + playerTime);
+        player.getData(UTVPlayerData.UTVDATA).addTime(time);
     }
 
     public static void decreasePlayerTime(Player player, long time) {
-        long playerTime = getPlayerTime(player);
-        player.setData(TIME, playerTime - time);
-    }
-
-    /**
-     * Determine whether the player has a time attachment
-     */
-    public static boolean hasPlayerTimeAttachment(Player player) {
-        return player.hasData(TIME);
-    }
-
-    public static void initPlayerTimeAttachment(Player player, long time) {
-        if (!hasPlayerTimeAttachment(player)) {
-            setPlayerTime(player, time);
-        }
+        player.getData(UTVPlayerData.UTVDATA).addTime(-time);
     }
 
     /**

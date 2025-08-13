@@ -90,6 +90,7 @@ public class UnderneathTimeV {
 		TimeSystem.init();
 		UTVComponents.init();
 		UTVLootModifiers.init();
+		UTVPlayerData.init();
 
 		//new UTVBlocks();
 		//new UTVBlockEntities();

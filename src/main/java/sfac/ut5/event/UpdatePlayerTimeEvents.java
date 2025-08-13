@@ -1,12 +1,8 @@
 package sfac.ut5.event;
 
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -16,10 +12,12 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.Clone;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import sfac.ut5.Config;
 import sfac.ut5.TimeSystem;
+import sfac.ut5.UTVPlayerData;
 import sfac.ut5.UnderneathTimeV;
-import sfac.ut5.*;
+
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 /**
  * @author AoXiang_Soar
@@ -41,7 +39,9 @@ public class UpdatePlayerTimeEvents {
 	// TODO The timer starts only when the player officially begins the mod progression
 	public static void onLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		var player = event.getEntity();
-		TimeSystem.initPlayerTimeAttachment(player, Config.INITIAL_TIME.get());
+		if(!player.hasData(UTVPlayerData.UTVDATA)){
+			player.setData(UTVPlayerData.UTVDATA, new UTVPlayerData());
+		}
 	}
 
 	public static void onPlayerClone(Clone event) {
