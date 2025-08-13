@@ -83,7 +83,7 @@ public class UnderneathTimeV {
 
 		NeoForge.EVENT_BUS.register(this);
 
-		UTVEvents.init();
+		UTVEvents.init(modEventBus);
 		UTVItems.init();
 		UTVBlocks.init();
 		UTVBlockEntities.init();
