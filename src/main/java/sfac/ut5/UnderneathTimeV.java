@@ -98,7 +98,7 @@ public class UnderneathTimeV {
 		//new UTVLootModifiers();
 		//new UTVProviders();
 		
-		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+		modContainer.registerConfig(ModConfig.Type.COMMON, Config.build());
 	}
 
     @SubscribeEvent
