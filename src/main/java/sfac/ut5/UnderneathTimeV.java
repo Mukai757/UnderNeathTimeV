@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -24,6 +25,7 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -34,6 +36,8 @@ import sfac.ut5.component.UTVComponents;
 import sfac.ut5.data.UTVDataGatherer;
 import sfac.ut5.data.loot_table.UTVLootModifiers;
 import sfac.ut5.event.UTVEvents;
+import sfac.ut5.fluid.UTVFluid;
+import sfac.ut5.fluid.UTVFluidType;
 import sfac.ut5.item.UTVItems;
 
 import java.util.LinkedList;
@@ -51,6 +55,8 @@ public class UnderneathTimeV {
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
 	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MOD_ID);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, UnderneathTimeV.MOD_ID);
+	public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, UnderneathTimeV.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 	public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(MOD_ID);
@@ -64,7 +70,7 @@ public class UnderneathTimeV {
 					.withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> UTVItems.FATE_POCKET_WATCH.get().getDefaultInstance())
 					.displayItems((parameters, output) -> {
 						for(var item : items4MainTab) {
-							LOGGER.debug(item.get().toString());
+//							LOGGER.debug(item.get().toString());
 							output.accept(item.get());
 						}
 					}).build());
@@ -77,6 +83,8 @@ public class UnderneathTimeV {
 		ITEMS.register(modEventBus);
 		BLOCKS.register(modEventBus);
 		BLOCK_ENTITY_TYPES.register(modEventBus);
+		FLUIDS.register(modEventBus);
+		FLUID_TYPES.register(modEventBus);
 		CREATIVE_MODE_TABS.register(modEventBus);
 		ATTACHMENT_TYPES.register(modEventBus);
 		DATA_COMPONENTS.register(modEventBus);
@@ -89,6 +97,8 @@ public class UnderneathTimeV {
 		UTVItems.init();
 		UTVBlocks.init();
 		UTVBlockEntities.init();
+		UTVFluid.init();
+		UTVFluidType.init();
 		TimeSystem.init();
 		UTVComponents.init();
 		UTVLootModifiers.init();

@@ -1,9 +1,5 @@
 package sfac.ut5.event;
 
-/**
- * @author Mukai
- */
-
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -25,6 +21,9 @@ import sfac.ut5.UTVPlayerData;
 import sfac.ut5.UnderneathTimeV;
 import sfac.ut5.item.ITimeStorageItem;
 
+/**
+ * @author zer0M1nd
+ */
 @OnlyIn(Dist.CLIENT)
 public class DisplayEvents {
     public static void register(IEventBus modEventBus) {
@@ -78,7 +77,7 @@ public class DisplayEvents {
         @Override
         public void render(Minecraft mc, Player player, GuiGraphics guiGraphics, int guiTicks) {
 
-            UTVPlayerData data = player.getData(UTVPlayerData.UTVDATA);
+//            UTVPlayerData data = player.getData(UTVPlayerData.UTVDATA);
             double scale = Config.TIME_DISPLAY_SCALE.getAsDouble() * 2;
             double x = Config.TIME_DISPLAY_X.getAsDouble();
             double y = Config.TIME_DISPLAY_Y.getAsDouble();

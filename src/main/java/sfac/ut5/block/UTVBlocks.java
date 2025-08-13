@@ -4,14 +4,12 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import sfac.ut5.UnderneathTimeV;
 import sfac.ut5.fluid.UTVFluid;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * @author AoXiang_Soar
@@ -39,8 +37,9 @@ public class UTVBlocks {
 	}
 
 
-	public static final Supplier<LiquidBlock> TIME_Fluid_Block = UnderneathTimeV.BLOCKS.register("time_filud_block",
-			()->new LiquidBlock((FlowingFluid) UTVFluid.MY_SOURCE_FLUID_BLOCK,BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+	public static final DeferredBlock<LiquidBlock> CHRONOPLASM_BLOCK = register("chronoplasm_block",
+			props -> new LiquidBlock(UTVFluid.CHRONOPLASM_FLOW.get(), props),
+			BlockBehaviour.Properties.ofFullCopy(Blocks.WATER), null);
 
 	public static final DeferredBlock<Block> TIME_SAND_ORE = register("time_sand_ore", Block::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),

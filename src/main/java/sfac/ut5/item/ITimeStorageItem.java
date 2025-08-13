@@ -6,6 +6,9 @@ import sfac.ut5.component.UTVComponents;
 
 import javax.annotation.Nonnegative;
 
+/**
+ * @author zer0M1nd
+ */
 public interface ITimeStorageItem {
 
     default long getTime(ItemStack is) {

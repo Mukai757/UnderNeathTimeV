@@ -1,12 +1,15 @@
 package sfac.ut5.item;
 
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import sfac.ut5.TimeSystem;
 import sfac.ut5.UnderneathTimeV;
+import sfac.ut5.fluid.UTVFluid;
 
 import java.util.function.Function;
 
@@ -46,9 +49,11 @@ public class UTVItems {
         UnderneathTimeV.addItem2Tab(tab, item);
         return item;
     }
-    public static final DeferredItem<ElytraItem> TimeFileBUCKET =
-            register("TimeFileBUCKET", ElytraItem::new, new Item.Properties().durability(432), UnderneathTimeV.MAIN_TAB);
 
+	public static final DeferredItem<BucketItem> CHRONOPLASM_BUCKET = register("chronoplasm_bucket",
+			prop -> new BucketItem(UTVFluid.CHRONOPLASM_SOURCE.get(), prop),
+			new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1), UnderneathTimeV.MAIN_TAB);
+    
     public static final DeferredItem<ElytraItem> TIME_WINGS =
             register("time_wings", ElytraItem::new, new Item.Properties().durability(432), UnderneathTimeV.MAIN_TAB);
 
