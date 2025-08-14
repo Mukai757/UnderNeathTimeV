@@ -76,6 +76,9 @@ public class UTVItems {
 
     public static final DeferredItem<TimePetalsItem> TimePetalsItem =
             register("backtrack_compass", TimePetalsItem::new, new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
+
+    public static final DeferredItem<TimeBookItem> TimeBookItem =
+            register("backtrack_compass", TimeBookItem::new, new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
     public static void init() {
     }
 
