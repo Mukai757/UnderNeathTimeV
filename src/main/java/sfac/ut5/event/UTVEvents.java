@@ -24,5 +24,6 @@ public class UTVEvents {
 		BacktrackCompassEvents.register();
 		DisplayEvents.register(modEventBus);
 		NetworkEvents.register(modEventBus);
+		TimeFluidMadeOre.register();
 	}
 }
