@@ -9,6 +9,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import sfac.ut5.gui.UTVGUITypes;
 
+/**
+ * @author Mukai
+ */
 public class TimeBookItem extends Item {
 
     public TimeBookItem(Properties properties) {

@@ -1,110 +1,127 @@
 package sfac.ut5.block.blockentity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.Containers;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemStackHandler;
+
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 import org.jetbrains.annotations.Nullable;
 
+import sfac.ut5.block.TimeBinderBlock;
 import sfac.ut5.gui.TimeBinderMenu;
 
 /**
  * @author Mukai
  */
-public class TimeBinderBlockEntity extends BlockEntity implements MenuProvider {
-    public final ItemStackHandler inventory = new ItemStackHandler(3) {
-        @Override
-        protected int getStackLimit(int slot, ItemStack stack) {
-            return 3;
-        }
-
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-            if(!level.isClientSide()) {
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
-        }
-    };
-    private float rotation;
-
+public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
+	private static final int[] INPUT = {0, 1};
+	private static final int[] OUTPUT = {2};
+	private static final int[] ALL = IntStream.concat(Arrays.stream(INPUT), Arrays.stream(OUTPUT)).toArray();
+	public static final int SIZE = ALL.length;
+	
+    private NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+	
     public TimeBinderBlockEntity(BlockPos pos, BlockState blockState) {
         super(UTVBlockEntities.TIME_ANVIL_BLOCK_ENTITY.get(), pos, blockState);
     }
 
-    public float getRenderingRotation() {
-        rotation += 0.5f;
-        if(rotation >= 360) {
-            rotation = 0;
-        }
-        return rotation;
+    /**
+     * Link to {@link TimeBinderBlock#getTicker}
+     */
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T blockEntity) {
+    	
     }
-
-    public void clearContents() {
-        inventory.setStackInSlot(0, ItemStack.EMPTY);
-    }
-
-    public void drops() {
-        SimpleContainer inv = new SimpleContainer(inventory.getSlots());
-        for(int i = 0; i < inventory.getSlots(); i++) {
-            inv.setItem(i, inventory.getStackInSlot(i));
-        }
-
-        Containers.dropContents(this.level, this.worldPosition, inv);
-    }
-
-
-    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
-        drops();
-        //抄了有报错，TODO
-        //super.preRemoveSideEffects(pos, state);
-    }
-    /*  同上
+    
     @Override
-    protected void saveAdditional(ValueOutput output) {
-        super.saveAdditional(output);
-        inventory.serialize(output);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
     }
 
     @Override
-    protected void loadAdditional(ValueInput input) {
-        super.loadAdditional(input);
-        inventory.deserialize(input);
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
     }
-    */
+    
+    /**
+     * Called when chunk is loaded
+     */
     @Override
-    public Component getDisplayName() {
-        return Component.literal("Pedestal");
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag, registries);
+        return tag;
     }
 
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new TimeBinderMenu(i, inventory, null); // TODO
-    }
-
-
+    /**
+     * Called when a block update occurs
+     */
     @Nullable
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        return saveWithoutMetadata(pRegistries);
-    }
+	@Override
+	public int getContainerSize() {
+		return SIZE;
+	}
+
+	@Override
+	protected Component getDefaultName() {
+		if (this.getBlockState().getValue(TimeBinderBlock.ADVANCED))
+			return Component.translatable("block.ut5.time_spindle_coupler");
+		else
+			return Component.translatable("block.ut5.time_bind_altar");
+	}
+
+	@Override
+	protected NonNullList<ItemStack> getItems() {
+		return items;
+	}
+
+	@Override
+	protected void setItems(NonNullList<ItemStack> items) {
+		this.items = items;
+	}
+
+	@Override
+	protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
+		if (!this.getBlockState().getValue(TimeBinderBlock.ADVANCED))
+			return null;
+		return new TimeBinderMenu(containerId, inventory, this);// new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.getBlockPos())
+	}
+
+	@Override
+	public int[] getSlotsForFace(Direction side) {
+		return ALL;
+	}
+
+	@Override
+	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction) {
+		for (int num : INPUT) 
+            if (num == index) return true;
+		return false;
+	}
+
+	@Override
+	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+		return true;
+	}
+
 }

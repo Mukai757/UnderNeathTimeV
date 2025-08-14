@@ -1,6 +1,5 @@
 package sfac.ut5.item;
 
-
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,6 +9,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+/**
+ * @author Mukai
+ */
 public class TimePetalsItem extends Item {
     public TimePetalsItem(Properties properties) {
         super(properties); // 设置物品分类，可根据实际情况调整

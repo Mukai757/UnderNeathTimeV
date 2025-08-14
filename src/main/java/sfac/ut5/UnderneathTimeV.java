@@ -37,6 +37,7 @@ import sfac.ut5.data.UTVDataGatherer;
 import sfac.ut5.data.loot_table.UTVLootModifiers;
 import sfac.ut5.event.UTVEvents;
 import sfac.ut5.fluid.UTVFluids;
+import sfac.ut5.gui.UTVGUITypes;
 import sfac.ut5.fluid.UTVFluidTypes;
 import sfac.ut5.item.UTVItems;
 
@@ -80,6 +81,7 @@ public class UnderneathTimeV {
 				+ " Will there come a day when loading this mod requires traversing an abyss-like expanse of time?www");
 		modEventBus.addListener(UTVDataGatherer::onGatherData);
 		modEventBus.addListener(UTVFluids::onRegisterClientExtensions);
+		modEventBus.addListener(UTVGUITypes::registerScreens);
 
 		ITEMS.register(modEventBus);
 		BLOCKS.register(modEventBus);
@@ -104,6 +106,7 @@ public class UnderneathTimeV {
 		UTVComponents.init();
 		UTVLootModifiers.init();
 		UTVPlayerData.init();
+		UTVGUITypes.init();
 
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.build());
 	}

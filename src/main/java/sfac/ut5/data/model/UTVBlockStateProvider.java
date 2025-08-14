@@ -2,7 +2,6 @@ package sfac.ut5.data.model;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -21,9 +20,6 @@ public class UTVBlockStateProvider extends BlockStateProvider {
 	@Override
 	protected void registerStatesAndModels() {
 		for(DeferredHolder<Block, ? extends Block> block : UnderneathTimeV.getKnownBlocks()) {
-			if (block.get() instanceof LiquidBlock) {
-				
-			}
 			simpleBlock(block.get());
 		}
 		

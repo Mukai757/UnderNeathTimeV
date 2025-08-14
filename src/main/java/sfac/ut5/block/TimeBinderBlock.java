@@ -2,46 +2,51 @@ package sfac.ut5.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import sfac.ut5.block.blockentity.TimeBinderBlockEntity;
+import sfac.ut5.block.blockentity.UTVBlockEntities;
 
 import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Mukai
+ * @author AoXiang_Soar
  */
 public class TimeBinderBlock extends BaseEntityBlock {
-    public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
+//    public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
     public static final MapCodec<TimeBinderBlock> CODEC = simpleCodec(TimeBinderBlock::new);
     
-    private static final BooleanProperty ADVANCED = BooleanProperty.create("advanced");
+    public static final BooleanProperty ADVANCED = BooleanProperty.create("advanced");
 
     public TimeBinderBlock(Properties properties) {
         super(properties);
         registerDefaultState(stateDefinition.any().setValue(ADVANCED, false));
     }
 
-    @Override
+    /*@Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
-    }
+    }*/
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
@@ -49,9 +54,8 @@ public class TimeBinderBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        // this is where the properties are actually added to the state
-        pBuilder.add(ADVANCED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(ADVANCED);
     }
 
     @Override
@@ -68,6 +72,11 @@ public class TimeBinderBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return type == UTVBlockEntities.TIME_ANVIL_BLOCK_ENTITY.get() ? (BlockEntityTicker<T>) TimeBinderBlockEntity::tick : null;
+    }
+    
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -76,6 +85,8 @@ public class TimeBinderBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    	if (state.getValue(ADVANCED) && !player.isShiftKeyDown())
+    		return InteractionResult.SUCCESS;
         return InteractionResult.PASS;
     }
 
@@ -83,31 +94,19 @@ public class TimeBinderBlock extends BaseEntityBlock {
     protected ItemInteractionResult useItemOn(
         ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult
     ) {
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
-    /*
-    @Override
-    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
-                                       Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(level.getBlockEntity(pos) instanceof TimeAnvilBlockEntity pedestalBlockEntity) {
-            if(player.isCrouching() && !level.isClientSide()) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(pedestalBlockEntity, Component.literal("Pedestal")), pos);
-                return InteractionResult.SUCCESS;
-            }
-
-            if(pedestalBlockEntity.inventory.getStackInSlot(0).isEmpty() && !stack.isEmpty()) {
-                pedestalBlockEntity.inventory.insertItem(0, stack.copy(), false);
-                stack.shrink(1);
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-            } else if(stack.isEmpty()) {
-                ItemStack stackOnPedestal = pedestalBlockEntity.inventory.extractItem(0, 1, false);
-                player.setItemInHand(InteractionHand.MAIN_HAND, stackOnPedestal);
-                pedestalBlockEntity.clearContents();
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
+    	if (!level.isClientSide && player instanceof ServerPlayer serverPlayer
+    			&& state.getValue(ADVANCED)) {
+    		BlockEntity entity = level.getBlockEntity(pos);
+            if(entity instanceof TimeBinderBlockEntity blockEntity) {
+            	serverPlayer.openMenu(new SimpleMenuProvider(blockEntity, Component.translatable("block.ut5.time_spindle_coupler")), pos);
             }
         }
-
-        return InteractionResult.SUCCESS;
-    }*/
+        return ItemInteractionResult.SUCCESS;
+    }
+    
+    @Override
+    public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+        return (TimeBinderBlockEntity) newBlockEntity(pos, state);
+    }
 
 }
