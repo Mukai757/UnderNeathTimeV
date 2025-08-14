@@ -74,6 +74,8 @@ public class UTVItems {
             register("hourglass_3", x -> new SimpleTimeStorageItem(x, TimeSystem.HOUR * 6),
                     new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
 
+    public static final DeferredItem<TimePetalsItem> TimePetalsItem =
+            register("backtrack_compass", TimePetalsItem::new, new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
     public static void init() {
     }
 
