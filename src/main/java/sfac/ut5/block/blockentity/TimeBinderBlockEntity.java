@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -51,11 +52,13 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+        ContainerHelper.loadAllItems(tag, items, registries);
     }
 
     @Override
     public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, this.items, registries);
     }
     
     /**
@@ -114,11 +117,16 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 
 	@Override
 	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction) {
-		for (int num : INPUT) 
-            if (num == index) return true;
-		return false;
+		return canPlaceItem(index, itemStack);
 	}
 
+	@Override
+	public boolean canPlaceItem(int slot, ItemStack stack) {
+		for (int num : INPUT) 
+            if (num == slot) return true;
+		return false;
+	}
+	
 	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
 		return true;
