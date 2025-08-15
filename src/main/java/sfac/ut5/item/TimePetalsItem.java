@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import sfac.ut5.TimeSystem;
 
 /**
  * @author Mukai
@@ -23,7 +24,7 @@ public class TimePetalsItem extends Item {
             // 给玩家添加速度3效果，持续5秒（100tick）
             player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 2)); // 2为速度等级，对应速度3
             // 设置冷却时间，例如10秒（200tick）
-            player.getCooldowns().addCooldown(this, 200);
+            player.getCooldowns().addCooldown(this, 10 * TimeSystem.second());
         }
         return InteractionResultHolder.success(player.getItemInHand(interactionHand));
     }
