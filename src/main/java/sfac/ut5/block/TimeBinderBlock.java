@@ -74,7 +74,7 @@ public class TimeBinderBlock extends BaseEntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == UTVBlockEntities.TIME_ANVIL_BLOCK_ENTITY.get() ? (BlockEntityTicker<T>) TimeBinderBlockEntity::tick : null;
+        return type == UTVBlockEntities.TIME_BINDER_BLOCK_ENTITY.get() ? (BlockEntityTicker<T>) TimeBinderBlockEntity::tick : null;
     }
     
     @Nullable
@@ -93,16 +93,48 @@ public class TimeBinderBlock extends BaseEntityBlock {
     @Override
     protected ItemInteractionResult useItemOn(
         ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult
-    ) {
-    	if (!level.isClientSide && player instanceof ServerPlayer serverPlayer
-    			&& state.getValue(ADVANCED)) {
-    		BlockEntity entity = level.getBlockEntity(pos);
-            if(entity instanceof TimeBinderBlockEntity blockEntity) {
-            	serverPlayer.openMenu(new SimpleMenuProvider(blockEntity, Component.translatable("block.ut5.time_spindle_coupler")), pos);
-            }
-        }
-        return ItemInteractionResult.SUCCESS;
+	) {
+		if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+			BlockEntity entity = level.getBlockEntity(pos);
+			if (entity instanceof TimeBinderBlockEntity blockEntity) {
+				if (state.getValue(ADVANCED)) {
+					serverPlayer.openMenu(new SimpleMenuProvider(blockEntity,
+							Component.translatable("block.ut5.time_spindle_coupler")), pos);
+				} else {
+					return useItemOnAltar(blockEntity, serverPlayer, stack, hand);
+				}
+			}
+		}
+		return ItemInteractionResult.SUCCESS;
     }
+    
+	private ItemInteractionResult useItemOnAltar(TimeBinderBlockEntity entity, ServerPlayer player, ItemStack stack, InteractionHand hand) {
+		int suitSlot = -1;
+		for (int i = 0; i < entity.getContainerSize(); i++) {
+			var containerItem = entity.getItem(i);
+			if (player.isShiftKeyDown()) { // When shift key is down, get item from altar
+				if (stack.isEmpty() && !containerItem.isEmpty()) {
+					player.setItemInHand(hand, entity.removeItem(i, containerItem.getCount()));
+					return ItemInteractionResult.SUCCESS;
+				}
+			} else if (!stack.isEmpty() && entity.canPlaceItem(i, stack)) { // Find a best slot
+				if (containerItem.isEmpty())
+					suitSlot = i;
+				if (ItemStack.isSameItemSameComponents(stack, containerItem) && containerItem.getCount() < containerItem.getMaxStackSize()) {
+					suitSlot = i;
+					break;
+				}
+			}
+		}
+		if (suitSlot != -1) { // Put item into altar
+			var containerItem = entity.getItem(suitSlot);
+			var item = stack.consumeAndReturn(1, player);
+			item.setCount(containerItem.getCount()+1);
+			entity.setItem(suitSlot, item);
+			return ItemInteractionResult.SUCCESS;
+		}
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+	}
     
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {

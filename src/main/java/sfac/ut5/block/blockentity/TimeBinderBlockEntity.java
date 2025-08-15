@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 import org.jetbrains.annotations.Nullable;
 
 import sfac.ut5.block.TimeBinderBlock;
-import sfac.ut5.gui.TimeBinderMenu;
+import sfac.ut5.gui.TimeSpindleCouplerMenu;
 
 /**
  * @author Mukai
@@ -39,7 +39,7 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
     private NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
 	
     public TimeBinderBlockEntity(BlockPos pos, BlockState blockState) {
-        super(UTVBlockEntities.TIME_ANVIL_BLOCK_ENTITY.get(), pos, blockState);
+        super(UTVBlockEntities.TIME_BINDER_BLOCK_ENTITY.get(), pos, blockState);
     }
 
     /**
@@ -107,7 +107,7 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 	protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
 		if (!this.getBlockState().getValue(TimeBinderBlock.ADVANCED))
 			return null;
-		return new TimeBinderMenu(containerId, inventory, this);// new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.getBlockPos())
+		return new TimeSpindleCouplerMenu(containerId, inventory, this);
 	}
 
 	@Override
@@ -120,6 +120,9 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 		return canPlaceItem(index, itemStack);
 	}
 
+	/**
+	 * Only determine whether a slot has the <b>CAPABILITY</b> to accept input, <b>without performing item comparison logic</b>
+	 */
 	@Override
 	public boolean canPlaceItem(int slot, ItemStack stack) {
 		for (int num : INPUT) 
@@ -129,7 +132,9 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 	
 	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		return true;
+		for (int num : OUTPUT) 
+            if (num == index) return true;
+		return false;
 	}
 
 }

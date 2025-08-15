@@ -21,7 +21,7 @@ public class TimeBookItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         if (!level.isClientSide && interactionHand == InteractionHand.MAIN_HAND) {
             // 在服务端打开GUI
-            player.openMenu((MenuProvider) UTVGUITypes.TIME_ANVIL_MENU.get());
+            player.openMenu((MenuProvider) UTVGUITypes.TIME_SPINDLE_COUPLER_MENU.get());
             //记得改成书的Gui，TODO
             return InteractionResultHolder.success(player.getItemInHand(interactionHand));
         }

@@ -15,16 +15,16 @@ import sfac.ut5.block.blockentity.TimeBinderBlockEntity;
 /**
  * @author Mukai
  */
-public class TimeBinderMenu extends BaseContainerMenu {
+public class TimeSpindleCouplerMenu extends BaseContainerMenu {
     public final TimeBinderBlockEntity blockEntity;
     private final Level level;
 
-    public TimeBinderMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
+    public TimeSpindleCouplerMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
         this(containerId, inv, (TimeBinderBlockEntity) inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public TimeBinderMenu(int containerId, Inventory inv, TimeBinderBlockEntity blockEntity) {
-        super(UTVGUITypes.TIME_ANVIL_MENU.get(), containerId);
+    public TimeSpindleCouplerMenu(int containerId, Inventory inv, TimeBinderBlockEntity blockEntity) {
+        super(UTVGUITypes.TIME_SPINDLE_COUPLER_MENU.get(), containerId);
         this.blockEntity = blockEntity;
         this.level = inv.player.level();
         
