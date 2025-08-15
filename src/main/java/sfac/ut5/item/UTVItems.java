@@ -20,7 +20,7 @@ import java.util.function.Function;
 public class UTVItems {
     /**
      * UTV utilizes this method to automatically register items and add them to the
-     * Creative Mode inventory. See also {@link UnderneathTimeV#addItem2Tab()}.
+     * Creative Mode inventory. See also {@link UnderneathTimeV#addItem2Tab}.
      *
      * @param name  The register name of the item
      * @param func  Initialization function called during registration; if no
