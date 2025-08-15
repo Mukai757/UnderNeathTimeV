@@ -47,7 +47,6 @@ import java.util.List;
 /**
  * @author AoXiang_Soar
  */
-
 @Mod(UnderneathTimeV.MOD_ID)
 public class UnderneathTimeV {
 	public static final String MOD_ID = "ut5";
@@ -126,9 +125,6 @@ public class UnderneathTimeV {
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
-
-
-
 
     public static <I extends ItemLike> void addItem2Tab(DeferredHolder<CreativeModeTab, CreativeModeTab> tab, DeferredHolder<? extends ItemLike, ?> item) {
     	if (tab == MAIN_TAB) {

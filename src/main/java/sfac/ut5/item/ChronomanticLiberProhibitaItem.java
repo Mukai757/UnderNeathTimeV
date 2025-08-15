@@ -12,9 +12,9 @@ import sfac.ut5.gui.UTVGUITypes;
 /**
  * @author Mukai
  */
-public class TimeBookItem extends Item {
+public class ChronomanticLiberProhibitaItem extends Item {
 
-    public TimeBookItem(Properties properties) {
+    public ChronomanticLiberProhibitaItem(Properties properties) {
         super(properties);
     }
     @Override
