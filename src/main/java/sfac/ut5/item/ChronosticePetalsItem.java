@@ -23,7 +23,7 @@ public class ChronosticePetalsItem extends Item {
         if (!level.isClientSide && interactionHand == InteractionHand.MAIN_HAND) {
             player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5 * TimeSystem.second(), 2));
             player.getCooldowns().addCooldown(this, 10 * TimeSystem.second());
-            player.getItemInHand(interactionHand).shrink(1);
+            player.getItemInHand(interactionHand).consume(1, player);
         }
         return InteractionResultHolder.success(player.getItemInHand(interactionHand));
     }
