@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import sfac.ut5.block.ILevelBlock;
+import sfac.ut5.blockstructure.TimeBindAltarStructure;
 import sfac.ut5.gui.TimeSpindleCouplerMenu;
 
 import java.util.Arrays;
@@ -40,15 +41,12 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
         super(UTVBlockEntities.TIME_BINDER_BLOCK_ENTITY.get(), pos, blockState);
     }
 
-	/*
-	public void tick() {
-		TimeBindAltarStructure.onServerTick(level, worldPosition, this, null); // 假设player参数暂时为null，可根据实际情况修改
-	}
-    /**
+
+    /*
      * Link to {@link TimeBinderBlock#getTicker}
      */
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T blockEntity) {
-    	
+		TimeBindAltarStructure.onServerTick(level, pos, blockEntity, null); // 假设player参数暂时为null，可根据实际情况修改
     }
     
     @Override

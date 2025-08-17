@@ -79,8 +79,6 @@ public class TimeBindAltarStructure {
         boolean find =patterns.stream().anyMatch(pattern -> pattern.find(level,pos)!= null);
         if (find) {
                 player.sendSystemMessage(Component.translatable("ut5.welcome"));
-        }else {
-
         }
 
 
