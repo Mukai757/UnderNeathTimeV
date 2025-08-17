@@ -1,6 +1,6 @@
 {
 	// Creative Tabs
-	"itemGroup.ut5": "UnderneathTime V",
+	"itemGroup.ut5": "Underneath Time V",
 	
 	// Blocks
 	"block.ut5.time_sand_ore": "Time Sand Ore",
@@ -36,6 +36,8 @@
 	"item.ut5.hourglass_3": "Slowfall Hourglass",
 
 	"item.ut5.chronoplasm_bucket": "Chronoplasm Bucket",
+	"item.ut5.chronostice_petals": "Chronostice Petals",
+	"item.ut5.chronomantic_liber_prohibita": "§lChronomantic §r§4§m§lLiber§r§r§r§l §r§6§n§lProhibita§r§r§r",
 	
 	// Commands
 	"command.ut5.time": "%1$s has %2$s left before reaching the end of life",

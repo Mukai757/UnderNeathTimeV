@@ -56,6 +56,7 @@ public class UpdatePlayerTimeEvents {
         var data = player.getData(UTVPlayerData.UTVDATA);
         PacketDistributor.sendToPlayer((ServerPlayer) player, new PacketSyncPlayerData(data));
         data.markClean();
+        // TODO If the player unlocks it through the altar, should data.setTimeRunning(true);
     }
 
     public static void onPlayerClone(Clone event) {
@@ -83,7 +84,7 @@ public class UpdatePlayerTimeEvents {
                         .then(Commands.literal("set").requires(player -> player.hasPermission(2))
                                 .then(Commands.argument("utime", StringArgumentType.string())
                                         .executes(command -> timeHandler.apply(command, TimeSystem::setPlayerTime))))
-                        .then(Commands.literal("setitem").requires(player -> player.hasPermission(2))
+                        .then(Commands.literal("set_item").requires(player -> player.hasPermission(2))
                                 .then(Commands.argument("utime", StringArgumentType.string())
                                         .executes(command -> timeHandler.apply(command, (p, t) -> {
                                             ItemStack is = p.getItemInHand(InteractionHand.MAIN_HAND);

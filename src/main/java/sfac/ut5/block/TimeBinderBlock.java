@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import sfac.ut5.block.blockentity.TimeBinderBlockEntity;
 import sfac.ut5.block.blockentity.UTVBlockEntities;
@@ -32,15 +31,13 @@ import org.jetbrains.annotations.Nullable;
  * @author Mukai
  * @author AoXiang_Soar
  */
-public class TimeBinderBlock extends BaseEntityBlock {
+public class TimeBinderBlock extends BaseEntityBlock implements ILevelBlock {
 //    public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
     public static final MapCodec<TimeBinderBlock> CODEC = simpleCodec(TimeBinderBlock::new);
-    
-    public static final BooleanProperty ADVANCED = BooleanProperty.create("advanced");
 
     public TimeBinderBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(ADVANCED, false));
+        registerDefaultState(stateDefinition.any().setValue(LEVEL, 0));
     }
 
     /*@Override
@@ -55,14 +52,14 @@ public class TimeBinderBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ADVANCED);
+        builder.add(LEVEL);
     }
 
     @Override
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
     	if(pContext.getItemInHand().getItem() == UTVBlocks.TIME_SPINDLE_COUPLER.asItem())
-    		return this.defaultBlockState().setValue(ADVANCED, true);
+    		return this.defaultBlockState().setValue(LEVEL, 1);
     	return this.defaultBlockState();
     }
     /* BLOCK ENTITY */
@@ -85,7 +82,7 @@ public class TimeBinderBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-    	if (state.getValue(ADVANCED) && !player.isShiftKeyDown())
+    	if (state.getValue(LEVEL) == 1 && !player.isShiftKeyDown())
     		return InteractionResult.SUCCESS;
         return InteractionResult.PASS;
     }
@@ -97,7 +94,7 @@ public class TimeBinderBlock extends BaseEntityBlock {
 		if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
 			BlockEntity entity = level.getBlockEntity(pos);
 			if (entity instanceof TimeBinderBlockEntity blockEntity) {
-				if (state.getValue(ADVANCED)) {
+				if (state.getValue(LEVEL) == 1) {
 					serverPlayer.openMenu(new SimpleMenuProvider(blockEntity,
 							Component.translatable("block.ut5.time_spindle_coupler")), pos);
 				} else {

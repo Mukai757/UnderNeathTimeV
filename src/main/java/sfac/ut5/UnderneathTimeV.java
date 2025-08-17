@@ -47,7 +47,6 @@ import java.util.List;
 /**
  * @author AoXiang_Soar
  */
-
 @Mod(UnderneathTimeV.MOD_ID)
 public class UnderneathTimeV {
 	public static final String MOD_ID = "ut5";
@@ -77,7 +76,7 @@ public class UnderneathTimeV {
 					}).build());
 
 	public UnderneathTimeV(IEventBus modEventBus, ModContainer modContainer) {
-		LOGGER.info("Loading UnderNeathTime V... This log was written on the first day of developing the mod."
+		LOGGER.info("Loading Underneath Time V... This log was written on the first day of developing the mod."
 				+ " Will there come a day when loading this mod requires traversing an abyss-like expanse of time?www");
 		modEventBus.addListener(UTVDataGatherer::onGatherData);
 		modEventBus.addListener(UTVFluids::onRegisterClientExtensions);
@@ -126,9 +125,6 @@ public class UnderneathTimeV {
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
-
-
-
 
     public static <I extends ItemLike> void addItem2Tab(DeferredHolder<CreativeModeTab, CreativeModeTab> tab, DeferredHolder<? extends ItemLike, ?> item) {
     	if (tab == MAIN_TAB) {

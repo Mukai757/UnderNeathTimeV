@@ -16,10 +16,9 @@ import java.util.function.Function;
  */
 
 public class UTVBlocks {
-
 	/**
 	 * UTV utilizes this method to automatically register blocks and add them to the
-	 * Creative Mode inventory. See also {@link UnderneathTimeV#addItem2Tab()}.
+	 * Creative Mode inventory. See also {@link UnderneathTimeV#addItem2Tab}.
 	 * 
 	 * @param name  The register name of the block
 	 * @param func  Initialization function called during registration; if no additional functionality is needed, 

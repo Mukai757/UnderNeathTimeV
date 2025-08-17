@@ -73,14 +73,12 @@ public class UTVItems {
             register("hourglass_3", x -> new SimpleTimeStorageItem(x, TimeSystem.HOUR * 6),
                     new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
 
-    /*
-    public static final DeferredItem<TimePetalsItem> TimePetalsItem =
-            register("time_petals_item", TimePetalsItem::new, new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
+    public static final DeferredItem<ChronosticePetalsItem> CHRONOSTICE_PETALS =
+            register("chronostice_petals", ChronosticePetalsItem::new, new Item.Properties(), UnderneathTimeV.MAIN_TAB);
 
-    public static final DeferredItem<TimeBookItem> TimeBookItem =
-            register("time_book_item", TimeBookItem::new, new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
+    public static final DeferredItem<ChronomanticLiberProhibitaItem> CHRONOMANTIC_LIBER_PROHIBITA =
+            register("chronomantic_liber_prohibita", ChronomanticLiberProhibitaItem::new, new Item.Properties().stacksTo(1), UnderneathTimeV.MAIN_TAB);
     
-    加物品不把屁股擦干净的一律不准注册（恼）*/
     public static void init() {
     }
 

@@ -1,8 +1,6 @@
 package sfac.ut5.event;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -16,7 +14,6 @@ import sfac.ut5.network.packets.PacketSyncPlayerData;
 /**
  * @author zer0M1nd
  */
-@OnlyIn(Dist.CLIENT)
 public class NetworkEvents {
 
     public static void register(IEventBus modEventBus) {
@@ -24,6 +21,8 @@ public class NetworkEvents {
         NeoForge.EVENT_BUS.addListener(NetworkEvents::syncData);
     }
 
+	// This is not client-only!
+    // The server also requires this method to establish a channel connection with the client!
     public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1");
         NetworkManager.registerAll(registrar);
