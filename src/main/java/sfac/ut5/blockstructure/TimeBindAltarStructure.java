@@ -77,6 +77,7 @@ public class TimeBindAltarStructure {
 
     public static void onServerTick(Level level, BlockPos pos, BlockEntity timeBinderBlockEntity, Player player) {
         boolean find =patterns.stream().anyMatch(pattern -> pattern.find(level,pos)!= null);
+        //判断这个结构不等于空
         if (find) {
                 player.sendSystemMessage(Component.translatable("ut5.welcome"));
         }
