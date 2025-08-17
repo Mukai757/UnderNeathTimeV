@@ -24,6 +24,7 @@ import java.util.stream.IntStream;
 
 import org.jetbrains.annotations.Nullable;
 
+import sfac.ut5.block.ILevelBlock;
 import sfac.ut5.block.TimeBinderBlock;
 import sfac.ut5.gui.TimeSpindleCouplerMenu;
 
@@ -87,7 +88,7 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 
 	@Override
 	protected Component getDefaultName() {
-		if (this.getBlockState().getValue(TimeBinderBlock.ADVANCED))
+		if (this.getBlockState().getValue(ILevelBlock.LEVEL) == 1)
 			return Component.translatable("block.ut5.time_spindle_coupler");
 		else
 			return Component.translatable("block.ut5.time_bind_altar");
@@ -105,7 +106,7 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 
 	@Override
 	protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
-		if (!this.getBlockState().getValue(TimeBinderBlock.ADVANCED))
+		if (this.getBlockState().getValue(ILevelBlock.LEVEL) == 0)
 			return null;
 		return new TimeSpindleCouplerMenu(containerId, inventory, this);
 	}

@@ -16,7 +16,6 @@ import java.util.function.Function;
  */
 
 public class UTVBlocks {
-
 	/**
 	 * UTV utilizes this method to automatically register blocks and add them to the
 	 * Creative Mode inventory. See also {@link UnderneathTimeV#addItem2Tab}.
