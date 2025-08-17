@@ -19,7 +19,8 @@ public class UTVBlockEntities {
 	       .build(null)
 	  );
 
-	private UTVBlockEntities() {} // No one initializes this!
+	private UTVBlockEntities() {
+	} // No one initializes this!
 
 	public static void init() {
 	}
