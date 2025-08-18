@@ -66,9 +66,11 @@ public class UTVBlocks {
 	public static final DeferredBlock<TimeBinderBlock> TIME_SPINDLE_COUPLER = register("time_spindle_coupler", TimeBinderBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<TimeBinderBlock> TIME_Core_ALTAR = register("time_core_altar", TimeBinderBlock::new,
+	
+	public static final DeferredBlock<TimeCoreAltarBlock> TIME_CORE_ALTAR = register("time_core_altar", TimeCoreAltarBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
 			UnderneathTimeV.MAIN_TAB);
+	
 	private UTVBlocks() {} // No one initializes this!
 
 	public static void init() {

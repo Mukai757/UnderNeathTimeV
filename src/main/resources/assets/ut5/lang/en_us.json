@@ -10,6 +10,7 @@
 	"block.ut5.time_bind_altar": "Time Bind Altar",
 	"block.ut5.time_spindle_coupler": "Time Spindle Coupler",
 	"block.ut5.chronoplasm": "Chronoplasm",
+	"block.ut5.time_core_altar": "Time Core Altar",
 	
 	// Items
 	"item.ut5.time_wings": "Time Wings",
@@ -51,5 +52,7 @@
 	"ut5.timeunits.hour": "Hour",
 	"ut5.timeunits.minute": "Minute",
 	"ut5.timeunits.second": "Second",
-	"ut5.timeunits.tick": "Tick"
+	"ut5.timeunits.tick": "Tick",
+		
+	"ut5.core_altar.invaild": "The altar trembled violently—the ritual had failed. It seemed the altar could no longer sustain magic of such intensity."
 }
