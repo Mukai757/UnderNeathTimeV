@@ -26,7 +26,7 @@ public class TimeCoreAltarBlock extends Block{
             ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult
     ) {
 		if (!level.isClientSide && player instanceof ServerPlayer) {
-			if (TimeCoreAltarStructure.isMatch(level, pos)) {
+			if (TimeCoreAltarStructure.INSTANCE.isMatch(level, pos)) {
 				int[] conditions = {0, TimeSystem.hour(), TimeSystem.day(), TimeSystem.month(), TimeSystem.year()};
 				var data = player.getData(UTVPlayerData.UTVDATA);
 				int playerLevel = data.getPlayerLevel();
