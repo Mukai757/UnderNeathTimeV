@@ -90,7 +90,8 @@ public class TimeCoreAltarBlock extends BaseEntityBlock implements ILevelBlock {
                 if (state.getValue(LEVEL) == 1) {
 
                     if (player.getData(UTVPlayerData.UTVDATA).getTime()>3600*20){
-                        player.getData(UTVPlayerData.UTVDATA).setTimePlayerLevel(1);
+                        long timePlayerLevel=player.getData(UTVPlayerData.UTVDATA).getTimePlayerLevel();
+                        player.getData(UTVPlayerData.UTVDATA).setTimePlayerLevel(timePlayerLevel+1);
                     };
 
                 } else {

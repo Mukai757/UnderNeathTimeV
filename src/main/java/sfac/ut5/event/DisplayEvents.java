@@ -92,10 +92,11 @@ public class DisplayEvents {
 
             guiGraphics.pose().pushPose();
             guiGraphics.pose().scale((float) scale, (float) scale, (float) scale);
+            if(player.getData(UTVPlayerData.UTVDATA).getTimePlayerLevel()!=0){
             guiGraphics.drawCenteredString(Minecraft.getInstance().font,
                     textTime, (int) (x * w / scale), (int) (y * h / scale), color);
             guiGraphics.pose().popPose();
-        }
+        }}
 
         @Override
         public boolean shouldRenderOverlay(Minecraft mc, Player player, GuiGraphics guiGraphics, int guiTicks) {

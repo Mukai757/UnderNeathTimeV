@@ -89,9 +89,11 @@ public class UTVPlayerData {
      * Does not markDirty()
      */
 	public void tick() {
+        if(TimePlayerLevel!=0){
 		if (this.timeRunning) {
 			this.time--;
 		}
+        }
     }
 
     /**
