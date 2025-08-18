@@ -69,6 +69,46 @@ public class UTVBlocks {
 	public static final DeferredBlock<TimeBinderBlock> TIME_Core_ALTAR = register("time_core_altar", TimeBinderBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
 			UnderneathTimeV.MAIN_TAB);
+	//时间空间方块
+	public static final DeferredBlock<Block> MakeSpaceBlock = register("make_space_block_0", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeSpaceBlockI = register("make_space_block_1", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeSpaceBlockII = register("make_space_block_2", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeSpaceBlockIII = register("make_space_block_3", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeSpaceBlockIV = register("make_space_block_4", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeSpaceBlockV = register("make_space_block_5", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+
+	public static final DeferredBlock<Block> MakeTimeBlockSecond = register("make_time_block_0", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeTimeBlockMin = register("make_time_block_1", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeTimeBlockHour = register("make_time_block_2", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeTimeBlockDay = register("make_time_block_3", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeTimeBlockMonth = register("make_time_block_4", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeTimeBlockYear = register("make_time_block_5", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+
+
 	private UTVBlocks() {} // No one initializes this!
 
 	public static void init() {
