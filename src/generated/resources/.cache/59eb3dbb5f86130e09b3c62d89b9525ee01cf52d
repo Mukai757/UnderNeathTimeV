@@ -1,5 +1,17 @@
-// 1.21	2025-08-18T11:02:32.9641856	Loot Tables
+// 1.21	2025-08-18T13:16:05.7813538	Loot Tables
 41b3e8c863926d5793fe6de3096c4837e5f0e920 data/ut5/loot_table/blocks/chronostice_crystal_ore.json
+0b41a41b6fa6c88819647fc508c4bc2bb10f8f43 data/ut5/loot_table/blocks/make_space_block_0.json
+a8f26e07ff03f81983ea4f500541010888417c53 data/ut5/loot_table/blocks/make_space_block_1.json
+10cd99687eb4b92d69621ad5f0dd8130c2f1b3a4 data/ut5/loot_table/blocks/make_space_block_2.json
+4c920cfcdf80fc224229f2c69061d4c4459c3a59 data/ut5/loot_table/blocks/make_space_block_3.json
+10497368dbbf65a4f779f868d9edc8e456a22488 data/ut5/loot_table/blocks/make_space_block_4.json
+c40e7f3681c7856351eecb8ce44365ba04c1f4cc data/ut5/loot_table/blocks/make_space_block_5.json
+ab921b103b21f3cbd3b00c9505746cc9ad0c04dd data/ut5/loot_table/blocks/make_time_block_0.json
+d15bb1809d16e55e8f74c2799684f40160342c8a data/ut5/loot_table/blocks/make_time_block_1.json
+7387825bba212034909c87f077d09d81e7d35056 data/ut5/loot_table/blocks/make_time_block_2.json
+c804f1850c933f15e7fcf1bc78439f909c2b2e9d data/ut5/loot_table/blocks/make_time_block_3.json
+1fcbaceadfd58446561b63d9858ab636f3ca1b2f data/ut5/loot_table/blocks/make_time_block_4.json
+66c158b9f45dfb7ea4a7124cbb1977b230f319f5 data/ut5/loot_table/blocks/make_time_block_5.json
 e331101fd8147f8bc3940238dd41b614a4f7c02c data/ut5/loot_table/blocks/space_dust_ore.json
 2a34819745205a6545e1cfdd9c5dc031588aa53e data/ut5/loot_table/blocks/time_bind_altar.json
 0a0f636018fbf120cc115214c273ee6d0c70c310 data/ut5/loot_table/blocks/time_core_altar.json

@@ -71,6 +71,45 @@ public class UTVBlocks {
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
 			UnderneathTimeV.MAIN_TAB);
 	
+	public static final DeferredBlock<Block> SPACE_PRODUCER_BLOCK = register("space_producer_block_0", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_BLOCK_1 = register("space_producer_block_1", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_BLOCK_2 = register("space_producer_block_2", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_BLOCK_3 = register("space_producer_block_3", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_BLOCK_4 = register("space_producer_block_4", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_BLOCK_5 = register("space_producer_block_5", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+
+	public static final DeferredBlock<Block> SECOND_PRODUCER_BLOCK = register("space_producer_block_0", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MINUTE_PRODUCER_BLOCK = register("space_producer_block_1", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> HOUR_PRODUCER_BLOCK = register("space_producer_block_2", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> DAY_PRODUCER_BLOCK = register("space_producer_block_3", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MONTH_PRODUCER_BLOCK = register("space_producer_block_4", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> YEAR_PRODUCER_BLOCK = register("space_producer_block_5", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+
+
 	private UTVBlocks() {} // No one initializes this!
 
 	public static void init() {
