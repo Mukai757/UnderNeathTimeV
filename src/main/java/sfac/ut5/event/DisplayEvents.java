@@ -81,6 +81,25 @@ public class DisplayEvents {
             double y = Config.TIME_DISPLAY_Y.getAsDouble();
             String colorS = Config.TIME_DISPLAY_COLOR.get();
             int color = Integer.parseInt(colorS, 16);
+            
+            int originalRed = (color >> 16) & 0xFF;
+            int originalGreen = (color >> 8) & 0xFF;
+            int originalBlue = color & 0xFF;
+            
+            var time = TimeSystem.getPlayerTime(player);
+            if (time < 30 * TimeSystem.MINUTE) {
+                double ratio = Math.min(1.0, (double)time / (30 * TimeSystem.MINUTE));
+                
+                int newRed = (int)(originalRed + (0xFF - originalRed) * (1 - ratio));
+                int newGreen = (int)(originalGreen * ratio);
+                int newBlue = (int)(originalBlue * ratio);
+                
+                newRed = Math.min(255, Math.max(0, newRed));
+                newGreen = Math.min(255, Math.max(0, newGreen));
+                newBlue = Math.min(255, Math.max(0, newBlue));
+                
+                color = (newRed << 16) | (newGreen << 8) | newBlue;
+            }
 
             int h = guiGraphics.guiHeight();
             int w = guiGraphics.guiWidth();
