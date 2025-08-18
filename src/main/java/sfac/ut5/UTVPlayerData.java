@@ -41,7 +41,7 @@ public class UTVPlayerData {
 
     private boolean timeRunning;
     private long time;
-
+    private long TimePlayerLevel = 0;
     /**
      * Mark if the data needs to be synced.
      * This field should not be saved.
@@ -76,6 +76,15 @@ public class UTVPlayerData {
         markDirty();
     }
 
+
+    public long getTimePlayerLevel() {
+        return TimePlayerLevel;
+    }
+
+    public long setTimePlayerLevel(long timeplayerlevel) {
+        this.TimePlayerLevel = timeplayerlevel;
+        return TimePlayerLevel;
+    }
     /**
      * Does not markDirty()
      */

@@ -19,6 +19,15 @@ public class UTVBlockEntities {
 	       .build(null)
 	  );
 
+	public static final Supplier<BlockEntityType<TimeCoreBlockEntity>> TIME_CORE_BLOCK_ENTITY = UnderneathTimeV.BLOCK_ENTITY_TYPES.register(
+			"time_core",
+			() -> BlockEntityType.Builder.of(
+							TimeCoreBlockEntity::new,
+							UTVBlocks.TIME_Core_ALTAR.get(), UTVBlocks.TIME_SPINDLE_COUPLER.get()
+					)
+					.build(null)
+	);
+
 	private UTVBlockEntities() {
 	} // No one initializes this!
 
