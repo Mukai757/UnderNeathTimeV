@@ -55,7 +55,6 @@ public class DisplayEvents {
             if (mc.player == null || !shouldRenderOverlay(mc, mc.player, guiGraphics, mc.gui.getGuiTicks()))
                 return;
 
-
             render(mc, mc.player, guiGraphics, mc.gui.getGuiTicks());
         }
 
@@ -92,11 +91,13 @@ public class DisplayEvents {
 
             guiGraphics.pose().pushPose();
             guiGraphics.pose().scale((float) scale, (float) scale, (float) scale);
-            if(player.getData(UTVPlayerData.UTVDATA).getTimePlayerLevel()!=0){
-            guiGraphics.drawCenteredString(Minecraft.getInstance().font,
-                    textTime, (int) (x * w / scale), (int) (y * h / scale), color);
+            
+            // Display only level > 0
+            if (player.getData(UTVPlayerData.UTVDATA).getPlayerLevel() > 0)
+	            guiGraphics.drawCenteredString(Minecraft.getInstance().font, textTime, (int) (x * w / scale), (int) (y * h / scale), color);
+            
             guiGraphics.pose().popPose();
-        }}
+        }
 
         @Override
         public boolean shouldRenderOverlay(Minecraft mc, Player player, GuiGraphics guiGraphics, int guiTicks) {
