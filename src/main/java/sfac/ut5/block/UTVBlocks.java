@@ -108,6 +108,13 @@ public class UTVBlocks {
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
 
+	public static final DeferredBlock<Block> MakeAltar_NullBlockA = register("make_altar_null_blocka", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MakeAltar_NullBlockB = register("make_altar_null_blockb", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+
 
 	private UTVBlocks() {} // No one initializes this!
 

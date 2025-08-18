@@ -1,5 +1,7 @@
-// 1.21	2025-08-18T13:16:05.7813538	Loot Tables
+// 1.21	2025-08-18T14:05:40.2014577	Loot Tables
 41b3e8c863926d5793fe6de3096c4837e5f0e920 data/ut5/loot_table/blocks/chronostice_crystal_ore.json
+3940567b6faac7c2ce19c22c3bf0461e1f62de1d data/ut5/loot_table/blocks/make_altar_null_blocka.json
+26724a38d28efa1c567c7b0ff4a8885b10c36532 data/ut5/loot_table/blocks/make_altar_null_blockb.json
 0b41a41b6fa6c88819647fc508c4bc2bb10f8f43 data/ut5/loot_table/blocks/make_space_block_0.json
 a8f26e07ff03f81983ea4f500541010888417c53 data/ut5/loot_table/blocks/make_space_block_1.json
 10cd99687eb4b92d69621ad5f0dd8130c2f1b3a4 data/ut5/loot_table/blocks/make_space_block_2.json
