@@ -26,7 +26,8 @@ public class UTVBlockTagProvider extends BlockTagsProvider {
         .add(UTVBlocks.CHRONOSTICE_CRYSTAL_ORE.get())
         .add(UTVBlocks.VOID_CRYSTAL_ORE.get())
         .add(UTVBlocks.TIME_BIND_ALTAR.get())
-        .add(UTVBlocks.TIME_SPINDLE_COUPLER.get());
+        .add(UTVBlocks.TIME_SPINDLE_COUPLER.get())
+        .add(UTVBlocks.TIME_CORE_ALTAR.get());
 		
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
         .add(UTVBlocks.SPACE_DUST_ORE.get())
@@ -37,7 +38,8 @@ public class UTVBlockTagProvider extends BlockTagsProvider {
         .add(UTVBlocks.SPACE_DUST_ORE.get())
         .add(UTVBlocks.TIME_SAND_ORE.get())
         .add(UTVBlocks.TIME_BIND_ALTAR.get())
-        .add(UTVBlocks.TIME_SPINDLE_COUPLER.get());
+        .add(UTVBlocks.TIME_SPINDLE_COUPLER.get())
+        .add(UTVBlocks.TIME_CORE_ALTAR.get());
         
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
         .add(UTVBlocks.CHRONOSTICE_CRYSTAL_ORE.get());
