@@ -97,7 +97,7 @@ public class UTVPlayerData {
      * Does not markDirty()
      */
 	public void tick() {
-		if (this.timeRunning) {
+		if (this.timeRunning && this.time > 0) {
 			this.time--;
 		}
     }
