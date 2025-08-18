@@ -73,7 +73,7 @@ public class TimeBindAltarStructure {
             .where('C', BlockInWorld.hasState(BlockStatePredicate.forBlock(UTVBlocks.TIME_BIND_ALTAR.get())))
             .build();
 
-    private static Set<BlockPattern> patterns = Set.of(pattern0, pattern90, pattern180, pattern270);
+    public static Set<BlockPattern> patterns = Set.of(pattern0, pattern90, pattern180, pattern270);
 
     public static void onServerTick(Level level, BlockPos pos, BlockEntity timeBinderBlockEntity, Player player) {
         boolean find =patterns.stream().anyMatch(pattern -> pattern.find(level,pos)!= null);
