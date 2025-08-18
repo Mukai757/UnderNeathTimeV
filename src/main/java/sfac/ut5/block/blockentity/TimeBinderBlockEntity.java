@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -17,14 +18,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+import sfac.ut5.block.ILevelBlock;
+import sfac.ut5.blockstructure.TimeBindAltarStructure;
+import sfac.ut5.gui.TimeSpindleCouplerMenu;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
-
-import org.jetbrains.annotations.Nullable;
-
-import sfac.ut5.block.TimeBinderBlock;
-import sfac.ut5.gui.TimeBinderMenu;
 
 /**
  * @author Mukai
@@ -38,24 +38,27 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
     private NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
 	
     public TimeBinderBlockEntity(BlockPos pos, BlockState blockState) {
-        super(UTVBlockEntities.TIME_ANVIL_BLOCK_ENTITY.get(), pos, blockState);
+        super(UTVBlockEntities.TIME_BINDER_BLOCK_ENTITY.get(), pos, blockState);
     }
 
-    /**
+
+    /*
      * Link to {@link TimeBinderBlock#getTicker}
      */
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T blockEntity) {
-    	
+		TimeBindAltarStructure.onServerTick(level, pos, blockEntity, null); // 假设player参数暂时为null，可根据实际情况修改
     }
     
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+        ContainerHelper.loadAllItems(tag, items, registries);
     }
 
     @Override
     public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, this.items, registries);
     }
     
     /**
@@ -84,7 +87,7 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 
 	@Override
 	protected Component getDefaultName() {
-		if (this.getBlockState().getValue(TimeBinderBlock.ADVANCED))
+		if (this.getBlockState().getValue(ILevelBlock.LEVEL) == 1)
 			return Component.translatable("block.ut5.time_spindle_coupler");
 		else
 			return Component.translatable("block.ut5.time_bind_altar");
@@ -100,11 +103,14 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 		this.items = items;
 	}
 
+
+
+
 	@Override
 	protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
-		if (!this.getBlockState().getValue(TimeBinderBlock.ADVANCED))
+		if (this.getBlockState().getValue(ILevelBlock.LEVEL) == 0)
 			return null;
-		return new TimeBinderMenu(containerId, inventory, this);// new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.getBlockPos())
+		return new TimeSpindleCouplerMenu(containerId, inventory, this);
 	}
 
 	@Override
@@ -114,14 +120,24 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
 
 	@Override
 	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction) {
-		for (int num : INPUT) 
-            if (num == index) return true;
-		return false;
+		return canPlaceItem(index, itemStack);
 	}
 
+	/**
+	 * Only determine whether a slot has the <b>CAPABILITY</b> to accept input, <b>without performing item comparison logic</b>
+	 */
+	@Override
+	public boolean canPlaceItem(int slot, ItemStack stack) {
+		for (int num : INPUT) 
+            if (num == slot) return true;
+		return false;
+	}
+	
 	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		return true;
+		for (int num : OUTPUT) 
+            if (num == index) return true;
+		return false;
 	}
 
 }

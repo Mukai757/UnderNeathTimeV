@@ -28,7 +28,7 @@ import sfac.ut5.item.ITimeStorageItem;
 public class DisplayEvents {
     public static void register(IEventBus modEventBus) {
         NeoForge.EVENT_BUS.addListener(DisplayEvents::onLoggedIn);
-
+        
         modEventBus.addListener(DisplayEvents::registerOverlays);
     }
 

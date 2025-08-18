@@ -11,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import sfac.ut5.block.UTVBlocks;
 
 /**
  * @author AoXiang_Soar
@@ -26,7 +25,13 @@ public class DebugRodItem extends Item {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		System.out.println(UTVBlocks.CHRONOSTICE_CRYSTAL_ORE.getKey().location().getPath());
+		if (level.isClientSide) {
+			player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(stack.getItem()));
+			System.out.println("client"+player.getItemInHand(InteractionHand.OFF_HAND));
+		} else {
+//			player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(stack.getItem()));
+//			System.out.println("server"+player.getItemInHand(InteractionHand.OFF_HAND));
+		}
 		return InteractionResultHolder.success(stack);
 	}
 	

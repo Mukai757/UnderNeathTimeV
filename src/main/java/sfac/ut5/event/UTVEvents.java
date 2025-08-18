@@ -1,6 +1,8 @@
 package sfac.ut5.event;
 
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.loading.FMLEnvironment;
 
 /**
  * Event Master Registry. </br>
@@ -22,8 +24,11 @@ public class UTVEvents {
 		TimeWingsEvents.register();
 		UpdatePlayerTimeEvents.register();
 		BacktrackCompassEvents.register();
-		DisplayEvents.register(modEventBus);
 		NetworkEvents.register(modEventBus);
 		TimeFluidEvents.register();
+
+    	if (FMLEnvironment.dist == Dist.CLIENT) {
+    		DisplayEvents.register(modEventBus);
+    	}
 	}
 }

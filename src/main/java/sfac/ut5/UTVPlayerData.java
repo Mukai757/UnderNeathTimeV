@@ -36,9 +36,7 @@ public class UTVPlayerData {
             UTVPlayerData::new
     );
 
-    public static void init() {
-
-    }
+    public static void init() {}
 
 
     private boolean timeRunning;
@@ -56,7 +54,7 @@ public class UTVPlayerData {
     }
 
     public UTVPlayerData() {
-        this.timeRunning = false;
+        this.timeRunning = !Config.ENABLE_RITUAL.get();
         this.time = Config.INITIAL_TIME.get();
     }
 
@@ -81,10 +79,10 @@ public class UTVPlayerData {
     /**
      * Does not markDirty()
      */
-    public void tick(){
-        if(this.timeRunning){
-            this.time--;
-        }
+	public void tick() {
+		if (this.timeRunning) {
+			this.time--;
+		}
     }
 
     /**

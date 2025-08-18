@@ -191,9 +191,35 @@ public class TimeSystem {
         return t;
     }
 
-    private TimeSystem() {
-    } // No one initializes this!
-
-    public static void init() {
+    public static int tick() {
+    	return (int) TICK;
     }
+    
+    public static int second() {
+    	return (int) SECOND;
+    }
+    
+    public static int minute() {
+    	return (int) MINUTE;
+    }
+    
+    public static int hour() {
+    	return (int) HOUR;
+    }
+    
+    public static int day() {
+    	return (int) DAY;
+    }
+
+    public static int month() {
+    	return (int) MONTH;
+    }
+    
+    public static int year() {
+    	return (int) YEAR;
+    }
+    
+    private TimeSystem() {}
+
+    public static void init() {}
 }
