@@ -53,7 +53,7 @@ public class TimeProducerBlockEntity extends BlockEntity implements IFluidHandle
     }
 
     public TimeProducerBlockEntity(BlockPos pos, BlockState state) {
-        super(UTVBlockEntities.TIME_PRODUCER.get(), pos, state);
+        super(UTVBlockEntities.SECOND_PRODUCER.get(), pos, state);
     }
 
     public void tick() {

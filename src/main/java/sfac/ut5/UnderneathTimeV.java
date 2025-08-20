@@ -136,7 +136,7 @@ public class UnderneathTimeV {
 	private void registerCapabilities(RegisterCapabilitiesEvent event) {
 		event.registerBlockEntity(
 			UTVCapability.FLUID_HANDLER,
-			UTVBlockEntities.TIME_PRODUCER.get(),
+			UTVBlockEntities.SECOND_PRODUCER.get(),
 			(be, side) -> be instanceof IFluidHandler handler ? handler : null
 		);
 	}
