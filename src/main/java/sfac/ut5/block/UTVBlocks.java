@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import sfac.ut5.UnderneathTimeV;
+import sfac.ut5.block.TimeProducerBlock.ProducerLevel;
 import sfac.ut5.fluid.UTVFluids;
 
 import java.util.function.Function;
@@ -89,22 +90,28 @@ public class UTVBlocks {
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
 			UnderneathTimeV.MAIN_TAB);
 
-	public static final DeferredBlock<TimeProducerBlock> SECOND_PRODUCER = register("time_producer_second", TimeProducerBlock::new,
+	public static final DeferredBlock<TimeProducerBlock> SECOND_PRODUCER = register("time_producer_second",
+			p -> new TimeProducerBlock(p, ProducerLevel.SECOND_PRODUCER),
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<TimeProducerBlock> MINUTE_PRODUCER = register("time_producer_minute", TimeProducerBlock::new,
+	public static final DeferredBlock<TimeProducerBlock> MINUTE_PRODUCER = register("time_producer_minute", 
+			p -> new TimeProducerBlock(p, ProducerLevel.MINUTE_PRODUCER),
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<TimeProducerBlock> HOUR_PRODUCER = register("time_producer_hour", TimeProducerBlock::new,
+	public static final DeferredBlock<TimeProducerBlock> HOUR_PRODUCER = register("time_producer_hour", 
+			p -> new TimeProducerBlock(p, ProducerLevel.HOUR_PRODUCER),
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<TimeProducerBlock> DAY_PRODUCER = register("time_producer_day", TimeProducerBlock::new,
+	public static final DeferredBlock<TimeProducerBlock> DAY_PRODUCER = register("time_producer_day", 
+			p -> new TimeProducerBlock(p, ProducerLevel.DAY_PRODUCER),
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<TimeProducerBlock> MONTH_PRODUCER = register("time_producer_month", TimeProducerBlock::new,
+	public static final DeferredBlock<TimeProducerBlock> MONTH_PRODUCER = register("time_producer_month", 
+			p -> new TimeProducerBlock(p, ProducerLevel.MONTH_PRODUCER),
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<TimeProducerBlock> YEAR_PRODUCER = register("time_producer_year", TimeProducerBlock::new,
+	public static final DeferredBlock<TimeProducerBlock> YEAR_PRODUCER = register("time_producer_year", 
+			p -> new TimeProducerBlock(p, ProducerLevel.YEAR_PRODUCER),
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
 

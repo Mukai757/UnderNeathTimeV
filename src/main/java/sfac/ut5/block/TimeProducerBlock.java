@@ -1,34 +1,85 @@
 package sfac.ut5.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+
 import org.jetbrains.annotations.Nullable;
+
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+
+import sfac.ut5.TimeSystem;
 import sfac.ut5.block.blockentity.TimeProducerBlockEntity;
+import sfac.ut5.block.blockentity.UTVBlockEntities;
 import sfac.ut5.item.UTVItems;
 
-
-public class TimeProducerBlock extends Block implements EntityBlock {
-
-    public TimeProducerBlock(Properties properties) {
+/**
+ * @author Mukai
+ */
+public class TimeProducerBlock extends BaseEntityBlock implements ILevelBlock {
+    public ProducerLevel producerLevel;
+    
+	public static final MapCodec<TimeProducerBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> 
+    instance.group(
+            BlockBehaviour.Properties.CODEC.fieldOf("properties").forGetter(BlockBehaviour::properties),
+            Codec.STRING.xmap(
+                s -> ProducerLevel.valueOf(s),
+                e -> e.name()
+            ).fieldOf("producerLevel").forGetter(b -> b.producerLevel)
+        ).apply(instance, TimeProducerBlock::new)
+    );
+    
+    public TimeProducerBlock(Properties properties, ProducerLevel producerLevel) {
         super(properties);
+        registerDefaultState(stateDefinition.any().setValue(LEVEL, 0));
+        this.producerLevel = producerLevel;
     }
 
-
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(LEVEL);
+    }
+    
+    @Override
+    @Nullable
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+    	switch (this.producerLevel) {
+		case SECOND_PRODUCER:
+			return this.defaultBlockState();
+		case MINUTE_PRODUCER:
+			return this.defaultBlockState().setValue(LEVEL, 1);
+		case HOUR_PRODUCER:
+			return this.defaultBlockState().setValue(LEVEL, 2);
+		case DAY_PRODUCER:
+			return this.defaultBlockState().setValue(LEVEL, 3);
+		case MONTH_PRODUCER:
+			return this.defaultBlockState().setValue(LEVEL, 4);
+		case YEAR_PRODUCER:
+			return this.defaultBlockState().setValue(LEVEL, 5);
+		default:
+	    	return this.defaultBlockState();
+		}
+    }
+    
     @Override
     protected ItemInteractionResult useItemOn(
             ItemStack stack, BlockState blockstate, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult
@@ -36,17 +87,14 @@ public class TimeProducerBlock extends Block implements EntityBlock {
         if (!level.isClientSide && hand == InteractionHand.MAIN_HAND) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof TimeProducerBlockEntity producer) {
-                // 输出当前流体量
                 FluidStack fluid = producer.getFluidInTank(0);
-                player.sendSystemMessage(Component.literal("当前流体量: " + fluid.getAmount() + "mB"));
+//                player.sendSystemMessage(Component.literal("当前流体量: " + fluid.getAmount() + "mB"));
 
-                // 检查空桶和流体量
                 ItemStack heldItem = player.getItemInHand(hand);
                 if (heldItem.is(Items.BUCKET) && fluid.getAmount() >= 1000) {
-                    // 消耗流体
                     producer.drain(1000, IFluidHandler.FluidAction.EXECUTE);
-                    // 替换为流体桶
                     heldItem.shrink(1);
+                    be.setChanged();
                     if (heldItem.isEmpty()) {
                         player.setItemInHand(hand, new ItemStack(UTVItems.CHRONOPLASM_BUCKET.get()));
                     } else {
@@ -56,11 +104,10 @@ public class TimeProducerBlock extends Block implements EntityBlock {
                 }
             }
         }
+        if (player.getItemInHand(hand).is(Items.BUCKET))
+            return ItemInteractionResult.SUCCESS;
         return super.useItemOn(stack,blockstate, level, pos, player, hand, hitResult);
     }
-
-
-
 
     @Nullable
     @Override
@@ -71,20 +118,17 @@ public class TimeProducerBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return (lvl, pos, st, be) -> {
-            if (be instanceof TimeProducerBlockEntity producer) {
-                producer.tick();
-            }
-        };
+        return type == UTVBlockEntities.TIME_PRODUCER.get() ? TimeProducerBlockEntity::tick : null;
     }
-
+    
     public enum ProducerLevel {
-        SECOND_PRODUCER(20, 1000, 1),
-        MINUTE_PRODUCER(20 * 60, 10_000, 60),
-        HOUR_PRODUCER(20 * 60 * 60, 100_000, 60 * 60),
-        DAY_PRODUCER(20 * 60 * 60 * 24, 1_000_000, 60 * 60 * 24),
-        MONTH_PRODUCER(20 * 60 * 60 * 24 * 30, 10_000_000, 60 * 60 * 24 * 30),
-        YEAR_PRODUCER(20 * 60 * 60 * 24 * 365, 100_000_000, 60 * 60 * 24 * 365);
+    	// TODO 改数值，用脚填的
+        SECOND_PRODUCER(20, 1000, TimeSystem.second()),
+        MINUTE_PRODUCER(20, 10_000, TimeSystem.minute()/2),
+        HOUR_PRODUCER(20, 100_000, TimeSystem.hour()/4),
+        DAY_PRODUCER(20, 1_000_000, TimeSystem.day()/8),
+        MONTH_PRODUCER(20, 10_000_000, TimeSystem.month()/16),
+        YEAR_PRODUCER(20, 100_000_000, TimeSystem.year()/32);
 
         private final int ticksPerOperation;
         private final int capacity;
@@ -107,9 +151,15 @@ public class TimeProducerBlock extends Block implements EntityBlock {
         public int getOutputPerSecond() {
             return outputPerSecond;
         }
+    }
 
-        public int getFluidAmount() {
-            return 1;
-        }
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return CODEC;
+	}
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 }

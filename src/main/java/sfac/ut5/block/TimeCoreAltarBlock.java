@@ -15,7 +15,7 @@ import sfac.ut5.TimeSystem;
 import sfac.ut5.UTVPlayerData;
 import sfac.ut5.structure.TimeCoreAltarStructure;
 
-public class TimeCoreAltarBlock extends Block{
+public class TimeCoreAltarBlock extends Block {
 
     public TimeCoreAltarBlock(Properties properties) {
         super(properties);

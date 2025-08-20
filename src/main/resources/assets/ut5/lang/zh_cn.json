@@ -11,12 +11,12 @@
 	"block.ut5.time_spindle_coupler": "时轴耦合器",
 	"block.ut5.chronoplasm": "时流质",
 	"block.ut5.time_core_altar": "时核祭坛",
-	"block.ut5.time_producer_second": "时流质生产机",
-	"block.ut5.time_producer_minute": "时流质生产机",
-	"block.ut5.time_producer_hour": "时流质生产机",
-	"block.ut5.time_producer_day": "时流质生产机",
-    "block.ut5.time_producer_month": "时流质生产机",
-    "block.ut5.time_producer_year": "时流质生产机",
+	"block.ut5.time_producer_second": "瞬流萃取机",
+	"block.ut5.time_producer_minute": "分漩聚合仪",
+	"block.ut5.time_producer_hour": "时涌反应釜",
+	"block.ut5.time_producer_day": "日晡循环炉",
+    "block.ut5.time_producer_month": "月汐凝炼塔",
+    "block.ut5.time_producer_year": "岁渊沉淀舱",
 	// Items
 	"item.ut5.time_wings": "时之翼",
 	

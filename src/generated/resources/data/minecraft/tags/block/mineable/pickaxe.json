@@ -4,6 +4,12 @@
     "ut5:void_crystal_ore",
     "ut5:time_bind_altar",
     "ut5:time_spindle_coupler",
-    "ut5:time_core_altar"
+    "ut5:time_core_altar",
+    "ut5:time_producer_second",
+    "ut5:time_producer_minute",
+    "ut5:time_producer_hour",
+    "ut5:time_producer_day",
+    "ut5:time_producer_month",
+    "ut5:time_producer_year"
   ]
 }
