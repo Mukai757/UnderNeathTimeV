@@ -67,8 +67,8 @@ public class TimeProducerBlockEntity extends BlockEntity implements IFluidHandle
     }
 
     private void produceFluid() {
-        if (level == TimeProducerBlock.ProducerLevel.SECOND_PRODUCER && getLevel() != null) {
-            FluidStack fluidStack = new FluidStack(UTVFluids.CHRONOPLASM_SOURCE.get(), 1);
+        if (getLevel() != null) {
+            FluidStack fluidStack = new FluidStack(UTVFluids.CHRONOPLASM_SOURCE.get(), level.getFluidAmount());
             BlockPos targetPos = getBlockPos().below();
             
             // NeoForge 1.21.1能力API调用

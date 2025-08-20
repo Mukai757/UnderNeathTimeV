@@ -89,22 +89,22 @@ public class UTVBlocks {
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
 			UnderneathTimeV.MAIN_TAB);
 
-	public static final DeferredBlock<TimeProducerBlock> TIME_PRODUCER = register("time_producer_block_0", TimeProducerBlock::new,
+	public static final DeferredBlock<TimeProducerBlock> SECOND_PRODUCER = register("time_producer_second", TimeProducerBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<Block> MINUTE_PRODUCER = register("time_producer_block_1", Block::new,
+	public static final DeferredBlock<TimeProducerBlock> MINUTE_PRODUCER = register("time_producer_minute", TimeProducerBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<Block> HOUR_PRODUCER = register("time_producer_block_2", Block::new,
+	public static final DeferredBlock<TimeProducerBlock> HOUR_PRODUCER = register("time_producer_hour", TimeProducerBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<Block> DAY_PRODUCER = register("time_producer_block_3", Block::new,
+	public static final DeferredBlock<TimeProducerBlock> DAY_PRODUCER = register("time_producer_day", TimeProducerBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<Block> MONTH_PRODUCER = register("time_producer_block_4", Block::new,
+	public static final DeferredBlock<TimeProducerBlock> MONTH_PRODUCER = register("time_producer_month", TimeProducerBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
-	public static final DeferredBlock<Block> YEAR_PRODUCER = register("time_producer_block_5", Block::new,
+	public static final DeferredBlock<TimeProducerBlock> YEAR_PRODUCER = register("time_producer_year", TimeProducerBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
 

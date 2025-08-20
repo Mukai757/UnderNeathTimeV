@@ -19,7 +19,7 @@ public class UTVBlockEntities {
 			register("time_binder", TimeBinderBlockEntity::new, UTVBlocks.TIME_BIND_ALTAR, UTVBlocks.TIME_SPINDLE_COUPLER);
 			
 	public static final Supplier<BlockEntityType<TimeProducerBlockEntity>> TIME_PRODUCER = 
-			register("time_producer", TimeProducerBlockEntity::new, UTVBlocks.TIME_PRODUCER);
+			register("time_producer", TimeProducerBlockEntity::new, UTVBlocks.MINUTE_PRODUCER);
 
 	@SafeVarargs
 	private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name,

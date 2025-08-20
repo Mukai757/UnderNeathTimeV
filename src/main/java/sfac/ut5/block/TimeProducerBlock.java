@@ -23,9 +23,12 @@ import sfac.ut5.item.UTVItems;
 
 
 public class TimeProducerBlock extends Block implements EntityBlock {
+
     public TimeProducerBlock(Properties properties) {
         super(properties);
     }
+
+
     @Override
     protected ItemInteractionResult useItemOn(
             ItemStack stack, BlockState blockstate, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult
@@ -39,9 +42,9 @@ public class TimeProducerBlock extends Block implements EntityBlock {
 
                 // 检查空桶和流体量
                 ItemStack heldItem = player.getItemInHand(hand);
-                if (heldItem.is(Items.BUCKET) && fluid.getAmount() >= 10) {
+                if (heldItem.is(Items.BUCKET) && fluid.getAmount() >= 1000) {
                     // 消耗流体
-                    producer.drain(10, IFluidHandler.FluidAction.EXECUTE);
+                    producer.drain(1000, IFluidHandler.FluidAction.EXECUTE);
                     // 替换为流体桶
                     heldItem.shrink(1);
                     if (heldItem.isEmpty()) {
@@ -76,16 +79,37 @@ public class TimeProducerBlock extends Block implements EntityBlock {
     }
 
     public enum ProducerLevel {
-        SECOND_PRODUCER(20);
+        SECOND_PRODUCER(20, 1000, 1),
+        MINUTE_PRODUCER(20 * 60, 10_000, 60),
+        HOUR_PRODUCER(20 * 60 * 60, 100_000, 60 * 60),
+        DAY_PRODUCER(20 * 60 * 60 * 24, 1_000_000, 60 * 60 * 24),
+        MONTH_PRODUCER(20 * 60 * 60 * 24 * 30, 10_000_000, 60 * 60 * 24 * 30),
+        YEAR_PRODUCER(20 * 60 * 60 * 24 * 365, 100_000_000, 60 * 60 * 24 * 365);
 
         private final int ticksPerOperation;
+        private final int capacity;
+        private final int outputPerSecond;
 
-        ProducerLevel(int ticksPerOperation) {
+        ProducerLevel(int ticksPerOperation, int capacity, int outputPerSecond) {
             this.ticksPerOperation = ticksPerOperation;
+            this.capacity = capacity;
+            this.outputPerSecond = outputPerSecond;
         }
 
         public int getTicksPerOperation() {
             return ticksPerOperation;
+        }
+
+        public int getCapacity() {
+            return capacity;
+        }
+
+        public int getOutputPerSecond() {
+            return outputPerSecond;
+        }
+
+        public int getFluidAmount() {
+            return 1;
         }
     }
 }
