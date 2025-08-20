@@ -16,7 +16,7 @@ import sfac.ut5.UnderneathTimeV;
 public class UTVGUITypes {
 	public static final Supplier<MenuType<TimeSpindleCouplerMenu>> TIME_SPINDLE_COUPLER_MENU = registerMenuType("time_spindle_coupler", TimeSpindleCouplerMenu::new);
 	public static final Supplier<MenuType<ChronomanticLiberProhibitaMenu>> CHRONOMANTIC_LIVER_PROHIBITA_MENU = registerMenuType("chronomantic_liber_prohibita", ChronomanticLiberProhibitaMenu::new);
-
+    //public static final Supplier<MenuType<TimeBinderMenu>> TIME_Book_MENU = registerMenuType("time_book_menu", (IContainerFactory<TimeBinderMenu>) TimeBookMenu);
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(
     		String name, IContainerFactory<T> factory) {
         return UnderneathTimeV.MENUS.register(name, () -> IMenuTypeExtension.create(factory));

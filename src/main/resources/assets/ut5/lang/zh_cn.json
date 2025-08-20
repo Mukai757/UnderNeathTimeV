@@ -10,6 +10,7 @@
 	"block.ut5.time_bind_altar": "时缚祭坛",
 	"block.ut5.time_spindle_coupler": "时轴耦合器",
 	"block.ut5.chronoplasm": "时流质",
+	"block.ut5.time_core_altar": "时核祭坛",
 	
 	// Items
 	"item.ut5.time_wings": "时之翼",
@@ -41,7 +42,8 @@
 	
 	// Commands
 	"command.ut5.time": "%1$s距离生命的尽头现在还有%2$s",
-	
+
+	"ut5:fluid_handler": "CapCapability: ut5:fluid_handler",
 	// Others
 	"ut5.welcome": "欢迎来到时空深渊V！",
 
@@ -51,5 +53,7 @@
 	"ut5.timeunits.hour": "时",
 	"ut5.timeunits.minute": "分",
 	"ut5.timeunits.second": "秒",
-	"ut5.timeunits.tick": "刻"
+	"ut5.timeunits.tick": "刻",
+	
+	"ut5.core_altar.invaild": "祭坛震动了起来，仪式失败了。看来祭坛已经不足以支撑这种强度的法术了。"
 }

@@ -35,7 +35,6 @@ public class UTVBlocks {
 		return block;
 	}
 
-
 	public static final DeferredBlock<LiquidBlock> CHRONOPLASM_BLOCK = register("chronoplasm",
 			props -> new LiquidBlock(UTVFluids.CHRONOPLASM_SOURCE.get(), props),
 			BlockBehaviour.Properties.ofFullCopy(Blocks.WATER), null);
@@ -66,6 +65,56 @@ public class UTVBlocks {
 	public static final DeferredBlock<TimeBinderBlock> TIME_SPINDLE_COUPLER = register("time_spindle_coupler", TimeBinderBlock::new,
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
 			UnderneathTimeV.MAIN_TAB);
+	
+	public static final DeferredBlock<TimeCoreAltarBlock> TIME_CORE_ALTAR = register("time_core_altar", TimeCoreAltarBlock::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
+			UnderneathTimeV.MAIN_TAB);
+	
+	public static final DeferredBlock<Block> SPACE_PRODUCER_0 = register("space_producer_block_0", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_1 = register("space_producer_block_1", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_2 = register("space_producer_block_2", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_3 = register("space_producer_block_3", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_4 = register("space_producer_block_4", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> SPACE_PRODUCER_5 = register("space_producer_block_5", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.STONE),
+			UnderneathTimeV.MAIN_TAB);
+
+	public static final DeferredBlock<TimeProducerBlock> TIME_PRODUCER = register("time_producer_block_0", TimeProducerBlock::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MINUTE_PRODUCER = register("time_producer_block_1", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> HOUR_PRODUCER = register("time_producer_block_2", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> DAY_PRODUCER = register("time_producer_block_3", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> MONTH_PRODUCER = register("time_producer_block_4", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> YEAR_PRODUCER = register("time_producer_block_5", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+
+	public static final DeferredBlock<Block> ALTAR_NULL_BLOCK_A = register("make_altar_null_blocka", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+	public static final DeferredBlock<Block> ALTAR_NULL_BLOCK_B = register("make_altar_null_blockb", Block::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+
 
 	private UTVBlocks() {} // No one initializes this!
 

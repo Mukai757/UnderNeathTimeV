@@ -22,23 +22,26 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.slf4j.Logger;
 import sfac.ut5.block.UTVBlocks;
 import sfac.ut5.block.blockentity.UTVBlockEntities;
+import sfac.ut5.block.capability.UTVCapability;
 import sfac.ut5.component.UTVComponents;
 import sfac.ut5.data.UTVDataGatherer;
 import sfac.ut5.data.loot_table.UTVLootModifiers;
 import sfac.ut5.event.UTVEvents;
+import sfac.ut5.fluid.UTVFluidTypes;
 import sfac.ut5.fluid.UTVFluids;
 import sfac.ut5.gui.UTVGUITypes;
-import sfac.ut5.fluid.UTVFluidTypes;
 import sfac.ut5.item.UTVItems;
 
 import java.util.LinkedList;
@@ -50,10 +53,12 @@ import java.util.List;
 @Mod(UnderneathTimeV.MOD_ID)
 public class UnderneathTimeV {
 	public static final String MOD_ID = "ut5";
+	public static final String MODID = "ut5";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
 	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
+	//public static final DeferredRegister<BlockCapability> Capability =DeferredRegister.create(BlockCapability.class, MOD_ID);
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, UnderneathTimeV.MOD_ID);
 	public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, UnderneathTimeV.MOD_ID);
@@ -61,6 +66,7 @@ public class UnderneathTimeV {
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 	public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, UnderneathTimeV.MOD_ID);
+
 	public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
 
 	private static List<DeferredHolder<? extends ItemLike, ?>> items4MainTab = new LinkedList<>();
@@ -106,8 +112,17 @@ public class UnderneathTimeV {
 		UTVLootModifiers.init();
 		UTVPlayerData.init();
 		UTVGUITypes.init();
-
+		// 注册能力系统
+		modEventBus.addListener(this::registerCapabilities);
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.build());
+	}
+
+	private void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(
+			UTVCapability.FLUID_HANDLER,
+			UTVBlockEntities.TIME_PRODUCER.get(),
+			(be, side) -> be instanceof IFluidHandler handler ? handler : null
+		);
 	}
 
     @SubscribeEvent

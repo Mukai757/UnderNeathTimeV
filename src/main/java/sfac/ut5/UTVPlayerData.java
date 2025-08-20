@@ -17,7 +17,8 @@ public class UTVPlayerData {
     public static final Codec<UTVPlayerData> CODEC = RecordCodecBuilder.create(instance -> // Given an instance
             instance.group(
                     Codec.BOOL.fieldOf("timeRunning").forGetter(UTVPlayerData::isTimeRunning),
-                    Codec.LONG.fieldOf("time").forGetter(UTVPlayerData::getTime)
+                    Codec.LONG.fieldOf("time").forGetter(UTVPlayerData::getTime),
+                    Codec.INT.fieldOf("playerLevel").forGetter(UTVPlayerData::getPlayerLevel)
             ).apply(instance, UTVPlayerData::new) // Define how to create the object
     );
 
@@ -33,6 +34,8 @@ public class UTVPlayerData {
             UTVPlayerData::isTimeRunning,
             ByteBufCodecs.VAR_LONG,
             UTVPlayerData::getTime,
+            ByteBufCodecs.INT,
+            UTVPlayerData::getPlayerLevel,
             UTVPlayerData::new
     );
 
@@ -41,21 +44,23 @@ public class UTVPlayerData {
 
     private boolean timeRunning;
     private long time;
-
+    private int playerLevel = 0;
     /**
      * Mark if the data needs to be synced.
      * This field should not be saved.
      */
     private boolean dirty = true;
 
-    public UTVPlayerData(boolean timeRunning, long time) {
+    public UTVPlayerData(boolean timeRunning, long time, int playerLevel) {
         this.timeRunning = timeRunning;
         this.time = time;
+        this.playerLevel = playerLevel;
     }
 
     public UTVPlayerData() {
         this.timeRunning = !Config.ENABLE_RITUAL.get();
-        this.time = Config.INITIAL_TIME.get();
+        this.time = Config.ENABLE_RITUAL.get() ? Config.INITIAL_RITUAL_TIME.get() : Config.INITIAL_TIME.get();
+        this.playerLevel = Config.ENABLE_RITUAL.get() ? 0 : 1;
     }
 
     public boolean isTimeRunning() {
@@ -76,11 +81,23 @@ public class UTVPlayerData {
         markDirty();
     }
 
+
+    public int getPlayerLevel() {
+        return playerLevel;
+    }
+
+    public void setPlayerLevel(int playerlevel) {
+        this.playerLevel = playerlevel;
+    }
+    
+    public void levelUp() {
+    	this.playerLevel++;
+    }
     /**
      * Does not markDirty()
      */
 	public void tick() {
-		if (this.timeRunning) {
+		if (this.timeRunning && this.time > 0) {
 			this.time--;
 		}
     }

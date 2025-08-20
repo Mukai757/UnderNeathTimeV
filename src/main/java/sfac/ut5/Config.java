@@ -9,14 +9,16 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    public static final ModConfigSpec.LongValue INITIAL_TIME = BUILDER
-            .comment("The initial time(ticks) when player first enters the game")
-            .defineInRange("initialTime", 3 * TimeSystem.HOUR, 0L, Long.MAX_VALUE);
-
     public static final ModConfigSpec.BooleanValue ENABLE_RITUAL = BUILDER
             .comment("If set to true, then players need to perform a ritual to start the contents of this mod.",
                     "Otherwise, all contents, including time count-down, are started by default.")
-            .define("enableRitual", false);
+            .define("enableRitual", true);
+    public static final ModConfigSpec.LongValue INITIAL_RITUAL_TIME = BUILDER
+            .comment("The initial time(ticks) when player first enters the game. Takes effect only when enableRitual is true")
+            .defineInRange("initialRitualTime", 30 * TimeSystem.MINUTE, 0L, Long.MAX_VALUE);
+    public static final ModConfigSpec.LongValue INITIAL_TIME = BUILDER
+            .comment("The initial time(ticks) when the player first completes the ritual through Time Core Altar. Takes effect only when enableRitual is false")
+            .defineInRange("initialTime", 3 * TimeSystem.HOUR, 0L, Long.MAX_VALUE);
 
     public static final ModConfigSpec.DoubleValue TIME_DISPLAY_X = BUILDER
             .comment("The amount of x-offset of time displaying. If it's in [0, 1], then it's a percentage value. Otherwise, it's measured in pixels.")
