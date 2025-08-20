@@ -72,6 +72,22 @@ public class UnderneathTimeV {
 	private static List<DeferredHolder<? extends ItemLike, ?>> items4MainTab = new LinkedList<>();
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(
 			"main_tab",
+/**
+ * 获取当前对象的坦克数量。
+ * 此方法覆盖了父类的方法，返回固定的坦克数量1。
+ *
+ * @return 当前对象的坦克数量，固定为1。
+ */
+/**
+ * 获取当前对象的储罐数量。
+ *
+ * @return 储罐的数量，固定返回1。
+ */
+/**
+ * 获取当前对象的坦克数量。
+ *
+ * @return 返回当前对象的坦克数量，固定为1。
+ */
 			() -> CreativeModeTab.builder().title(Component.translatable("itemGroup.ut5"))
 					.withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> UTVItems.FATE_POCKET_WATCH.get().getDefaultInstance())
 					.displayItems((parameters, output) -> {

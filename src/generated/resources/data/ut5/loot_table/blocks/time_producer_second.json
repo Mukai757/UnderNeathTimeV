@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ut5:time_producer_block_2"
+          "name": "ut5:time_producer_second"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "ut5:blocks/time_producer_block_2"
+  "random_sequence": "ut5:blocks/time_producer_second"
 }

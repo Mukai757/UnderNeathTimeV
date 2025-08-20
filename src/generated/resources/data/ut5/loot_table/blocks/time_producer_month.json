@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ut5:time_producer_block_1"
+          "name": "ut5:time_producer_month"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "ut5:blocks/time_producer_block_1"
+  "random_sequence": "ut5:blocks/time_producer_month"
 }

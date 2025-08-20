@@ -11,7 +11,12 @@
 	"block.ut5.time_spindle_coupler": "时轴耦合器",
 	"block.ut5.chronoplasm": "时流质",
 	"block.ut5.time_core_altar": "时核祭坛",
-	
+	"block.ut5.time_producer_second": "时流质生产机",
+	"block.ut5.time_producer_minute": "时流质生产机",
+	"block.ut5.time_producer_hour": "时流质生产机",
+	"block.ut5.time_producer_day": "时流质生产机",
+    "block.ut5.time_producer_month": "时流质生产机",
+    "block.ut5.time_producer_year": "时流质生产机",
 	// Items
 	"item.ut5.time_wings": "时之翼",
 	
