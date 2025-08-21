@@ -1,5 +1,7 @@
 {
   "values": [
-    "ut5:chronostice_crystal_ore"
+    "ut5:chronostice_crystal_ore",
+    "ut5:time_producer_month",
+    "ut5:time_producer_year"
   ]
 }

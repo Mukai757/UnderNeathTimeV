@@ -3,7 +3,10 @@
     "ut5:void_crystal_ore",
     "ut5:space_dust_ore",
     "ut5:time_sand_ore",
-    "ut5:hourglass_binder",
-    "ut5:time_synchronizer"
+    "ut5:time_bind_altar",
+    "ut5:time_spindle_coupler",
+    "ut5:time_core_altar",
+    "ut5:time_producer_hour",
+    "ut5:time_producer_day"
   ]
 }

@@ -22,19 +22,16 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.slf4j.Logger;
 import sfac.ut5.block.UTVBlocks;
 import sfac.ut5.block.blockentity.UTVBlockEntities;
-import sfac.ut5.block.capability.UTVCapability;
 import sfac.ut5.component.UTVComponents;
 import sfac.ut5.data.UTVDataGatherer;
 import sfac.ut5.data.loot_table.UTVLootModifiers;
@@ -72,22 +69,6 @@ public class UnderneathTimeV {
 	private static List<DeferredHolder<? extends ItemLike, ?>> items4MainTab = new LinkedList<>();
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(
 			"main_tab",
-/**
- * 获取当前对象的坦克数量。
- * 此方法覆盖了父类的方法，返回固定的坦克数量1。
- *
- * @return 当前对象的坦克数量，固定为1。
- */
-/**
- * 获取当前对象的储罐数量。
- *
- * @return 储罐的数量，固定返回1。
- */
-/**
- * 获取当前对象的坦克数量。
- *
- * @return 返回当前对象的坦克数量，固定为1。
- */
 			() -> CreativeModeTab.builder().title(Component.translatable("itemGroup.ut5"))
 					.withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> UTVItems.FATE_POCKET_WATCH.get().getDefaultInstance())
 					.displayItems((parameters, output) -> {
@@ -100,9 +81,11 @@ public class UnderneathTimeV {
 	public UnderneathTimeV(IEventBus modEventBus, ModContainer modContainer) {
 		LOGGER.info("Loading Underneath Time V... This log was written on the first day of developing the mod."
 				+ " Will there come a day when loading this mod requires traversing an abyss-like expanse of time?www");
+		
 		modEventBus.addListener(UTVDataGatherer::onGatherData);
 		modEventBus.addListener(UTVFluids::onRegisterClientExtensions);
 		modEventBus.addListener(UTVGUITypes::registerScreens);
+		modEventBus.addListener(UTVCapability::registerCapabilities);
 
 		ITEMS.register(modEventBus);
 		BLOCKS.register(modEventBus);
@@ -128,17 +111,8 @@ public class UnderneathTimeV {
 		UTVLootModifiers.init();
 		UTVPlayerData.init();
 		UTVGUITypes.init();
-		// 注册能力系统
-		modEventBus.addListener(this::registerCapabilities);
+		
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.build());
-	}
-
-	private void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerBlockEntity(
-			UTVCapability.FLUID_HANDLER,
-			UTVBlockEntities.SECOND_PRODUCER.get(),
-			(be, side) -> be instanceof IFluidHandler handler ? handler : null
-		);
 	}
 
     @SubscribeEvent

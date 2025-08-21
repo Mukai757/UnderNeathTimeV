@@ -27,11 +27,20 @@ public class UTVBlockTagProvider extends BlockTagsProvider {
         .add(UTVBlocks.VOID_CRYSTAL_ORE.get())
         .add(UTVBlocks.TIME_BIND_ALTAR.get())
         .add(UTVBlocks.TIME_SPINDLE_COUPLER.get())
-        .add(UTVBlocks.TIME_CORE_ALTAR.get());
+        .add(UTVBlocks.TIME_CORE_ALTAR.get())
+        .add(UTVBlocks.SECOND_PRODUCER.get())
+        .add(UTVBlocks.MINUTE_PRODUCER.get())
+        .add(UTVBlocks.HOUR_PRODUCER.get())
+        .add(UTVBlocks.DAY_PRODUCER.get())
+        .add(UTVBlocks.MONTH_PRODUCER.get())
+        .add(UTVBlocks.YEAR_PRODUCER.get());
 		
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
         .add(UTVBlocks.SPACE_DUST_ORE.get())
         .add(UTVBlocks.TIME_SAND_ORE.get());
+
+        tag(BlockTags.NEEDS_STONE_TOOL)
+        .add(UTVBlocks.MINUTE_PRODUCER.get());
         
         tag(BlockTags.NEEDS_IRON_TOOL)
         .add(UTVBlocks.VOID_CRYSTAL_ORE.get())
@@ -39,10 +48,14 @@ public class UTVBlockTagProvider extends BlockTagsProvider {
         .add(UTVBlocks.TIME_SAND_ORE.get())
         .add(UTVBlocks.TIME_BIND_ALTAR.get())
         .add(UTVBlocks.TIME_SPINDLE_COUPLER.get())
-        .add(UTVBlocks.TIME_CORE_ALTAR.get());
+        .add(UTVBlocks.TIME_CORE_ALTAR.get())
+        .add(UTVBlocks.HOUR_PRODUCER.get())
+        .add(UTVBlocks.DAY_PRODUCER.get());
         
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
-        .add(UTVBlocks.CHRONOSTICE_CRYSTAL_ORE.get());
+        .add(UTVBlocks.CHRONOSTICE_CRYSTAL_ORE.get())
+        .add(UTVBlocks.MONTH_PRODUCER.get())
+        .add(UTVBlocks.YEAR_PRODUCER.get());
 	}
 
 }

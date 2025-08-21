@@ -11,6 +11,12 @@
 	"block.ut5.time_spindle_coupler": "Time Spindle Coupler",
 	"block.ut5.chronoplasm": "Chronoplasm",
 	"block.ut5.time_core_altar": "Time Core Altar",
+	"block.ut5.time_producer_second": "S​​aturnflow Extractor",
+	"block.ut5.time_producer_minute": "M​​ercurblend Synthesizer​",
+	"block.ut5.time_producer_hour": "​​H​​elioshift Reactor",
+	"block.ut5.time_producer_day": "D​​ianloop Forge",
+	"block.ut5.time_producer_month": "M​​etisflux Refinery",
+	"block.ut5.time_producer_year": "Y​​mirspan Vault",
 	
 	// Items
 	"item.ut5.time_wings": "Time Wings",
