@@ -71,7 +71,7 @@ public class TimeBinderBlock extends BaseEntityBlock implements ILevelBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == UTVBlockEntities.TIME_BINDER_BLOCK_ENTITY.get() ? TimeBinderBlockEntity::tick : null;
+        return type == UTVBlockEntities.TIME_BINDER.get() ? TimeBinderBlockEntity::tick : null;
     }
     
     @Nullable

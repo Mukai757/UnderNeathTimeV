@@ -4,6 +4,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import sfac.ut5.UnderneathTimeV;
@@ -37,7 +38,12 @@ public class UTVBlocks {
 	}
 
 	public static final DeferredBlock<LiquidBlock> CHRONOPLASM_BLOCK = register("chronoplasm",
-			props -> new LiquidBlock(UTVFluids.CHRONOPLASM_SOURCE.get(), props),
+			props -> new LiquidBlock(UTVFluids.CHRONOPLASM_SOURCE.get(), props) {
+			    @Override
+			    protected boolean isRandomlyTicking(BlockState state) {
+			        return true;
+			    }
+			},
 			BlockBehaviour.Properties.ofFullCopy(Blocks.WATER), null);
 
 	public static final DeferredBlock<Block> TIME_SAND_ORE = register("time_sand_ore", Block::new,

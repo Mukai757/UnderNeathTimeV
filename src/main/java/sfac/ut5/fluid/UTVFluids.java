@@ -1,8 +1,14 @@
 package sfac.ut5.fluid;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -14,6 +20,7 @@ import java.util.function.Supplier;
 
 /**
  * @author Mukai
+ * @author AoXiang_Soar
  */
 public class UTVFluids {
 
@@ -23,7 +30,13 @@ public class UTVFluids {
 			.slopeFindDistance(2).levelDecreasePerBlock(2).block(UTVBlocks.CHRONOPLASM_BLOCK);
 
 	public static final Supplier<FlowingFluid> CHRONOPLASM_SOURCE = UnderneathTimeV.FLUIDS.register("chronoplasm",
-			() -> new BaseFlowingFluid.Source(UTVFluids.FLUID_PROPERTIES));
+			() -> new BaseFlowingFluid.Source(UTVFluids.FLUID_PROPERTIES) {
+				@Override
+				public void randomTick(Level level, BlockPos pos, FluidState state, RandomSource random) {
+					if (level.isClientSide) return;
+			    	level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+				}
+			});
 	public static final Supplier<FlowingFluid> CHRONOPLASM_FLOWING = UnderneathTimeV.FLUIDS.register("flowing_chronoplasm",
 			() -> new BaseFlowingFluid.Flowing(UTVFluids.FLUID_PROPERTIES));
 

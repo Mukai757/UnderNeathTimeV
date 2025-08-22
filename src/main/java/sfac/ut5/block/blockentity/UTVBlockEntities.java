@@ -15,7 +15,7 @@ import java.util.function.Supplier;
  * @author AoXiang_Soar
  */
 public class UTVBlockEntities {
-	public static final Supplier<BlockEntityType<TimeBinderBlockEntity>> TIME_BINDER_BLOCK_ENTITY = 
+	public static final Supplier<BlockEntityType<TimeBinderBlockEntity>> TIME_BINDER = 
 			register("time_binder", TimeBinderBlockEntity::new, UTVBlocks.TIME_BIND_ALTAR, UTVBlocks.TIME_SPINDLE_COUPLER);
 			
 	public static final Supplier<BlockEntityType<TimeProducerBlockEntity>> TIME_PRODUCER = register("time_producer",

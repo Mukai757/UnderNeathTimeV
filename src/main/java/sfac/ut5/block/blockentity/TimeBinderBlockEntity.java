@@ -37,7 +37,7 @@ public class TimeBinderBlockEntity extends BaseContainerBlockEntity implements W
     private NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
 	
     public TimeBinderBlockEntity(BlockPos pos, BlockState blockState) {
-        super(UTVBlockEntities.TIME_BINDER_BLOCK_ENTITY.get(), pos, blockState);
+        super(UTVBlockEntities.TIME_BINDER.get(), pos, blockState);
     }
 
     /*
