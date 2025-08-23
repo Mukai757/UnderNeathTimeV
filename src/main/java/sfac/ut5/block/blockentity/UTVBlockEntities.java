@@ -21,6 +21,10 @@ public class UTVBlockEntities {
 	public static final Supplier<BlockEntityType<TimeProducerBlockEntity>> TIME_PRODUCER = register("time_producer",
 			TimeProducerBlockEntity::new, UTVBlocks.SECOND_PRODUCER, UTVBlocks.MINUTE_PRODUCER,
 			UTVBlocks.HOUR_PRODUCER, UTVBlocks.DAY_PRODUCER, UTVBlocks.MONTH_PRODUCER, UTVBlocks.YEAR_PRODUCER);
+			
+	public static final Supplier<BlockEntityType<SpaceProducerBlockEntity>> SPACE_PRODUCER = register("space_producer",
+			SpaceProducerBlockEntity::new, UTVBlocks.SPACE_PRODUCER_0, UTVBlocks.SPACE_PRODUCER_1
+			, UTVBlocks.SPACE_PRODUCER_2, UTVBlocks.SPACE_PRODUCER_3, UTVBlocks.SPACE_PRODUCER_4, UTVBlocks.SPACE_PRODUCER_5);
 
 	@SafeVarargs
 	private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name,
