@@ -133,6 +133,10 @@ public class UTVBlocks {
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
 			UnderneathTimeV.MAIN_TAB);
 
+	public static final DeferredBlock<Block> REWINDING_CHEST = register("rewinding_chest", RewindingChestBlock::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.SAND),
+			UnderneathTimeV.MAIN_TAB);
+
 
 	private UTVBlocks() {} // No one initializes this!
 
