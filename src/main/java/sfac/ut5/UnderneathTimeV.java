@@ -2,7 +2,6 @@ package sfac.ut5;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.MenuType;
@@ -13,18 +12,13 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -54,7 +48,6 @@ public class UnderneathTimeV {
 
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
 	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
-	//public static final DeferredRegister<BlockCapability> Capability =DeferredRegister.create(BlockCapability.class, MOD_ID);
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, UnderneathTimeV.MOD_ID);
 	public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, UnderneathTimeV.MOD_ID);
@@ -114,7 +107,7 @@ public class UnderneathTimeV {
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.build());
 	}
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
@@ -128,7 +121,7 @@ public class UnderneathTimeV {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
-    }
+    }*/
 
     public static <I extends ItemLike> void addItem2Tab(DeferredHolder<CreativeModeTab, CreativeModeTab> tab, DeferredHolder<? extends ItemLike, ?> item) {
     	if (tab == MAIN_TAB) {
