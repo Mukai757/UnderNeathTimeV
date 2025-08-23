@@ -15,8 +15,14 @@
 	"block.ut5.time_producer_minute": "分漩聚合仪",
 	"block.ut5.time_producer_hour": "时涌反应釜",
 	"block.ut5.time_producer_day": "日晡循环炉",
-    "block.ut5.time_producer_month": "月汐凝炼塔",
-    "block.ut5.time_producer_year": "岁渊沉淀舱",
+	"block.ut5.time_producer_month": "月汐凝炼塔",
+	"block.ut5.time_producer_year": "岁渊沉淀舱",
+	"block.ut5.space_producer_block_0": "微域启器",
+	"block.ut5.space_producer_block_1": "维褶枢机",
+	"block.ut5.space_producer_block_2": "腔隙构架",
+	"block.ut5.space_producer_block_3": "架构驱仪",
+	"block.ut5.space_producer_block_4": "界域铸场",
+	"block.ut5.space_producer_block_5": "寰宇织机",
 	// Items
 	"item.ut5.time_wings": "时之翼",
 	

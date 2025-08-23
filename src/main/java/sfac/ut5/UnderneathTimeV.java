@@ -50,7 +50,6 @@ import java.util.List;
 @Mod(UnderneathTimeV.MOD_ID)
 public class UnderneathTimeV {
 	public static final String MOD_ID = "ut5";
-	public static final String MODID = "ut5";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);

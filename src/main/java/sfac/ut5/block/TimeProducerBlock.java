@@ -123,25 +123,19 @@ public class TimeProducerBlock extends BaseEntityBlock implements ILevelBlock {
     
     public enum ProducerLevel {
     	// TODO 改数值，用脚填的
-        SECOND_PRODUCER(20, 1000, TimeSystem.second()),
-        MINUTE_PRODUCER(20, 10_000, TimeSystem.minute()/2),
-        HOUR_PRODUCER(20, 100_000, TimeSystem.hour()/4),
-        DAY_PRODUCER(20, 1_000_000, TimeSystem.day()/8),
-        MONTH_PRODUCER(20, 10_000_000, TimeSystem.month()/16),
-        YEAR_PRODUCER(20, 100_000_000, TimeSystem.year()/32);
+        SECOND_PRODUCER(1000, TimeSystem.second()),
+        MINUTE_PRODUCER(10_000, TimeSystem.minute()/2),
+        HOUR_PRODUCER(100_000, TimeSystem.hour()/4),
+        DAY_PRODUCER(1_000_000, TimeSystem.day()/8),
+        MONTH_PRODUCER(10_000_000, TimeSystem.month()/16),
+        YEAR_PRODUCER(100_000_000, TimeSystem.year()/32);
 
-        private final int ticksPerOperation;
         private final int capacity;
         private final int outputPerSecond;
 
-        ProducerLevel(int ticksPerOperation, int capacity, int outputPerSecond) {
-            this.ticksPerOperation = ticksPerOperation;
+        ProducerLevel(int capacity, int outputPerSecond) {
             this.capacity = capacity;
             this.outputPerSecond = outputPerSecond;
-        }
-
-        public int getTicksPerOperation() {
-            return ticksPerOperation;
         }
 
         public int getCapacity() {

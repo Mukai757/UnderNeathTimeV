@@ -26,15 +26,14 @@ import sfac.ut5.fluid.UTVFluids;
  */
 public class TimeProducerBlockEntity extends BlockEntity implements IFluidHandler {
 
-    private int tickCounter = 0; // Don't need to save... need it?
     private final TimeProducerBlock.ProducerLevel producerLevel;
     private final FluidTank fluidTank;
     
     public TimeProducerBlockEntity(BlockPos pos, BlockState state) {
         super(UTVBlockEntities.TIME_PRODUCER.get(), pos, state);
         var block = (TimeProducerBlock) state.getBlock();
-        producerLevel = block.producerLevel;
-        fluidTank = new FluidTank(producerLevel.getCapacity());
+        this.producerLevel = block.producerLevel;
+        this.fluidTank = new FluidTank(producerLevel.getCapacity());
     }
 
     @Override
@@ -103,18 +102,6 @@ public class TimeProducerBlockEntity extends BlockEntity implements IFluidHandle
         return ClientboundBlockEntityDataPacket.create(this);
     }
     
-    public int getTickCounter() {
-    	return tickCounter;
-    }
-    
-    public void increaseTickCounter() {
-    	tickCounter++;
-    }
-    
-    public void resetTickCounter() {
-    	tickCounter = 0;
-    }
-    
     public TimeProducerBlock.ProducerLevel getProducerLevel() {
 		return producerLevel;
     }
@@ -124,11 +111,7 @@ public class TimeProducerBlockEntity extends BlockEntity implements IFluidHandle
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T blockEntity) {
 		if (level == null || level.isClientSide) return;
 		if (blockEntity instanceof TimeProducerBlockEntity be) {
-			be.increaseTickCounter();
-			if (be.getTickCounter() >= be.getProducerLevel().getTicksPerOperation()) {
-				be.resetTickCounter();
-				produceFluid(level, pos, state, be);
-			}
+			produceFluid(level, pos, state, be);
 		}
     }
 
