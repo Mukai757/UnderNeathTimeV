@@ -53,8 +53,7 @@
 	
 	// Commands
 	"command.ut5.time": "%1$s距离生命的尽头现在还有%2$s",
-
-	"ut5:fluid_handler": "CapCapability: ut5:fluid_handler",
+	
 	// Others
 	"ut5.welcome": "欢迎来到时空深渊V！",
 
