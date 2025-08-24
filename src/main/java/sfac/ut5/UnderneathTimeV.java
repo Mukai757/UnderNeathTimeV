@@ -31,6 +31,8 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.slf4j.Logger;
 import sfac.ut5.block.UTVBlocks;
 import sfac.ut5.block.blockentity.UTVBlockEntities;
+import sfac.ut5.block.blockentity.renderer.UTVBlockEntityRenderers;
+import sfac.ut5.block.blockentity.renderer.UTVBlockEntityWithoutLevelRenderer;
 import sfac.ut5.component.UTVComponents;
 import sfac.ut5.data.UTVDataGatherer;
 import sfac.ut5.data.loot_table.UTVLootModifiers;
@@ -83,6 +85,8 @@ public class UnderneathTimeV {
 		modEventBus.addListener(UTVFluids::onRegisterClientExtensions);
 		modEventBus.addListener(UTVGUITypes::registerScreens);
 		modEventBus.addListener(UTVCapability::registerCapabilities);
+		modEventBus.addListener(UTVBlockEntityRenderers::registerEntityRenderers);
+		modEventBus.addListener(UTVBlockEntityWithoutLevelRenderer::registerClientExtensions);
 
 		ITEMS.register(modEventBus);
 		BLOCKS.register(modEventBus);

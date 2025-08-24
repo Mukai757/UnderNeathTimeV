@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ut5:make_altar_null_blockb"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "ut5:blocks/make_altar_null_blockb"
+}

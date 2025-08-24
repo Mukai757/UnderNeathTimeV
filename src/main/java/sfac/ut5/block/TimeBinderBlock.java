@@ -33,7 +33,6 @@ import org.jetbrains.annotations.Nullable;
  * @author AoXiang_Soar
  */
 public class TimeBinderBlock extends BaseEntityBlock implements ILevelBlock {
-//    public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
     public static final MapCodec<TimeBinderBlock> CODEC = simpleCodec(TimeBinderBlock::new);
 
     public TimeBinderBlock(Properties properties) {
@@ -41,10 +40,6 @@ public class TimeBinderBlock extends BaseEntityBlock implements ILevelBlock {
         registerDefaultState(stateDefinition.any().setValue(LEVEL, 0));
     }
 
-    /*@Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }*/
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {

@@ -1,7 +1,8 @@
-// 1.21	2025-08-20T23:00:17.3569519	Loot Tables
+// 1.21	2025-08-24T15:15:46.7863334	Loot Tables
 41b3e8c863926d5793fe6de3096c4837e5f0e920 data/ut5/loot_table/blocks/chronostice_crystal_ore.json
 3940567b6faac7c2ce19c22c3bf0461e1f62de1d data/ut5/loot_table/blocks/make_altar_null_blocka.json
 26724a38d28efa1c567c7b0ff4a8885b10c36532 data/ut5/loot_table/blocks/make_altar_null_blockb.json
+f2d0533895a25103e4ee44da95140f7ab1d9bed5 data/ut5/loot_table/blocks/rewinding_chest.json
 e331101fd8147f8bc3940238dd41b614a4f7c02c data/ut5/loot_table/blocks/space_dust_ore.json
 85af3049e99552237d36eebe9bc542f7a741a061 data/ut5/loot_table/blocks/space_producer_block_0.json
 60ccd615cb542317b9686f9dbc7e5e0e48383aff data/ut5/loot_table/blocks/space_producer_block_1.json

@@ -27,7 +27,7 @@ public class UTVBlockEntities {
 			, UTVBlocks.SPACE_PRODUCER_2, UTVBlocks.SPACE_PRODUCER_3, UTVBlocks.SPACE_PRODUCER_4, UTVBlocks.SPACE_PRODUCER_5);
 
 	public static final Supplier<BlockEntityType<RewindingChestBlockEntity>> REWINDING_CHEST = register("rewinding_chest",
-			RewindingChestBlockEntity::new); // TODO add block
+			RewindingChestBlockEntity::new, UTVBlocks.REWINDING_CHEST); // TODO add block
 
 	@SafeVarargs
 	private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name,

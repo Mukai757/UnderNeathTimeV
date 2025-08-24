@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ut5:block/time_producer_minute"
+    }
+  }
+}
