@@ -1,4 +1,4 @@
-// 1.21	2025-08-24T15:15:46.7863334	Loot Tables
+// 1.21	2025-08-26T20:00:54.9181038	Loot Tables
 41b3e8c863926d5793fe6de3096c4837e5f0e920 data/ut5/loot_table/blocks/chronostice_crystal_ore.json
 3940567b6faac7c2ce19c22c3bf0461e1f62de1d data/ut5/loot_table/blocks/make_altar_null_blocka.json
 26724a38d28efa1c567c7b0ff4a8885b10c36532 data/ut5/loot_table/blocks/make_altar_null_blockb.json
@@ -10,6 +10,7 @@ e331101fd8147f8bc3940238dd41b614a4f7c02c data/ut5/loot_table/blocks/space_dust_o
 484c9917be4aa74bef5606324b5d6021332ad0c6 data/ut5/loot_table/blocks/space_producer_block_3.json
 16632a83a5f1e815abc8a2ba0c81eb84597fde6b data/ut5/loot_table/blocks/space_producer_block_4.json
 fcdab1015158f87d70bb4faf33b350ddcdef00a5 data/ut5/loot_table/blocks/space_producer_block_5.json
+c12e75b5e57a6fe52fec1345da545833cc423777 data/ut5/loot_table/blocks/space_pulverizer.json
 2a34819745205a6545e1cfdd9c5dc031588aa53e data/ut5/loot_table/blocks/time_bind_altar.json
 0a0f636018fbf120cc115214c273ee6d0c70c310 data/ut5/loot_table/blocks/time_core_altar.json
 129adca6a82f918f08d52f73efbc94f6b194aaae data/ut5/loot_table/blocks/time_producer_day.json

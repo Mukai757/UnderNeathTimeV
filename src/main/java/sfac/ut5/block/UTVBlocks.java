@@ -137,6 +137,9 @@ public class UTVBlocks {
 			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.WOOD),
 			UnderneathTimeV.MAIN_TAB);
 
+	public static final DeferredBlock<SpacePulverizerBlock> Space_Pulverizer_Block =register("space_pulverizer", SpacePulverizerBlock::new,
+			BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().sound(SoundType.ANVIL),
+			UnderneathTimeV.MAIN_TAB);
 
 	private UTVBlocks() {} // No one initializes this!
 

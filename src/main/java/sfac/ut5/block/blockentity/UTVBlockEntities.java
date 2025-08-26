@@ -29,6 +29,9 @@ public class UTVBlockEntities {
 	public static final Supplier<BlockEntityType<RewindingChestBlockEntity>> REWINDING_CHEST = register("rewinding_chest",
 			RewindingChestBlockEntity::new, UTVBlocks.REWINDING_CHEST); // TODO add block
 
+	public static final Supplier<BlockEntityType<SpacePulverizerBlockEntity>> Space_Pulverizer =
+			register("space_pulverizer", SpacePulverizerBlockEntity::new, UTVBlocks.Space_Pulverizer_Block, UTVBlocks.TIME_SPINDLE_COUPLER);
+
 	@SafeVarargs
 	private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name,
 			BlockEntitySupplier<T> entityBlock, DeferredBlock<? extends Block>... blocks) {
