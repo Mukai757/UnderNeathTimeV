@@ -4,6 +4,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -24,6 +25,17 @@ public abstract class BaseContainerMenu extends AbstractContainerMenu {
     public static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
     public static final int FIRST_VANILLA_SLOT_INDEX = 0;
     public static final int FIRST_CONTAINER_SLOT_INDEX = FIRST_VANILLA_SLOT_INDEX + VANILLA_SLOT_COUNT;
+    
+    public static class OutputSlot extends Slot {
+		public OutputSlot(Container container, int slot, int x, int y) {
+			super(container, slot, x, y);
+		}
+		
+		@Override
+        public boolean mayPlace(ItemStack stack) {
+            return false;
+        }
+    }
 	
     protected BaseContainerMenu(MenuType<?> menuType, int containerId) {
 		super(menuType, containerId);

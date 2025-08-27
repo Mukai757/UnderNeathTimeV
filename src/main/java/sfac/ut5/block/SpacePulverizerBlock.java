@@ -19,37 +19,39 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import sfac.ut5.block.blockentity.SpacePulverizerBlockEntity;
-import sfac.ut5.block.blockentity.TimeBinderBlockEntity;
 import sfac.ut5.block.blockentity.UTVBlockEntities;
 
+/**
+ * @author Mukai
+ */
 public class SpacePulverizerBlock extends BaseEntityBlock{
-
     public static final MapCodec<SpacePulverizerBlock> CODEC = simpleCodec(SpacePulverizerBlock::new);
+    
     public SpacePulverizerBlock(Properties properties) {
         super(properties);
     }
-    //这个要抄
+    
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
-    //这个也要抄
+    
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new TimeBinderBlockEntity(blockPos, blockState);
+        return new SpacePulverizerBlockEntity(blockPos, blockState);
     }
-    //模型渲染，可选抄
+    
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
-    //方块更新，得抄
+    
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == UTVBlockEntities.Space_Pulverizer.get() ? TimeBinderBlockEntity::tick : null;
+        return type == UTVBlockEntities.SPACE_PULVERIZER.get() ? SpacePulverizerBlockEntity::tick : null;
     }
-    //打开GUI，选抄
+    
     @Override
     protected ItemInteractionResult useItemOn(
             ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult
@@ -61,7 +63,6 @@ public class SpacePulverizerBlock extends BaseEntityBlock{
                         blockEntity.getName()), pos);
                 }
             }
-
         return ItemInteractionResult.SUCCESS;
     }
 }

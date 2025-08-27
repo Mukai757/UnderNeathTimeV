@@ -1,24 +1,14 @@
 package sfac.ut5.block.blockentity;
 
-import org.jetbrains.annotations.Nullable;
-
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -36,11 +26,7 @@ import sfac.ut5.gui.SpaceProducerMenu;
  * @author Mukai
  * @author AoXiang_Soar
  */
-// Lazy to implement an abstract class :(
-public class SpaceProducerBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, ILevelBlock, IFluidHandler {
-	public static final int SIZE = 1;
-	
-    private NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+public class SpaceProducerBlockEntity extends UTVBaseContainerBlockEntity implements ILevelBlock, IFluidHandler {
     private int space = 0;
     private int timeLeft = 0;
     
@@ -51,7 +37,7 @@ public class SpaceProducerBlockEntity extends BaseContainerBlockEntity implement
 	private final static String TIME_LEFT_KEY = UnderneathTimeV.MOD_ID + ":time_left";
 
 	public SpaceProducerBlockEntity(BlockPos pos, BlockState state) {
-		super(UTVBlockEntities.SPACE_PRODUCER.get(), pos, state);
+		super(UTVBlockEntities.SPACE_PRODUCER.get(), pos, state, new int[] {0}, null);
 		var block = (SpaceProducerBlock) state.getBlock();
 		this.producerLevel = block.producerLevel;
 		this.fluidTank = new FluidTank(producerLevel.getCapacity());
@@ -150,7 +136,6 @@ public class SpaceProducerBlockEntity extends BaseContainerBlockEntity implement
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        ContainerHelper.loadAllItems(tag, items, registries);
         fluidTank.readFromNBT(registries, tag);
         this.space = tag.getInt(SPACE_TAG_KEY);
         this.timeLeft = tag.getInt(TIME_LEFT_KEY);
@@ -159,65 +144,15 @@ public class SpaceProducerBlockEntity extends BaseContainerBlockEntity implement
     @Override
     public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        ContainerHelper.saveAllItems(tag, this.items, registries);
         fluidTank.writeToNBT(registries, tag);
         tag.putInt(SPACE_TAG_KEY, this.space);
         tag.putInt(TIME_LEFT_KEY, this.timeLeft);
     }
-    
-    /**
-     * Called when chunk is loaded
-     */
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, registries);
-        return tag;
-    }
-    
-    /**
-     * Called when a block update occurs
-     */
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-    
-	@Override
-	public int getContainerSize() {
-		return SIZE;
-	}
-
-	@Override
-	public int[] getSlotsForFace(Direction side) {
-		return new int[]{0};
-	}
-
-	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction) {
-		return true;
-	}
-
-	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		return true;
-	}
 
 	@Override
 	protected Component getDefaultName() {
 		String s = "block.ut5.space_producer_block_" + producerLevel.getId();
 		return Component.translatable(s);
-	}
-
-	@Override
-	protected NonNullList<ItemStack> getItems() {
-		return items;
-	}
-
-	@Override
-	protected void setItems(NonNullList<ItemStack> items) {
-		this.items = items;
 	}
 
 	@Override
